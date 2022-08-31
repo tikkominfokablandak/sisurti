@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    | Pengguna
+    | Daftar Verifikator
 @endsection
 
 @section('css')
@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 @endsection
 
 @section('header')
@@ -16,12 +20,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Pengguna</h1>
+          <h1 class="m-0">Verifikator Surat - Daftar</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Pengguna</li>
+            <li class="breadcrumb-item active">Daftar Verifikator</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -30,7 +34,7 @@
 @endsection
 
 @section('content')
-<section class="content">
+  <section class="content">
     <div class="container-fluid">
       <!-- Info boxes -->
       <div class="row">
@@ -38,13 +42,10 @@
 
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Daftar Data Pengguna</h3>
-              <div class="card-tools">
-                <a href="{{ route('users.create') }}">
-                  <button type="button" class="btn btn-block btn-success btn-sm">
-                    <i class="fas fa-user-plus"></i> Tambah Pengguna
+              <div class="col-2">
+                  <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-tambah">
+                    <i class="fas fa-user-plus"></i> Tambah Baru
                   </button>
-                </a>
               </div>
             </div>
             <!-- /.card-header -->
@@ -52,47 +53,22 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Hak Akses</th>
                   <th>Nama</th>
-                  <th>Email</th>
-                  <th>Nama Pengguna</th>
-                  <th>Instansi / Unit Kerja</th>
                   <th>Jabatan</th>
-                  <th>Status</th>
-                  <th width="10"><i class="fas fa-wrench"></i></th>
+                  <th>Instansi / Unit Kerja</th>
+                  <th width="8"></th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($user as $item)
+                @foreach ($verifikator as $list)
                 <tr>
-                  <td>{{ $item->nama_role }}</td>
-                  <td>{{ $item->nama }}</td>
-                  <td>{{ $item->email }}</td>
-                  <td>{{ $item->username }}</td>
-                  <td>{{ $item->nama_opd }} / {{ $item->nama_unitkerja }}</td>
-                  <td>{{ $item->nama_jabatan }}</td>
-                  <td align="center">
-                    @if( $item->active == 1 )
-                      <span class="badge bg-success">Aktif</span>
-                    @elseif( $item->active == 0 )
-                      <span class="badge bg-danger">Tidak Aktif</span>
-                    @endif
-                  </td>
-                  <td align="center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-outline-primary btn-block dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-right">
-                          <a class="dropdown-item" href="{{ url('users/'.$item->id) }}" style="color:blue">
-                            <i class="fa fa-info-circle"></i>
-                              Detail
-                          </a>
-                          <a class="dropdown-item" href="{{ url('users/'.$item->id.'/edit') }}" style="color:#ffc107" hover>
-                            <i class="fa fa-edit"></i>
-                              Edit
-                          </a>
-                      </div>
-                    </div>
+                  <td>{{ $list->nama }}</td>
+                  <td>{{ $list->nama_jabatan }}</td>
+                  <td>{{ $list->nama_opd }} / {{ $list->nama_unitkerja }}</td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-danger">
+                      <i class="far fa-trash-alt"></i>
+                    </button>
                   </td>
                 </tr>
                 @endforeach
@@ -107,6 +83,43 @@
       </div>
       <!-- /.row -->
     </div><!--/. container-fluid -->
+
+    <div class="modal fade" id="modal-tambah">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><i class="fas fa-plus" style="color:rgb(0, 86, 167)"></i> Form Verifikator Baru</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form method="POST" action="{{ route('daftar-verifikator.store') }}" enctype="multipart/form-data">
+            @csrf
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Pengguna
+                <small style="color:red"><b>*</b></small>
+              </label>
+
+              <select id="id_user" class="form-control" style="width: 100%;" name="id_user" required oninvalid="this.setCustomValidity('Mohon pilih verifikator!')" oninput="setCustomValidity('')">
+                <option value=""></option>
+                @foreach ($user as $item)
+                  <option value="{{ $item->id }}">{{ $item->nama }} - {{ $item->nama_jabatan }} - {{ $item->nama_unitkerja }} - {{ $item->nama_opd }}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
+          </div>
+          </form>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
   </section>
 @endsection
 
@@ -141,5 +154,16 @@
       "responsive": true,
     });
   });
+</script>
+
+<!-- Select2 -->
+<script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+<script>
+$(function () {
+    $('#id_user').select2({
+        placeholder: "Pilih Verifikator",
+        theme: 'bootstrap4'
+    });
+});
 </script>
 @endsection

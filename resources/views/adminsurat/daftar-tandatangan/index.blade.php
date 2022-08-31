@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    | Pengguna
+    | Daftar Penandatangan
 @endsection
 
 @section('css')
@@ -16,12 +16,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Pengguna</h1>
+          <h1 class="m-0">Penandatangan Surat - Daftar</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Pengguna</li>
+            <li class="breadcrumb-item active">Daftar Penandatangan</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -38,11 +38,10 @@
 
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Daftar Data Pengguna</h3>
-              <div class="card-tools">
-                <a href="{{ route('users.create') }}">
+              <div class="col-2">
+                <a href="{{ route('daftar-penandatangan.create') }}">
                   <button type="button" class="btn btn-block btn-success btn-sm">
-                    <i class="fas fa-user-plus"></i> Tambah Pengguna
+                    <i class="fas fa-user-plus"></i> Tambah Baru
                   </button>
                 </a>
               </div>
@@ -52,50 +51,15 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Hak Akses</th>
                   <th>Nama</th>
-                  <th>Email</th>
-                  <th>Nama Pengguna</th>
-                  <th>Instansi / Unit Kerja</th>
                   <th>Jabatan</th>
+                  <th>File</th>
                   <th>Status</th>
                   <th width="10"><i class="fas fa-wrench"></i></th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($user as $item)
-                <tr>
-                  <td>{{ $item->nama_role }}</td>
-                  <td>{{ $item->nama }}</td>
-                  <td>{{ $item->email }}</td>
-                  <td>{{ $item->username }}</td>
-                  <td>{{ $item->nama_opd }} / {{ $item->nama_unitkerja }}</td>
-                  <td>{{ $item->nama_jabatan }}</td>
-                  <td align="center">
-                    @if( $item->active == 1 )
-                      <span class="badge bg-success">Aktif</span>
-                    @elseif( $item->active == 0 )
-                      <span class="badge bg-danger">Tidak Aktif</span>
-                    @endif
-                  </td>
-                  <td align="center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-outline-primary btn-block dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-right">
-                          <a class="dropdown-item" href="{{ url('users/'.$item->id) }}" style="color:blue">
-                            <i class="fa fa-info-circle"></i>
-                              Detail
-                          </a>
-                          <a class="dropdown-item" href="{{ url('users/'.$item->id.'/edit') }}" style="color:#ffc107" hover>
-                            <i class="fa fa-edit"></i>
-                              Edit
-                          </a>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                @endforeach
+
                 </tbody>
               </table>
             </div>

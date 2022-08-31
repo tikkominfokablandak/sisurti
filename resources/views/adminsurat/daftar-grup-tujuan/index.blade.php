@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    | Pengguna
+    | Daftar Grup Tujuan
 @endsection
 
 @section('css')
@@ -16,12 +16,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Pengguna</h1>
+          <h1 class="m-0">Grup Tujuan - Daftar</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Pengguna</li>
+            <li class="breadcrumb-item active">Daftar Grup Tujuan</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -38,13 +38,10 @@
 
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Daftar Data Pengguna</h3>
-              <div class="card-tools">
-                <a href="{{ route('users.create') }}">
-                  <button type="button" class="btn btn-block btn-success btn-sm">
-                    <i class="fas fa-user-plus"></i> Tambah Pengguna
-                  </button>
-                </a>
+              <div class="col-2">
+                <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-tambah">
+                  <i class="fas fa-user-plus"></i> Tambah Baru
+                </button>
               </div>
             </div>
             <!-- /.card-header -->
@@ -52,50 +49,15 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Hak Akses</th>
                   <th>Nama</th>
-                  <th>Email</th>
-                  <th>Nama Pengguna</th>
-                  <th>Instansi / Unit Kerja</th>
-                  <th>Jabatan</th>
-                  <th>Status</th>
+                  <th>Deskripsi</th>
+                  <th>Jumlah Tujuan</th>
+                  <th>Dibuat pada</th>
                   <th width="10"><i class="fas fa-wrench"></i></th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($user as $item)
-                <tr>
-                  <td>{{ $item->nama_role }}</td>
-                  <td>{{ $item->nama }}</td>
-                  <td>{{ $item->email }}</td>
-                  <td>{{ $item->username }}</td>
-                  <td>{{ $item->nama_opd }} / {{ $item->nama_unitkerja }}</td>
-                  <td>{{ $item->nama_jabatan }}</td>
-                  <td align="center">
-                    @if( $item->active == 1 )
-                      <span class="badge bg-success">Aktif</span>
-                    @elseif( $item->active == 0 )
-                      <span class="badge bg-danger">Tidak Aktif</span>
-                    @endif
-                  </td>
-                  <td align="center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-outline-primary btn-block dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-right">
-                          <a class="dropdown-item" href="{{ url('users/'.$item->id) }}" style="color:blue">
-                            <i class="fa fa-info-circle"></i>
-                              Detail
-                          </a>
-                          <a class="dropdown-item" href="{{ url('users/'.$item->id.'/edit') }}" style="color:#ffc107" hover>
-                            <i class="fa fa-edit"></i>
-                              Edit
-                          </a>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                @endforeach
+
                 </tbody>
               </table>
             </div>
@@ -107,6 +69,46 @@
       </div>
       <!-- /.row -->
     </div><!--/. container-fluid -->
+
+    <div class="modal fade" id="modal-tambah">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><i class="fas fa-plus" style="color:rgb(0, 86, 167)"></i> Form Grup Tujuan Baru</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form method="POST" action="{{ route('daftar-grup-tujuan.store') }}" enctype="multipart/form-data">
+            @csrf
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Nama
+                <small style="color:red"><b>*</b></small>
+              </label>
+
+              <input type="text" class="form-control form-control-sm" placeholder="Masukan Nama Tujuan ..." name="nama_tujuan" value="{{ old('nama_tujuan') }}" required autocomplete="nama_tujuan" autofocus oninvalid="this.setCustomValidity('Mohon isi nama tujuan terlebih dahulu!')" oninput="setCustomValidity('')">
+            </div>
+
+            <div class="form-group">
+              <label>Deskripsi
+
+              </label>
+
+              <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+            <button type="button" class="btn btn-primary">Simpan</button>
+          </div>
+          </form>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
   </section>
 @endsection
 

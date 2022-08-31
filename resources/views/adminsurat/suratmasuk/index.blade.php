@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    | Pengguna
+    | Daftar Surat Masuk
 @endsection
 
 @section('css')
@@ -16,12 +16,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Pengguna</h1>
+          <h1 class="m-0">Surat Masuk - Daftar</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Pengguna</li>
+            <li class="breadcrumb-item"><a href="{{ route('dashboard.adminsurat') }}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Daftar Surat Masuk</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -37,33 +37,22 @@
         <div class="col-12">
 
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Daftar Data Pengguna</h3>
-              <div class="card-tools">
-                <a href="{{ route('users.create') }}">
-                  <button type="button" class="btn btn-block btn-success btn-sm">
-                    <i class="fas fa-user-plus"></i> Tambah Pengguna
-                  </button>
-                </a>
-              </div>
-            </div>
-            <!-- /.card-header -->
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Hak Akses</th>
-                  <th>Nama</th>
-                  <th>Email</th>
-                  <th>Nama Pengguna</th>
-                  <th>Instansi / Unit Kerja</th>
-                  <th>Jabatan</th>
+                  <th>No</th>
+                  <th>Tanggal Surat</th>
+                  <th>Nomor Surat</th>
+                  <th>Hal</th>
+                  <th>Asal Surat</th>
+                  <th>Tingkat Urgensi</th>
                   <th>Status</th>
-                  <th width="10"><i class="fas fa-wrench"></i></th>
+                  <th width="10">Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($user as $item)
+                {{-- @foreach ($user as $item)
                 <tr>
                   <td>{{ $item->nama_role }}</td>
                   <td>{{ $item->nama }}</td>
@@ -95,7 +84,7 @@
                     </div>
                   </td>
                 </tr>
-                @endforeach
+                @endforeach --}}
                 </tbody>
               </table>
             </div>
