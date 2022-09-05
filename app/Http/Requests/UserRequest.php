@@ -24,30 +24,6 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        // $rules = [
-        //     'nip' => 'numeric',
-        //     'nik' => 'numeric',
-        //     'no_hp' => 'numeric',
-        //     'username' => 'min:5 | unique:users',
-        //     'email' => 'email | max:255 | unique:users',
-        //     'password' => 'min:8 | confirmed',
-        //     'foto' => 'mimes:jpeg,png,jpg | max:2048',
-        // ];
-
-        // $email = $this->request->get('email');
-
-        // if (in_array($this->method(), ['PUT', 'PATCH'])) {
-        //     $email = $this->route()->parameter('email');
-
-        //     $rules['email'] = [
-        //         'email',
-        //         'max:255',
-        //         Rule::unique('users')->ignore($email),
-        //     ];
-        // }
-
-        // return $rules;
-
         return [
             'nip' => 'numeric',
             'nik' => 'numeric',
@@ -61,7 +37,7 @@ class UserRequest extends FormRequest
     {
         return [
             'username' => 'min:5 | unique:users',
-            'email' => 'email | max:255 | unique:users',
+            'email' => 'email | max:255 | unique:users'
         ];
     }
 

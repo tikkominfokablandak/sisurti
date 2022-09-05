@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Opd;
+use Validator;
+use Alert;
+use App\Http\Requests\OpdRequest;
+use Illuminate\Support\Str;
 
 class OPDController extends Controller
 {
@@ -29,7 +33,12 @@ class OPDController extends Controller
      */
     public function index()
     {
-        return view('adminkab.opd.index');
+        $opd = Opd::select('opds.*')->orderBy('id', 'desc')->get();
+
+        return view('adminkab.opd.index', [
+            'opd' => $opd
+            ]
+        );
     }
 
     /**
@@ -39,7 +48,7 @@ class OPDController extends Controller
      */
     public function create()
     {
-        //
+        return view('adminkab.opd.create');
     }
 
     /**
@@ -48,9 +57,21 @@ class OPDController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OpdRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $opd = $request->all();
+
+        $opd['nama_opd'] = $request->nama_opd;
+        $opd['singkatan'] = $request->singkatan;
+        $opd['alamat'] = $request->alamat;
+
+        Opd::create($opd);
+
+        alert()->success('Sukses', 'Data OPD baru berhasil ditambahkan');
+
+        return redirect('opd');
     }
 
     /**
@@ -72,7 +93,13 @@ class OPDController extends Controller
      */
     public function edit($id)
     {
-        //
+        $opd = Opd::select('opds.*')->where('id', $id)->first();
+
+        return view('adminkab.opd.edit', 
+            [
+                'opd' => $opd
+            ]
+        );
     }
 
     /**
@@ -82,9 +109,17 @@ class OPDController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OpdRequest $request, $id)
     {
-        //
+        $validated = $request->validated();
+
+        $opds = Opd::findOrfail($id);
+
+        $opd = $request->all();
+
+        $opds->update($opd);
+
+        return redirect()->route('opd.index')->with('success', 'Perubahan data berhasil di simpan.');
     }
 
     /**
