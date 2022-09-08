@@ -189,36 +189,6 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Tujuan Eksternal
-
-                                </label>
-
-                                <select id="tujuan-eksternal" class="form-control" style="width: 100%;" name="tujuan-eksternal">
-                                    <option value=""></option>
-                                    @foreach ($eksternal as $item)
-                                    <option value="{{ $item->id }}">{{ $item->nama_tujuan }} - {{ $item->jabatan_tujuan }} - {{ $item->instansi_tujuan }} - {{ $item->kotakab }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            {{-- <div class="form-group">
-                                <input id="nama_tujuan" type="text" class="form-control form-control-sm" placeholder="Nama Tujuan" name="nama_tujuan" disabled>
-                            </div>
-
-                            <div class="form-group">
-                                <input id="jabatan_tujuan" type="text" class="form-control form-control-sm" placeholder="Jabatan Tujuan" name="jabatan" disabled>
-                            </div>
-
-                            <div class="form-group">
-                                <input id="instansi_tujuan" type="text" class="form-control form-control-sm" placeholder="Instansi Tujuan" name="instansi_tujuan" disabled>
-                            </div>
-
-                            <div class="form-group">
-                                <input id="kotakab" type="text" class="form-control form-control-sm" placeholder="Kota / Kabupaten Tujuan" name="kotakab" disabled>
-                            </div> --}}
-                        </div>
                     </div>
                 </div>
 

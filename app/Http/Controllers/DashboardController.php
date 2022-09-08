@@ -25,6 +25,8 @@ class DashboardController extends Controller
         return view('adminsurat.index');
     } else if (Auth::user()->id_role == '4') {
         return view('user.index');
+    } else if (Auth::user()->id_role == '5') {
+        return view('TNDE.admin.dashboard');
     // } else {
     //     return view('assistant.dashboard');
     }

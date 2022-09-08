@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\AdminSurat;
+namespace App\Http\Controllers\AdminTNDE;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ use Storage;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
-class SuratKeluarController extends Controller
+class NaskahKeluarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class SuratKeluarController extends Controller
      */
     public function index()
     {
-        return view('adminsurat.suratkeluar.index');
+        return view('TNDE.naskah-keluar.index');
     }
 
     /**
@@ -81,7 +81,7 @@ class SuratKeluarController extends Controller
                         ->orderBy('users.nama', 'asc')
                         ->get();
 
-        return view('adminsurat.suratkeluar.create', [
+        return view('TNDE.naskah-keluar.create', [
             'jenissurat' => $jenissurat,
             'internal' => $internal,
             'tembusan' => $tembusan,
@@ -97,56 +97,9 @@ class SuratKeluarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SuratKeluarRequest $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
-
-        $suratkeluar = new SuratKeluar;
-        // $suratkeluar = $request->all();
-
-            $file = $request->file('file_surat');
-            $nama = 'sk-' . str_random(10);
-            $extension = $file->getClientOriginalExtension();
-            $namabaru = $nama . '.' . $extension;
-            Storage::putFileAs('public/sk', $request->file('file_surat'), $namabaru);
-
-        // $suratkeluar['file_surat'] = $namabaru;
-
-        // $suratkeluar['tgl_surat'] = Carbon::now();
-        // $suratkeluar['id_status'] = 1;
-        // $suratkeluar['id_create'] = Auth::user()->id;
-        // $suratkeluar['id_pengirim'] = Auth::user()->id;
-
-        $suratkeluar
-
-        $suratkeluar->file_surat = $namabaru;
-
-        $suratkeluar->tgl_surat = Carbon::now();
-        $suratkeluar->id_status = 1;
-        $suratkeluar->id_create = Auth::user()->id;
-        $suratkeluar->id_pengirim = Auth::user()->id;
-
-        $suratkeluar->save();
-
-        // SuratKeluar::create($suratkeluar);
-
-        $id_sm = NULL;
-        $id_sk = $suratkeluar->id;
-        $id_tujuan = $suratkeluar->id_tujuan;
-        $id_pengirim = $suratkeluar->id_create;
-        $id_tembusan = $suratkeluar->id_tembusan;
-        $id_verifikator = $suratkeluar->id_verifikator;
-        $id_ttd = $suratkeluar->id_ttd;
-        $id_disposisi = NULL;
-        $id_status = 1;
-        $read = "READ";
-        $id_create = $suratkeluar->id_create;
-
-        LogSurat::createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $id_status, $read, $id_create);
-
-        alert()->success('Sukses','Data surat keluar baru berhasil disimpan.');
-
-        return redirect('surat-keluar');
+        //
     }
 
     /**

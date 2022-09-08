@@ -89,4 +89,30 @@ Route::group(['middleware' => ['web', 'auth', 'roles']],function(){
             });
         });
     });
+
+
+    //PROJEK TATA NASKAH
+    Route::group(['roles' => 'Admin OPD TNDE'],function(){
+        // Route::resource('naskah-masuk', \App\Http\Controllers\AdminSurat\SuratMasukController::class);
+        Route::resource('naskah-keluar', \App\Http\Controllers\AdminTNDE\NaskahKeluarController::class);
+        // Route::resource('naskah-disposisi', \App\Http\Controllers\AdminSurat\DisposisiController::class);
+
+        // Route::resource('log-naskah-masuk', \App\Http\Controllers\AdminSurat\LogSuratMasukController::class);
+        Route::resource('log-naskah-keluar', \App\Http\Controllers\AdminTNDE\LogNaskahKeluarController::class);
+
+        Route::resource('daftar-penandatangan', \App\Http\Controllers\AdminSurat\TandatanganController::class);
+        Route::resource('daftar-verifikator', \App\Http\Controllers\AdminSurat\VerifikatorController::class);
+
+        Route::group(['prefix' => 'daftar-tujuan'], function () {
+            Route::get('/', [\App\Http\Controllers\AdminSurat\TujuanController::class, 'index'])->name('tujuan.index');
+
+            Route::post('/internal', [\App\Http\Controllers\AdminSurat\TujuanController::class, 'storeInternal'])->name('internal.store');
+            Route::post('/eksternal', [\App\Http\Controllers\AdminSurat\TujuanController::class, 'storeEksternal'])->name('eksternal.store');
+        });
+
+        Route::resource('daftar-grup-tujuan', \App\Http\Controllers\AdminSurat\GrupTujuanController::class);
+        Route::resource('daftar-tembusan', \App\Http\Controllers\AdminSurat\TembusanController::class);
+        
+        Route::resource('template-naskah', \App\Http\Controllers\AdminTNDE\TemplateNaskahController::class);
+    });
 });
