@@ -15,7 +15,8 @@ class TemplateNaskahController extends Controller
      */
     public function index()
     {
-        $template = Jenissurat::get();
+        $template = Jenissurat::where('jenis_surat', 'SURAT DINAS')
+            ->get();
 
         return view('TNDE.template.index', [
             'template' => $template

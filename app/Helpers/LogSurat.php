@@ -38,7 +38,7 @@ class LogSurat
         //     ]);
         // }
 
-        Logsurat::create([
+        Log_surat::create([
             'id_sm' => $id_sm,
             'id_sk' => $id_sk,
             'id_tujuan' => $id_tujuan,

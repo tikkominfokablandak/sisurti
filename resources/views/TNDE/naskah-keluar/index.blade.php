@@ -54,31 +54,27 @@
                 </tr>
                 </thead>
                 <tbody>
-                {{-- @foreach ($user as $item)
+                @foreach ($naskahkeluar as $item)
                 <tr>
-                  <td>{{ $item->nama_role }}</td>
-                  <td>{{ $item->nama }}</td>
-                  <td>{{ $item->email }}</td>
-                  <td>{{ $item->username }}</td>
-                  <td>{{ $item->nama_opd }} / {{ $item->nama_unitkerja }}</td>
-                  <td>{{ $item->nama_jabatan }}</td>
-                  <td align="center">
-                    @if( $item->active == 1 )
-                      <span class="badge bg-success">Aktif</span>
-                    @elseif( $item->active == 0 )
-                      <span class="badge bg-danger">Tidak Aktif</span>
-                    @endif
-                  </td>
+                  <td>{{ $no++ }}</td>
+                  <td>{{ $item->created_at }}</td>
+                  <td>{{ $item->no_surat }}</td>
+                  <td>{{ $item->perihal }}</td>
+                  <td>{{ $item->nama }} - {{ $item->nama_unitkerja }}</td>
+                  <td>{{ $item->tingkat_urgen }}</td>
+                  <td align="center"><span class="badge bg-warning">BELUM</span></td>
+                  <td align="center"><span class="badge bg-warning">BELUM</span></td>
+                  <td align="center"><span class="badge bg-warning">BELUM</span></td>
                   <td align="center">
                     <div class="btn-group">
                       <button type="button" class="btn btn-outline-primary btn-block dropdown-toggle dropdown-icon" data-toggle="dropdown">
                       </button>
                       <div class="dropdown-menu dropdown-menu-right">
-                          <a class="dropdown-item" href="{{ url('users/'.$item->id) }}" style="color:blue">
+                          <a class="dropdown-item" href="{{ url('naskah-keluar/'.$item->id) }}" style="color:blue">
                             <i class="fa fa-info-circle"></i>
                               Detail
                           </a>
-                          <a class="dropdown-item" href="{{ url('users/'.$item->id.'/edit') }}" style="color:#ffc107" hover>
+                          <a class="dropdown-item" href="{{ url('naskah-keluar/'.$item->id.'/edit') }}" style="color:#ffc107" hover>
                             <i class="fa fa-edit"></i>
                               Edit
                           </a>
@@ -86,7 +82,7 @@
                     </div>
                   </td>
                 </tr>
-                @endforeach --}}
+                @endforeach
                 </tbody>
               </table>
             </div>

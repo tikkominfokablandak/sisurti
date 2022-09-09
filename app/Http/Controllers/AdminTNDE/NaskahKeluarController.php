@@ -27,7 +27,16 @@ class NaskahKeluarController extends Controller
      */
     public function index()
     {
-        return view('TNDE.naskah-keluar.index');
+        $naskahkeluar = SuratKeluar::join('users', 'users.id', 'suratkeluars.id_pengirim')
+        ->join('jabatans','users.id_jabatan','jabatans.id')
+        ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
+        ->join('opds','unitkerjas.id_opd','opds.id')
+        ->select('users.*', 'suratkeluars.*', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
+        ->get();
+
+        return view('TNDE.naskah-keluar.index', [
+            'naskahkeluar' => $naskahkeluar
+        ])->with('no',1);
     }
 
     /**
@@ -67,7 +76,7 @@ class NaskahKeluarController extends Controller
                         ->join('jabatans','users.id_jabatan','jabatans.id')
                         ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
                         ->join('opds','unitkerjas.id_opd','opds.id')
-                        ->select('users.*', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
+                        ->select('users.*', 'verifikators.*', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
                         ->where('verifikators.id_create', Auth::user()->id)
                         ->orderBy('users.nama', 'asc')
                         ->get();
@@ -99,7 +108,55 @@ class NaskahKeluarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $validated = $request->validated();
+
+        $naskahkeluar = new SuratKeluar;
+        // $suratkeluar = $request->all();
+
+            $file = $request->file('file_surat');
+            $nama = 'sk-' . str_random(10);
+            $extension = $file->getClientOriginalExtension();
+            $namabaru = $nama . '.' . $extension;
+            Storage::putFileAs('public/sk', $request->file('file_surat'), $namabaru);
+
+            
+            $naskahkeluar->file_surat = $namabaru;
+            
+        $naskahkeluar->id_verifikator = $request->id_verifikator;
+        $naskahkeluar->id_ttd = $request->id_ttd;
+        $naskahkeluar->id_jenissurat = $request->id_jenissurat;
+        $naskahkeluar->sifat_surat = $request->sifat_surat;
+        $naskahkeluar->tingkat_urgen = $request->tingkat_urgen;
+        $naskahkeluar->no_surat = $request->no_surat;
+        $naskahkeluar->perihal = $request->perihal;
+        $naskahkeluar->isi = $request->isi;
+        $naskahkeluar->id_tujuan = $request->id_tujuan;
+        $naskahkeluar->id_tembusan = $request->id_tembusan;
+
+        $naskahkeluar->tgl_surat = Carbon::now();
+        $naskahkeluar->id_status = 1;
+        $naskahkeluar->id_create = Auth::user()->id;
+        $naskahkeluar->id_pengirim = Auth::user()->id;
+
+        $naskahkeluar->save();
+
+        $id_sm = NULL;
+        $id_sk = $naskahkeluar->id;
+        $id_tujuan = $naskahkeluar->id_tujuan;
+        $id_pengirim = $naskahkeluar->id_create;
+        $id_tembusan = $naskahkeluar->id_tembusan;
+        $id_verifikator = $naskahkeluar->id_verifikator;
+        $id_ttd = $naskahkeluar->id_ttd;
+        $id_disposisi = NULL;
+        $id_status = 1;
+        $read = "READ";
+        $id_create = $naskahkeluar->id_create;
+
+        LogSurat::createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $id_status, $read, $id_create);
+
+        alert()->success('Sukses','Data surat keluar baru berhasil disimpan.');
+
+        return redirect('naskah-keluar');
     }
 
     /**

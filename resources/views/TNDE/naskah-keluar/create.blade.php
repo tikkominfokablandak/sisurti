@@ -39,7 +39,7 @@
         <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-default">
-              <form method="POST" action="{{ route('surat-keluar.store') }}" enctype="multipart/form-data">
+              <form method="POST" action="{{ route('naskah-keluar.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="card-header">
                     <h3 class="card-title">DETAIL ISI SURAT</h3>
