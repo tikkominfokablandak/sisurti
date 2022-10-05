@@ -38,9 +38,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles']],function(){
     Route::get('get-jabatan', [\App\Http\Controllers\JabatanController::class, 'select'])->name('get-jabatan.select');
     Route::get('get-user', [\App\Http\Controllers\UserController::class, 'select'])->name('get-user.select');
 
+
     Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
-    
-    Route::group(['roles' => 'Admin Kab Landak'],function(){
+
+    Route::group(['roles' => 'Admin Kab Landak'], function(){
         Route::resource('users', \App\Http\Controllers\UserController::class);
         Route::resource('opd', \App\Http\Controllers\OPDController::class);
         Route::resource('unitkerja', \App\Http\Controllers\UnitKerjaController::class);

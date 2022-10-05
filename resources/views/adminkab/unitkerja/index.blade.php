@@ -12,12 +12,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Daftar OPD</h1>
+          <h1 class="m-0">Daftar Unit Kerja</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard.admin') }}">Dashboard</a></li>
-            <li class="breadcrumb-item active">OPD</li>
+            <li class="breadcrumb-item active">Unit Kerja</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -34,11 +34,11 @@
 
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Daftar Data Pengguna</h3>
+              <h3 class="card-title">Daftar Data Unit Kerja</h3>
               <div class="card-tools">
-                <a href="{{ route('opd.create') }}">
+                <a href="{{ route('unitkerja.create') }}">
                   <button type="button" class="btn btn-block btn-success btn-sm">
-                    <i class="fas fa-user-plus"></i> Tambah Pengguna
+                    <i class="fas fa-user-plus"></i> Tambah Data Unit Kerja
                   </button>
                 </a>
               </div>
@@ -49,19 +49,21 @@
                 <thead>
                 <tr>
                   <th>No</th>
-                  <th>Nama OPD</th>
-                  <th>Singkatan</th>
+                  <th>Nama Unit Kerja</th>
+                  <th>Induk Unit Kerja</th>
+                  <th>OPD</th>
                   <th>Alamat</th>
                   <th width="10"><i class="fas fa-wrench"></i></th>
                 </tr>
                 </thead>
                 <tbody>
                 
-                @foreach ($opd as $item)
+                @foreach ($unitkerja as $item)
                 <tr>
                   <td>No</td>
+                  <td>{{ $item->nama_unitkerja }}</td>
+                  <td>{{ $item->induk_unitkerja }}</td>
                   <td>{{ $item->nama_opd }}</td>
-                  <td>{{ $item->singkatan }}</td>
                   <td>{{ $item->alamat }}</td>
                   
                   <td align="center">
@@ -69,8 +71,7 @@
                       <button type="button" class="btn btn-outline-primary btn-block dropdown-toggle dropdown-icon" data-toggle="dropdown">
                       </button>
                       <div class="dropdown-menu dropdown-menu-right">
-                          
-                          <a class="dropdown-item" href="{{ url('opd/'.$item->id.'/edit') }}" style="color:#ffc107" hover>
+                          <a class="dropdown-item" href="{{ url('unitkerja/'.$item->id.'/edit') }}" style="color:#ffc107" hover>
                             <i class="fa fa-edit"></i>
                               Edit
                           </a>
