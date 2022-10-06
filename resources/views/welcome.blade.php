@@ -45,7 +45,7 @@
         <h1>
           <a href="{{ url('/') }}">
             <img src="assets/img/sipaskal/favicon_landak-32x32.png" alt="" title="" />
-            <span>SIPASKAL</span>
+            <span>SISURTI</span>
           </a>
         </h1>
         <!-- Uncomment below if you prefer to use an image logo -->
@@ -59,8 +59,9 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div class="hero-container" data-aos="fade-in">
-      <h1>Selamat Datang di SIPASKAL</h1>
-      <h2>Sistem Informasi Pengelolaan Surat Kabupaten Landak</h2>
+      <h1>Selamat Datang di SISURTI</h1>
+      <!-- <h2>Sistem Informasi Pengelolaan Surat Kabupaten Landak</h2> -->
+      <h2>Sistem Informasi Surat Elektronik</h2>
       <img src="assets/img/hero-img.png" alt="Hero Imgs" data-aos="zoom-out" data-aos-delay="100">
       <a href="{{route('login')}}" class="btn-get-started scrollto">Masuk</a>
       <!-- <a href="{{route('login')}}" class="text-sm text-gray-700 underline">Log in</a> -->
@@ -77,7 +78,7 @@
 
     <div class="copyrights">
       <div class="container">
-        <p>&copy; SIPASKAL 2022.</p>
+        <p>&copy; SISURTI 2022.</p>
         <div class="credits">
           <!--
           All the links in the footer should remain intact.

@@ -55,6 +55,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles']],function(){
         Route::resource('log-disposisi', \App\Http\Controllers\AdminSurat\LogDisposisiController::class);
         
         Route::group(['roles' => 'Admin Surat'], function(){
+            
+            
             Route::resource('surat-masuk', \App\Http\Controllers\AdminSurat\SuratMasukController::class);
             Route::resource('surat-keluar', \App\Http\Controllers\AdminSurat\SuratKeluarController::class);
             Route::resource('surat-disposisi', \App\Http\Controllers\AdminSurat\DisposisiController::class);
@@ -76,6 +78,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles']],function(){
             Route::resource('daftar-grup-tujuan', \App\Http\Controllers\AdminSurat\GrupTujuanController::class);
             Route::resource('daftar-tembusan', \App\Http\Controllers\AdminSurat\TembusanController::class);
             Route::resource('template-surat', \App\Http\Controllers\AdminSurat\JenisSuratController::class);
+            //Route::get('/dashboard', [\App\Http\Controllers\AdminSurat\AdminSuratController::class, 'index']);
         });
 
         Route::group(['roles' => 'User'], function(){

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class AdminSuratController extends Controller
 {
@@ -13,6 +14,11 @@ class AdminSuratController extends Controller
      */
     public function index()
     {
-        return view('adminsurat.index');
+        //$users = User::count();
+        //$count = DB::table('opds')->get()->count();
+        $count = User::count();
+        
+        //return view ("adminsurat.index ", compact('users'));
+        return view ('adminsurat.index', ['count' => $count]);
     }
 }

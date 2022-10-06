@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
       <img src="{{ asset('assets/img/sipaskal/sipaskal-logo.png') }}" alt="SIPASKAL Logo" class="brand-image elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">S I P A S K A L</span>
+      <span class="brand-text font-weight-light">S I S U R T I</span>
     </a>
 
     <!-- Sidebar -->
@@ -78,31 +78,31 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('surat-masuk.create') }}" class="nav-link {{ ( (request()->is('surat-masuk/create')) ) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-file-signature"></i>
                   <p>Registrasi Surat Masuk</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('surat-keluar.create') }}" class="nav-link {{ ( (request()->is('surat-keluar/create')) ) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-file-signature"></i>
                   <p>Registrasi Surat Keluar</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('surat-masuk.index') }}" class="nav-link {{ ( (request()->is('surat-masuk')) ) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-envelope"></i>
                   <p>Daftar Surat Masuk</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('surat-keluar.index') }}" class="nav-link {{ ( (request()->is('surat-keluar')) ) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-paper-plane"></i>
                   <p>Daftar Surat Keluar</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('surat-disposisi.index') }}" class="nav-link {{ ( (request()->is('surat-disposisi*')) ) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas icon-file-check-2"></i>
                   <p>Disposisi</p>
                 </a>
               </li>
@@ -120,19 +120,19 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('log-surat-masuk.index') }}" class="nav-link {{ ( (request()->is('log-surat-masuk*')) ) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-envelope-open-text"></i>
                   <p>Surat Masuk</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('log-surat-keluar.index') }}" class="nav-link {{ ( (request()->is('log-surat-keluar*')) ) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="icon-unarchive-icon"></i>
                   <p>Surat Keluar</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('log-disposisi.index') }}" class="nav-link {{ ( (request()->is('log-disposisi*')) ) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas icon-file-check-2"></i>
                   <p>Disposisi</p>
                 </a>
               </li>

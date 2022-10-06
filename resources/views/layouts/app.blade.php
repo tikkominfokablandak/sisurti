@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SIPASKAL @yield('title')</title>
+  <title>SISURTI @yield('title')</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,6 +16,9 @@
 
   <link href="{{ asset('assets/img/sipaskal/sipaskal-logo.png') }}" style="width: 32px" rel="icon">
 
+  <!-- link custom icon -->
+  <link href="https://file.myfontastic.com/osQDddESiraU8uVXBkRupT/icons.css" rel="stylesheet">
+
   @yield('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -23,7 +26,7 @@
 
   <!-- Preloader -->
   {{-- <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__wobble" src="{{ asset('assets/img/sipaskal/sipaskal-logo.png') }}" alt="SIPASKAL" height="60" width="60">
+    <img class="animation__wobble" src="{{ asset('assets/img/sipaskal/sipaskal-logo.png') }}" alt="SISURTI" height="60" width="60">
   </div> --}}
 
   <!-- Navbar -->
