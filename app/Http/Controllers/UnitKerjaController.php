@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Unitkerja;
+use App\Models\Opd;
+use App\Http\Requests\UnitkerjaRequest;
 
 class UnitKerjaController extends Controller
 {
@@ -32,7 +34,13 @@ class UnitKerjaController extends Controller
      */
     public function index()
     {
-        //
+        $unitkerja = Unitkerja::select('unitkerjas.*', 'opds.nama_opd')
+                    ->join('opds', 'unitkerjas.id_opd', '=', 'opds.id')
+                    ->get();
+
+        return view('adminkab.unitkerja.index', [
+            'unitkerja' => $unitkerja
+        ]);
     }
 
     /**
@@ -42,7 +50,11 @@ class UnitKerjaController extends Controller
      */
     public function create()
     {
-        //
+        $opd = Opd::orderBy('nama_opd', 'asc')->get();
+
+        return view('adminkab.unitkerja.create', [
+            'opd' => $opd
+        ]);
     }
 
     /**
@@ -51,9 +63,22 @@ class UnitKerjaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UnitkerjaRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $unitKerja = $request->all();
+
+        $unitKerja['nama_unitkerja'] = $request->nama_unitkerja;
+        $unitKerja['induk_unitkerja'] = $request->induk_unitkerja;
+        $unitKerja['alamat'] = $request->alamat;
+        $unitKerja['id_opd'] = $request->id_opd;
+
+        Unitkerja::create($unitKerja);
+
+        alert()->success('Sukses', 'Data Unit Kerja baru berhasil ditambahkan.');
+
+        return redirect ('unitkerja');
     }
 
     /**
@@ -75,7 +100,17 @@ class UnitKerjaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $unitKerja = Unitkerja::select('unitkerjas.*','opds.nama_opd')
+        ->join('opds', 'unitkerjas.id_opd', '=', 'opds.id')
+        ->where('unitkerjas.id',$id)
+        ->first();
+
+        $opd = Opd::OrderBy('nama_opd', 'asc')->get();
+
+        return view('adminkab.unitkerja.edit', [
+            'unitkerja' => $unitKerja,
+            'opd' => $opd
+        ]);
     }
 
     /**
@@ -85,9 +120,18 @@ class UnitKerjaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UnitkerjaRequest $request, $id)
     {
-        //
+        $validated = $request->validated();
+
+        $unitkerjas = Unitkerja::findOrfail($id);
+
+        $unitkerja = $request->all();
+
+        $unitkerjas->update($unitkerja);
+
+        return redirect()->route('unitkerja.index')
+                            ->with('success', 'Perubahan data berhasil disimpan.');
     }
 
     /**
@@ -99,5 +143,6 @@ class UnitKerjaController extends Controller
     public function destroy($id)
     {
         //
+        
     }
 }

@@ -47,7 +47,7 @@ class UserController extends Controller
         $role = Role::orderBy('id', 'asc')->get();
 
         return view('adminkab.users.create', [
-            'role' => $role,
+            'role' => $role
             ]
         );
     }

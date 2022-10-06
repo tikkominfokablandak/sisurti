@@ -44,7 +44,7 @@
               <!-- /.card-header -->
 
               @if ($errors->count() > 0)
-              <div id="ERROR_COPY" style="display: none;" class="alert alert-danger">
+                <div id="ERROR_COPY" style="display: none;" class="alert alert-danger">
                     @foreach ($errors->all() as $error)
                         {{ $error }}<br/>
                         <br/>
@@ -81,6 +81,7 @@
                                     </span>
                                 @enderror
                             </div>
+                            
                             <div class="form-group">
                                 <label for="nama_lengkap">{{ __('Nama Lengkap') }}</label>
 
