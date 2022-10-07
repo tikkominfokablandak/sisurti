@@ -82,24 +82,24 @@
                   <p>Registrasi Surat Masuk</p>
                 </a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="{{ route('surat-keluar.create') }}" class="nav-link {{ ( (request()->is('surat-keluar/create')) ) ? 'active' : '' }}">
                   <i class="fas fa-file-signature"></i>
                   <p>Registrasi Surat Keluar</p>
                 </a>
-              </li>
+              </li> --}}
               <li class="nav-item">
                 <a href="{{ route('surat-masuk.index') }}" class="nav-link {{ ( (request()->is('surat-masuk')) ) ? 'active' : '' }}">
                   <i class="fas fa-envelope"></i>
                   <p>Daftar Surat Masuk</p>
                 </a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="{{ route('surat-keluar.index') }}" class="nav-link {{ ( (request()->is('surat-keluar')) ) ? 'active' : '' }}">
                   <i class="fas fa-paper-plane"></i>
                   <p>Daftar Surat Keluar</p>
                 </a>
-              </li>
+              </li> --}}
               <li class="nav-item">
                 <a href="{{ route('surat-disposisi.index') }}" class="nav-link {{ ( (request()->is('surat-disposisi*')) ) ? 'active' : '' }}">
                   <i class="fas icon-file-check-2"></i>
@@ -124,12 +124,12 @@
                   <p>Surat Masuk</p>
                 </a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="{{ route('log-surat-keluar.index') }}" class="nav-link {{ ( (request()->is('log-surat-keluar*')) ) ? 'active' : '' }}">
                   <i class="icon-unarchive-icon"></i>
                   <p>Surat Keluar</p>
                 </a>
-              </li>
+              </li> --}}
               <li class="nav-item">
                 <a href="{{ route('log-disposisi.index') }}" class="nav-link {{ ( (request()->is('log-disposisi*')) ) ? 'active' : '' }}">
                   <i class="fas icon-file-check-2"></i>
@@ -139,8 +139,8 @@
             </ul>
           </li>
 
-          <li class="nav-item {{ ( (request()->is('daftar-penandatangan*')) or (request()->is('daftar-verifikator*')) or (request()->is('daftar-tujuan*')) or (request()->is('daftar-grup-tujuan*')) or (request()->is('daftar-tembusan*')) ) ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ ( (request()->is('daftar-penandatangan*')) or (request()->is('daftar-verifikator*')) or (request()->is('daftar-tujuan*')) or (request()->is('daftar-grup-tujuan*')) or (request()->is('daftar-tembusan*')) ) ? 'active' : '' }}">
+          <li class="nav-item {{ ( (request()->is('daftar-penandatangan*')) or (request()->is('daftar-verifikator*')) or (request()->is('daftar-tujuan*')) or (request()->is('daftar-grup-tujuan*')) or (request()->is('daftar-tembusan*')) or (request()->is('template-naskah*')) ) ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ ( (request()->is('daftar-penandatangan*')) or (request()->is('daftar-verifikator*')) or (request()->is('daftar-tujuan*')) or (request()->is('daftar-grup-tujuan*')) or (request()->is('daftar-tembusan*')) or (request()->is('template-naskah*')) ) ? 'active' : '' }}">
               <i class="nav-icon fas fa-cogs"></i>
               <p>
                 Pengaturan
@@ -149,6 +149,12 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                <a href="{{ route('template-naskah.index') }}" class="nav-link {{ ( (request()->is('template-naskah')) ) ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Template Surat</p>
+                </a>
+              </li>
+              {{-- <li class="nav-item">
                 <a href="{{ route('daftar-penandatangan.index') }}" class="nav-link {{ ( (request()->is('daftar-penandatangan*')) ) ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Daftar Penandatangan</p>
@@ -159,19 +165,19 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Daftar Verifikator</p>
                 </a>
-              </li>
+              </li> --}}
               <li class="nav-item">
                 <a href="{{ route('tujuan.index') }}" class="nav-link {{ ( (request()->is('daftar-tujuan*')) ) ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Daftar Tujuan</p>
                 </a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="{{ route('daftar-grup-tujuan.index') }}" class="nav-link {{ ( (request()->is('daftar-grup-tujuan*')) ) ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Daftar Grup Tujuan</p>
                 </a>
-              </li>
+              </li> --}}
               <li class="nav-item">
                 <a href="{{ route('daftar-tembusan.index') }}" class="nav-link {{ ( (request()->is('daftar-tembusan*')) ) ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
