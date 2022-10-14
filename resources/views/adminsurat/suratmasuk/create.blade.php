@@ -45,28 +45,17 @@
               <!-- /.card-header -->
 
               <!-- form start -->
-              <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
+              <form method="POST" action="{{ route('surat-masuk.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label>Pengirim</label>
-
-                                <select id="pengirim" class="form-control form-control-sm @error('hak_akses') is-invalid @enderror" style="width: 100%;" name="pengirim" required oninvalid="this.setCustomValidity('Mohon pilih pengirim dahulu!')" oninput="setCustomValidity('')">
-                                    <option value=""></option>
-
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="form-group">
                                 <label for="username">{{ __('Nama Pengirim') }}
                                     <small style="color:red"><b>*</b></small>
                                 </label>
 
-                                <input id="nama_pengirim" type="text" class="form-control form-control-sm @error('nama_pengirim') is-invalid @enderror" placeholder="Masukan Nama Pengirim ..." name="nama_pengirim" value="{{ old('nama_pengirim') }}" required autocomplete="username" autofocus oninvalid="this.setCustomValidity('Mohon isi Nama Pengirim terlebih dahulu!')" oninput="setCustomValidity('')">
+                                <input id="nama_pengirim" type="text" class="form-control form-control @error('nama_pengirim') is-invalid @enderror" placeholder="Masukan Nama Pengirim ..." name="nama_pengirim" value="{{ old('nama_pengirim') }}" required autocomplete="username" autofocus oninvalid="this.setCustomValidity('Mohon isi Nama Pengirim terlebih dahulu!')" oninput="setCustomValidity('')">
 
                                 @error('nama_pengirim')
                                     <span class="invalid-feedback" role="alert">
@@ -74,33 +63,29 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
 
-                        <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="username">{{ __('Jabatan Pengirim') }}
+                                <label for="jabatan_pengirim">{{ __('Jabatan Pengirim') }}
                                     <small style="color:red"><b>*</b></small>
                                 </label>
 
-                                <input id="username" type="text" class="form-control form-control-sm @error('username') is-invalid @enderror" placeholder="Masukan Nama Pengguna ..." name="username" value="{{ old('username') }}" required autocomplete="username" autofocus oninvalid="this.setCustomValidity('Mohon isi Nama Pengguna terlebih dahulu!')" oninput="setCustomValidity('')">
+                                <input id="jabatan_pengirim" type="text" class="form-control form-control @error('jabatan_pengirim') is-invalid @enderror" placeholder="Masukan Jabatan Pengirim ..." name="jabatan_pengirim" value="{{ old('jabatan_pengirim') }}" required autocomplete="jabatan_pengirim" autofocus oninvalid="this.setCustomValidity('Mohon isi Jabatan Pengirim terlebih dahulu!')" oninput="setCustomValidity('')">
 
-                                @error('username')
+                                @error('jabatan_pengirim')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                        </div>
 
-                        <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="username">{{ __('Instansi Pengirim') }}
+                                <label for="instansi_pengirim">{{ __('Instansi Pengirim') }}
                                     <small style="color:red"><b>*</b></small>
                                 </label>
 
-                                <input id="username" type="text" class="form-control form-control-sm @error('username') is-invalid @enderror" placeholder="Masukan Nama Pengguna ..." name="username" value="{{ old('username') }}" required autocomplete="username" autofocus oninvalid="this.setCustomValidity('Mohon isi Nama Pengguna terlebih dahulu!')" oninput="setCustomValidity('')">
+                                <input id="instansi_pengirim" type="text" class="form-control form-control @error('instansi_pengirim') is-invalid @enderror" placeholder="Masukan Instansi Pengirim ..." name="instansi_pengirim" value="{{ old('instansi_pengirim') }}" required autocomplete="instansi_pengirim" autofocus oninvalid="this.setCustomValidity('Mohon isi Instansi Pengirim terlebih dahulu!')" oninput="setCustomValidity('')">
 
-                                @error('username')
+                                @error('instansi_pengirim')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -118,52 +103,54 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-5">
                             <div class="form-group">
-                                <label for="username">{{ __('Jenis Surat') }}
+                                <label for="jenis_surat">{{ __('Jenis Surat') }}
                                     <small style="color:red"><b>*</b></small>
                                 </label>
 
-                                <select id="pengirim" class="form-control form-control-sm @error('hak_akses') is-invalid @enderror" style="width: 100%;" name="pengirim" required oninvalid="this.setCustomValidity('Mohon pilih pengirim dahulu!')" oninput="setCustomValidity('')">
+                                <select id="jenis_surat" class="form-control form-control-sm @error('jenis_surat') is-invalid @enderror" style="width: 100%;" name="id_jenissurat" required oninvalid="this.setCustomValidity('Mohon pilih jenis surat dahulu!')" oninput="setCustomValidity('')">
                                     <option value=""></option>
-
+                                    @foreach ($jenissurat as $item)
+                                        <option value="{{ $item->id }}">{{$item->jenis_surat}}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="username">{{ __('Sifat Surat') }}
+                                <label for="sifat_surat">{{ __('Sifat Surat') }}
                                     <small style="color:red"><b>*</b></small>
                                 </label>
 
-                                <select id="pengirim" class="form-control form-control-sm @error('hak_akses') is-invalid @enderror" style="width: 100%;" name="pengirim" required oninvalid="this.setCustomValidity('Mohon pilih pengirim dahulu!')" oninput="setCustomValidity('')">
+                                <select id="sifat_surat" class="form-control form-control-sm @error('sifat_surat') is-invalid @enderror" style="width: 100%;" name="sifat_surat" required oninvalid="this.setCustomValidity('Mohon pilih sifat surat dahulu!')" oninput="setCustomValidity('')">
                                     <option value=""></option>
-
+                                    <option value="RAHASIA">RAHASIA</option>
+                                    <option value="SANGAT RAHASIA">SANGAT RAHASIA</option>
+                                    <option value="TERBATAS">TERBATAS</option>
+                                    <option value="BIASA">BIASA</option>
+                                    <option value="TERBUKA">TERBUKA</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="username">{{ __('Tingkat Urgensi') }}
+                                <label for="tingkat_urgen">{{ __('Tingkat Urgensi') }}
                                     <small style="color:red"><b>*</b></small>
                                 </label>
 
-                                <select id="pengirim" class="form-control form-control-sm @error('hak_akses') is-invalid @enderror" style="width: 100%;" name="pengirim" required oninvalid="this.setCustomValidity('Mohon pilih pengirim dahulu!')" oninput="setCustomValidity('')">
+                                <select id="tingkat_urgen" class="form-control form-control-sm @error('tingkat_urgen') is-invalid @enderror" style="width: 100%;" name="tingkat_urgen" required oninvalid="this.setCustomValidity('Mohon pilih tingkat urgensi dahulu!')" oninput="setCustomValidity('')">
                                     <option value=""></option>
-
+                                    <option value="BIASA">BIASA</option>
+                                    <option value="SEGERA">SEGERA</option>
+                                    <option value="SANGAT SEGERA">SANGAT SEGERA</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="username">{{ __('Nomor Surat') }}
+                                <label for="no_surat">{{ __('Nomor Surat') }}
                                     <small style="color:red"><b>*</b></small>
                                 </label>
 
-                                <input id="nama_pengirim" type="text" class="form-control form-control-sm @error('nama_pengirim') is-invalid @enderror" placeholder="Masukan Nama Pengirim ..." name="nama_pengirim" value="{{ old('nama_pengirim') }}" required autocomplete="username" autofocus oninvalid="this.setCustomValidity('Mohon isi Nama Pengirim terlebih dahulu!')" oninput="setCustomValidity('')">
-
-                                @error('nama_pengirim')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input id="no_surat" type="text" class="form-control @error('no_surat') is-invalid @enderror" placeholder="Masukan Nomor Surat ..." name="no_surat" value="{{ old('no_surat') }}" required autocomplete="no_surat" autofocus oninvalid="this.setCustomValidity('Mohon isi Nomor Surat terlebih dahulu!')" oninput="setCustomValidity('')">
                             </div>
 
                             <div class="form-group">
@@ -185,7 +172,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="username">{{ __('Tanggal Diterima') }}
                                     <small style="color:red"><b>*</b></small>
                                 </label>
@@ -197,16 +184,16 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            </div> --}}
                         </div>
 
-                        <div class="col-sm-6">
+                        <div class="col-sm-7">
                             <div class="form-group">
                                 <label>{{ __('Hal') }}
                                     <small style="color:red"><b>*</b></small>
                                 </label>
 
-                                <textarea name="hal" rows="3" class="form-control" id="hal" placeholder="Masukkan hal..."></textarea>
+                                <textarea name="perihal" rows="3" class="form-control" id="perihal" placeholder="Masukkan hal..."></textarea>
                             </div>
 
                             <div class="form-group">
@@ -214,7 +201,7 @@
                                     <small style="color:red"><b>*</b></small>
                                 </label>
 
-                                <textarea name="hal" rows="8" class="form-control" id="hal" placeholder="Masukkan hal..."></textarea>
+                                <textarea name="isi" rows="8" class="form-control" id="isi" placeholder="Masukkan isi ringkas..."></textarea>
                             </div>
 
                             <div class="form-group">
@@ -223,7 +210,7 @@
                                 </label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input @error('foto') is-invalid @enderror" id="customFile" name="foto">
+                                        <input type="file" class="custom-file-input @error('file_surat') is-invalid @enderror" id="customFile" name="file_surat" required>
                                         <label class="custom-file-label" for="customFile">Pilih file</label>
                                     </div>
                                 </div>
@@ -232,12 +219,6 @@
                                         Format yang didukung: .PDF
                                     </small>
                                 </div>
-
-                                @error('customFile')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                         </div>
                     </div>
@@ -252,36 +233,31 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Grup Tujuan</label>
-
-                                <select id="pengirim" class="form-control form-control-sm @error('hak_akses') is-invalid @enderror" style="width: 100%;" name="pengirim" required oninvalid="this.setCustomValidity('Mohon pilih pengirim dahulu!')" oninput="setCustomValidity('')">
-                                    <option value=""></option>
-
-                                </select>
-                            </div>
-
-                            <div class="form-group">
                                 <label>Utama
                                     <small style="color:red"><b>*</b></small>
                                 </label>
 
-                                <select id="pengirim" class="form-control form-control-sm @error('hak_akses') is-invalid @enderror" style="width: 100%;" name="pengirim" required oninvalid="this.setCustomValidity('Mohon pilih pengirim dahulu!')" oninput="setCustomValidity('')">
+                                <select id="tujuan" class="form-control form-control-sm @error('tujuan') is-invalid @enderror" style="width: 100%;" name="id_tujuan" required oninvalid="this.setCustomValidity('Mohon pilih tujuan dahulu!')" oninput="setCustomValidity('')">
                                     <option value=""></option>
-
+                                    @foreach ($tujuan as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nama }} - {{ $item->nama_jabatan }} - {{ $item->nama_unitkerja }} - {{ $item->nama_opd }}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <div class="form-group">
                                 <label>Tembusan</label>
 
-                                <select id="pengirim" class="form-control form-control-sm @error('hak_akses') is-invalid @enderror" style="width: 100%;" name="pengirim" required oninvalid="this.setCustomValidity('Mohon pilih pengirim dahulu!')" oninput="setCustomValidity('')">
+                                <select id="tembusan" class="form-control form-control-sm @error('tembusan') is-invalid @enderror" style="width: 100%;" name="id_tembusan">
                                     <option value=""></option>
-
+                                    @foreach ($tembusan as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nama }} - {{ $item->nama_jabatan }} - {{ $item->nama_unitkerja }} - {{ $item->nama_opd }}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -305,18 +281,28 @@
 <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
 <script>
 $(function () {
-    $('#grup_jabatan').select2({
-        placeholder: "Pilih Grup Jabatan",
+    $('#sifat_surat').select2({
+        placeholder: "Pilih Sifat Surat",
         theme: 'bootstrap4'
     });
 
-    $('#hak_akses').select2({
-        placeholder: "Pilih Hak Akses",
+    $('#jenis_surat').select2({
+        placeholder: "Pilih Jenis Surat",
         theme: 'bootstrap4'
     });
 
-    $('#jenis_user').select2({
-        placeholder: "Pilih Jenis Pengguna",
+    $('#tingkat_urgen').select2({
+        placeholder: "Pilih Tingkat Urgensi",
+        theme: 'bootstrap4'
+    });
+
+    $('#tujuan').select2({
+            placeholder: "Pilih Tujuan",
+            theme: 'bootstrap4'
+        });
+    
+    $('#tembusan').select2({
+        placeholder: "Pilih Tembusan",
         theme: 'bootstrap4'
     });
 
@@ -360,15 +346,7 @@ if ( has_errors ){
 </script>
 
 <script>
-      $(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    })
-
+$(function () {
     //Datemask dd/mm/yyyy
     $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
     //Datemask2 mm/dd/yyyy

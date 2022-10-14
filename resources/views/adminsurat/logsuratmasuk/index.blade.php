@@ -20,7 +20,7 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{ route('dashboard.adminsurat') }}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
             <li class="breadcrumb-item active">Log Surat Masuk</li>
           </ol>
         </div><!-- /.col -->
@@ -41,50 +41,59 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>No</th>
-                  <th>Tanggal Surat</th>
+                  <th width="10">No</th>
+                  <th width="60">Tanggal Surat</th>
                   <th>Nomor Surat</th>
                   <th>Hal</th>
                   <th>Asal Surat</th>
                   <th>Tingkat Urgensi</th>
-                  <th>Status Tindak Lanjut</th>
+                  <th width="10">Status</th>
                   <th width="10">Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
-                {{-- @foreach ($user as $item)
+                @foreach ($suratmasuk as $item)
                 <tr>
-                  <td>{{ $item->nama_role }}</td>
-                  <td>{{ $item->nama }}</td>
-                  <td>{{ $item->email }}</td>
-                  <td>{{ $item->username }}</td>
-                  <td>{{ $item->nama_opd }} / {{ $item->nama_unitkerja }}</td>
-                  <td>{{ $item->nama_jabatan }}</td>
+                  <td>{{ $logsuratmasuk++ }}</td>
+                  <td>{{ date('j M Y', strtotime($item->tgl_surat)) }}</td>
+                  <td>{{ $item->no_surat }}</td>
+                  <td>{{ $item->perihal }}</td>
+                  <td>{{ $item->nama_instansi }}</td>
+                  <td>{{ $item->tingkat_urgen }}</td>
                   <td align="center">
-                    @if( $item->active == 1 )
-                      <span class="badge bg-success">Aktif</span>
-                    @elseif( $item->active == 0 )
-                      <span class="badge bg-danger">Tidak Aktif</span>
+                    @if( $item->id_status == 1 )
+                      <span class="badge bg-success">Konsep</span>
+                    @elseif( $item->id_status == 2 )
+                      <span class="badge bg-green">Terkirim</span>
+                    @elseif( $item->id_status == 3 )
+                      <span class="badge bg-warning">Belum Dibaca</span>
+                    @elseif( $item->id_status == 4 )
+                      <span class="badge bg-success">Sudah Dibaca</span>
+                    @elseif( $item->id_status == 5 )
+                      <span class="badge bg-warning">Disposisi</span>
+                    @elseif( $item->id_status == 6 )
+                      <span class="badge bg-warning">Tindak Lanjut</span>
+                    @elseif( $item->id_status == 7 )
+                      <span class="badge bg-success">Selesai</span>
+                    @elseif( $item->id_status == 8 )
+                      <span class="badge bg-warning">Belum Verifikasi</span>
+                    @elseif( $item->id_status == 9 )
+                      <span class="badge bg-success">Sudah Verifikasi</span>
+                    @elseif( $item->id_status == 10 )
+                      <span class="badge bg-warning">Belum Tandatangan</span>
+                    @elseif( $item->id_status == 11 )
+                      <span class="badge bg-success">Sudah Tandatangan</span>
                     @endif
                   </td>
                   <td align="center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-outline-primary btn-block dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                    <a href="{{ url('log-surat-masuk/'.$item->id) }}" style="color:blue">
+                      <button type="button" class="btn btn-xs btn-outline-primary btn-block">
+                        <i class="fa fa-info-circle"></i>
                       </button>
-                      <div class="dropdown-menu dropdown-menu-right">
-                          <a class="dropdown-item" href="{{ url('users/'.$item->id) }}" style="color:blue">
-                            <i class="fa fa-info-circle"></i>
-                              Detail
-                          </a>
-                          <a class="dropdown-item" href="{{ url('users/'.$item->id.'/edit') }}" style="color:#ffc107" hover>
-                            <i class="fa fa-edit"></i>
-                              Edit
-                          </a>
-                      </div>
-                    </div>
+                    </a>
                   </td>
                 </tr>
-                @endforeach --}}
+                @endforeach
                 </tbody>
               </table>
             </div>

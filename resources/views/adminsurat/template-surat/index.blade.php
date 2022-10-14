@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    | Daftar Template Surat
+@endsection
+
 @section('css')
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -12,12 +16,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Daftar Jabatan</h1>
+          <h1 class="m-0">Template Surat - Daftar</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Jabatan</li>
+            <li class="breadcrumb-item active">Daftar Template Surat</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -33,52 +37,22 @@
         <div class="col-12">
 
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Daftar Data Jabatan</h3>
-              <div class="card-tools">
-                <a href="{{ route('jabatan.create') }}">
-                  <button type="button" class="btn btn-block btn-success btn-sm">
-                    <i class="fas fa-user-plus"></i> Tambah Jabatan
-                  </button>
-                </a>
-              </div>
-            </div>
-            <!-- /.card-header -->
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>No</th>
-                  <th>Jabatan</th>
-                  <th>OPD</th>
-                  <th>Unit Kerja</th>
-                  <th>Induk Jabatan</th>
-                  <th width="10"><i class="fas fa-wrench"></i></th>
+                  <th width="10">No</th>
+                  <th>Jenis Surat</th>
+                  <th>File</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($jabatan as $item)
-                <tr>
-                  <td>No</td>
-                  <td>{{ $item->nama_jabatan }}</td>
-                  <td>{{ $item->nama_opd }}</td>
-                  <td>{{ $item->nama_unitkerja }}</td>
-                  <td>{{ $item->induk_jabatan }}</td>
-                  
-                  <td align="center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-outline-primary btn-block dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-right">
-                          
-                          <a class="dropdown-item" href="{{ url('jabatan/'.$item->id.'/edit') }}" style="color:#ffc107" hover>
-                            <i class="fa fa-edit"></i>
-                              Edit
-                          </a>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
+                @foreach ($template as $item)
+                  <tr>
+                    <td>{{ $no++ }}</td>
+                    <td>{{ $item->jenis_surat }}</td>
+                    <td>{{ $item->file }}</td>
+                  </tr>
                 @endforeach
                 </tbody>
               </table>
@@ -124,6 +98,6 @@
       "autoWidth": false,
       "responsive": true,
     });
-  }); 
+  });
 </script>
 @endsection
