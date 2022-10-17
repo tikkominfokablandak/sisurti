@@ -117,8 +117,6 @@ class SuratKeluarController extends Controller
         // $suratkeluar['id_create'] = Auth::user()->id;
         // $suratkeluar['id_pengirim'] = Auth::user()->id;
 
-        $suratkeluar
-
         $suratkeluar->file_surat = $namabaru;
 
         $suratkeluar->tgl_surat = Carbon::now();

@@ -59,6 +59,9 @@ Route::group(['middleware' => ['web', 'auth', 'roles']],function(){
             
             
             Route::resource('surat-masuk', \App\Http\Controllers\AdminSurat\SuratMasukController::class);
+            Route::get('surat-masuk/{id}/file', [\App\Http\Controllers\AdminSurat\SuratMasukController::class, 'file'])->name('sm.file');
+            Route::post('surat-masuk/{id}/kirim', [\App\Http\Controllers\AdminSurat\SuratMasukController::class, 'kirim'])->name('sm.kirim');
+            
             Route::resource('surat-keluar', \App\Http\Controllers\AdminSurat\SuratKeluarController::class);
             Route::resource('surat-disposisi', \App\Http\Controllers\AdminSurat\DisposisiController::class);
 
@@ -83,40 +86,41 @@ Route::group(['middleware' => ['web', 'auth', 'roles']],function(){
         });
 
         Route::group(['roles' => 'User'], function(){
-            Route::group(['prefix' => 'surat'], function(){
-                Route::resource('tandatangan', TandatanganController::class);
-                Route::resource('verifikasi', VerifikatorController::class);
-                Route::resource('masuk', SuratMasukController::class);
-                Route::resource('keluar', SuratKeluarController::class);
-                Route::resource('tembusan', TembusanController::class);
-                Route::resource('disposisi', DisposisiController::class);
-            });
+            // Route::group(['prefix' => 'surat'], function(){
+                // Route::resource('tandatangan', TandatanganController::class);
+                // Route::resource('verifikasi', VerifikatorController::class);
+                Route::resource('tindak-lanjut', \App\Http\Controllers\User\TindakLanjutController::class);
+                Route::resource('surat-masuk', \App\Http\Controllers\User\SuratMasukController::class);
+                // Route::resource('keluar', SuratKeluarController::class);
+                // Route::resource('tembusan', TembusanController::class);
+                Route::resource('disposisi', \App\Http\Controllers\User\DisposisiController::class);
+            // });
         });
     });
 
 
     //PROJEK TATA NASKAH
-    Route::group(['roles' => 'Admin OPD TNDE'],function(){
-        // Route::resource('naskah-masuk', \App\Http\Controllers\AdminSurat\SuratMasukController::class);
-        Route::resource('naskah-keluar', \App\Http\Controllers\AdminTNDE\NaskahKeluarController::class);
-        // Route::resource('naskah-disposisi', \App\Http\Controllers\AdminSurat\DisposisiController::class);
+    // Route::group(['roles' => 'Admin OPD TNDE'],function(){
+    //     // Route::resource('naskah-masuk', \App\Http\Controllers\AdminSurat\SuratMasukController::class);
+    //     Route::resource('naskah-keluar', \App\Http\Controllers\AdminTNDE\NaskahKeluarController::class);
+    //     // Route::resource('naskah-disposisi', \App\Http\Controllers\AdminSurat\DisposisiController::class);
 
-        // Route::resource('log-naskah-masuk', \App\Http\Controllers\AdminSurat\LogSuratMasukController::class);
-        Route::resource('log-naskah-keluar', \App\Http\Controllers\AdminTNDE\LogNaskahKeluarController::class);
+    //     // Route::resource('log-naskah-masuk', \App\Http\Controllers\AdminSurat\LogSuratMasukController::class);
+    //     Route::resource('log-naskah-keluar', \App\Http\Controllers\AdminTNDE\LogNaskahKeluarController::class);
 
-        Route::resource('daftar-penandatangan', \App\Http\Controllers\AdminSurat\TandatanganController::class);
-        Route::resource('daftar-verifikator', \App\Http\Controllers\AdminSurat\VerifikatorController::class);
+    //     Route::resource('daftar-penandatangan', \App\Http\Controllers\AdminSurat\TandatanganController::class);
+    //     Route::resource('daftar-verifikator', \App\Http\Controllers\AdminSurat\VerifikatorController::class);
 
-        Route::group(['prefix' => 'daftar-tujuan'], function () {
-            Route::get('/', [\App\Http\Controllers\AdminSurat\TujuanController::class, 'index'])->name('tujuan.index');
+    //     Route::group(['prefix' => 'daftar-tujuan'], function () {
+    //         Route::get('/', [\App\Http\Controllers\AdminSurat\TujuanController::class, 'index'])->name('tujuan.index');
 
-            Route::post('/internal', [\App\Http\Controllers\AdminSurat\TujuanController::class, 'storeInternal'])->name('internal.store');
-            Route::post('/eksternal', [\App\Http\Controllers\AdminSurat\TujuanController::class, 'storeEksternal'])->name('eksternal.store');
-        });
+    //         Route::post('/internal', [\App\Http\Controllers\AdminSurat\TujuanController::class, 'storeInternal'])->name('internal.store');
+    //         Route::post('/eksternal', [\App\Http\Controllers\AdminSurat\TujuanController::class, 'storeEksternal'])->name('eksternal.store');
+    //     });
 
-        Route::resource('daftar-grup-tujuan', \App\Http\Controllers\AdminSurat\GrupTujuanController::class);
-        Route::resource('daftar-tembusan', \App\Http\Controllers\AdminSurat\TembusanController::class);
+    //     Route::resource('daftar-grup-tujuan', \App\Http\Controllers\AdminSurat\GrupTujuanController::class);
+    //     Route::resource('daftar-tembusan', \App\Http\Controllers\AdminSurat\TembusanController::class);
         
-        Route::resource('template-naskah', \App\Http\Controllers\AdminTNDE\TemplateNaskahController::class);
-    });
+    //     Route::resource('template-naskah', \App\Http\Controllers\AdminTNDE\TemplateNaskahController::class);
+    // });
 });

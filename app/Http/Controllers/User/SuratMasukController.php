@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\AdminSurat;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Jenissurat;
 
-class JenisSuratController extends Controller
+class SuratMasukController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +14,7 @@ class JenisSuratController extends Controller
      */
     public function index()
     {
-        $template = Jenissurat::get();
-
-        return view('adminsurat.template-surat.index', [
-            'template' => $template
-        ])->with('no', 1);
+        return view('user.suratmasuk.index');
     }
 
     /**
