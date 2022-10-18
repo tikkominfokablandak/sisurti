@@ -119,7 +119,7 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer" style="display: block;">
-                Total status Surat keluar dan Surat masuk pada menu "Surat DINAS"
+                Total isian pada menu "Administrasi"
               </div>
               <!-- /.card-footer-->
             </div>
