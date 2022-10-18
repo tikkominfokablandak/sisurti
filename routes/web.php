@@ -37,8 +37,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles']],function(){
     Route::get('get-unitkerja', [\App\Http\Controllers\UnitKerjaController::class, 'select'])->name('get-unitkerja.select');
     Route::get('get-jabatan', [\App\Http\Controllers\JabatanController::class, 'select'])->name('get-jabatan.select');
     Route::get('get-user', [\App\Http\Controllers\UserController::class, 'select'])->name('get-user.select');
-
-
+   
     Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
 
     Route::group(['roles' => 'Admin Kab Landak'], function(){

@@ -150,7 +150,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('template-surat.index') }}" class="nav-link {{ ( (request()->is('template-surat')) ) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-file-upload"></i>
                   <p>Template Surat</p>
                 </a>
               </li>
