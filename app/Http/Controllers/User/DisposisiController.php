@@ -4,9 +4,29 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\SuratMasuk;
+use App\Models\User;
+use Auth;
 
 class DisposisiController extends Controller
 {
+    public function disposisi($id)
+    {
+        $suratmasuk = SuratMasuk::join('jenissurats', 'suratmasuks.id_jenissurat', 'jenissurats.id')
+        ->join('users', 'suratmasuks.id_create', 'users.id')
+        ->select('suratmasuks.*', 'users.nama', 'jenissurats.jenis_surat')
+        ->find($id);
+
+        $tujuandisposisi = User::join('jabatans', 'users.id_jabatan', 'jabatans.id')
+        ->where('users.id_opd', Auth::user()->id_opd)
+        ->get();
+
+        return view('user.suratmasuk.disposisi', [
+            'suratmasuk' => $suratmasuk,
+            'tujuandisposisi' => $tujuandisposisi
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *

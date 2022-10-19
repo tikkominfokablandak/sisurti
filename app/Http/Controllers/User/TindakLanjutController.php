@@ -14,7 +14,13 @@ class TindakLanjutController extends Controller
      */
     public function index()
     {
-        return view('user.tindaklanjut.index');
+        $suratmasuk = SuratMasuk::where('suratmasuks.id_tujuan', Auth::user()->id)
+        ->where('id_status', '<>', '1')
+        ->get();
+
+        return view('user.tindaklanjut.index', [
+            'suratmasuk' => $suratmasuk
+        ])->with('no',1);
     }
 
     /**

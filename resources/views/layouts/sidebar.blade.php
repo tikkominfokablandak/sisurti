@@ -217,7 +217,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/surat-masuk" class="nav-link {{ ( (request()->is('surat-masuk')) ) ? 'active' : '' }}">
+            <a href="/suratmasuk" class="nav-link {{ ( (request()->is('suratmasuk')) ) ? 'active' : '' }}">
               <i class="nav-icon fas fa-envelope"></i>
               <p>
                 Daftar Surat Masuk

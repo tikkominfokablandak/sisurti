@@ -90,11 +90,15 @@ Route::group(['middleware' => ['web', 'auth', 'roles']],function(){
                 // Route::resource('tandatangan', TandatanganController::class);
                 // Route::resource('verifikasi', VerifikatorController::class);
                 Route::resource('tindak-lanjut', \App\Http\Controllers\User\TindakLanjutController::class);
-                Route::resource('surat-masuk', \App\Http\Controllers\User\SuratMasukController::class);
+                Route::group(['prefix' => 'suratmasuk'], function(){
+                    Route::resource('/', \App\Http\Controllers\User\SuratMasukController::class);
+                    Route::post('/{id}', [\App\Http\Controllers\User\SuratMasukController::class, 'detail'])->name('sm.detail');
+                    Route::get('/{id}/disposisi', [\App\Http\Controllers\User\DisposisiController::class, 'disposisi'])->name('disposisi');
+                    Route::post('/{id}/disposisi', [\App\Http\Controllers\User\DisposisiController::class, 'kirimdisposisi'])->name('disposisi.kirim');
+                });
                 // Route::resource('keluar', SuratKeluarController::class);
                 // Route::resource('tembusan', TembusanController::class);
                 Route::resource('disposisi', \App\Http\Controllers\User\DisposisiController::class);
-            // });
         });
     });
 
