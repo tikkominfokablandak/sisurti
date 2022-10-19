@@ -6,7 +6,7 @@
     <div class="card card-outline card-primary">
       <div class="text-center">
         <a href="{{ url('/') }}" class="h1">
-            <img src="assets/img/login/sipaskal-logo-login.png" alt="SIPASKAL" style="width:200px">
+            <img src="assets/img/login/sisurti-logo-login.png" alt="SISURTI" style="width:200px">
         </a>
       </div>
       <div class="card-body">
