@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    | Tambah Data Jabatan |
+    | Edit Data Jabatan 
 @endsection
 
 @section('css')
@@ -73,26 +73,17 @@
                             <div class="form-group">
                                 <label for="opd">{{ __('OPD') }}</label>
 
-                                <select id="opd" name="opd" data-placeholder="Pilih OPD" class="form-control @error('opd') is-invalid @enderror" style="width: 100%;" oninvalid="this.setCustomValidity('Mohon pilih OPD dahulu!')" oninput="setCustomValidity('')">
-                                    @foreach ($opd as $op)
-                                        <option value="{{ $op->id }}" {{ $op->id == $jabatan->id_opd ? 'selected' : '' }}>{{ $op->nama_opd }}</option>
-                                    @endforeach
+                                <select id="select_opd" name="opd" data-placeholder="Pilih OPD" class="form-control @error('select_opd') is-invalid @enderror" style="width: 100%;" oninvalid="this.setCustomValidity('Mohon pilih OPD dahulu!')" oninput="setCustomValidity('')">
+                                    <option>{{ $jabatan->nama_opd }}</option>
                                 </select>
 
-                                @error('singkatan')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="unitkerja">{{ __('Unit Kerja') }}</label>
                                 
-                                <select id="unitkerja" name="unitkerja" data-placeholder="Pilih unitkerja" class="form-control @error('unitkerja') is-invalid @enderror" style="width: 100%;" oninvalid="this.setCustomValidity('Mohon pilih unit kerja dahulu!')" oninput="setCustomValidity('')">
-                                    @foreach ($unitkerja as $uk)
-                                        <option value="{{ $uk->id }}" {{ $uk->id == $jabatan->id_unitkerja ? 'selected' : '' }}>{{ $uk->nama_unitkerja }}</option>
-                                    @endforeach
+                                <select id="select_unitkerja" name="unitkerja" data-placeholder="Pilih Unit Kerja" class="form-control @error('unitkerja') is-invalid @enderror" style="width: 100%;" oninvalid="this.setCustomValidity('Mohon pilih unit kerja dahulu!')" oninput="setCustomValidity('')">
+                                    <option>{{ $jabatan->nama_unitkerja }}</option>
                                 </select>
 
                                 @error('alamat')
@@ -105,7 +96,7 @@
                             <div class="form-group">
                                 <label for="induk_jabatan">{{ __('Nama induk jabatan') }}</label>
 
-                                <input id="induk_jabatan" type="text" class="form-control @error('induk_jabatan') is-invalid @enderror" name="induk_jabatan" value="{{ $jabatan->induk_jabatan }}" placeholder="Masukan Induk Unit Kerja..." autocomplete="induk_jabatan" autofocus oninvalid="this.setCustomValidity('Mohon isi nama induk kerja terlebih dahulu!')" oninput="setCustomValidity('')">
+                                <input id="induk_jabatan" type="text" class="form-control @error('induk_jabatan') is-invalid @enderror" name="induk_jabatan" value="{{ $jabatan->induk_jabatan }}" placeholder="Masukan Induk Jabatan..." autocomplete="induk_jabatan" autofocus oninvalid="this.setCustomValidity('Mohon isi nama induk kerja terlebih dahulu!')" oninput="setCustomValidity('')">
 
                                 @error('induk_jabatan')
                                     <span class="invalid-feedback" role="alert">
@@ -169,7 +160,6 @@ $(document).ready(function() {
     $('#select_opd').change(function() {
         //clear select
         $('#select_unitkerja').empty();
-        $("#select_jabatan").empty();
         //set id
         let opdID = $(this).val();
         if (opdID) {
@@ -194,7 +184,6 @@ $(document).ready(function() {
             });
         } else {
             $('#select_unitkerja').empty();
-            $("#select_jabatan").empty();
         }
     });
     //  Event on change select opd:end
@@ -236,15 +225,6 @@ $(document).ready(function() {
     $("#select_unitkerja").select2(
             {theme: 'bootstrap4',}
         );
-        $("#select_jabatan").select2(
-            {theme: 'bootstrap4',}
-        );
-    });
-
-    $('#select_unitkerja').on('select2:clear', function(e) {
-    $("#select_jabatan").select2(
-        {theme: 'bootstrap4',}
-        );
     });
 });
 </script>
@@ -254,24 +234,6 @@ $(document).ready(function() {
 <!-- Select2 -->
 <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
 <script>
-$(function () {
-    $('#grup_jabatan').select2({
-        placeholder: "Pilih Grup Jabatan",
-        theme: 'bootstrap4'
-    });
-
-    $('#hak_akses').select2({
-        placeholder: "Pilih Hak Akses",
-        theme: 'bootstrap4'
-    });
-
-    $('#jenis_user').select2({
-        placeholder: "Pilih Jenis Pengguna",
-        theme: 'bootstrap4'
-    });
-
-    bsCustomFileInput.init();
-});
 
 var has_errors = {{ $errors->count() > 0 ? 'true' : 'false' }};
 

@@ -34,16 +34,16 @@ class OpdRequest extends FormRequest
     public function store()
     {
         return [
-            'nama_opd' => 'unique:opds',
-            'singkatan' => 'unique:opds'
+            'nama_opd' => 'unique:opds|max:128|required',
+            'singkatan' => 'unique:opds|max:32|required'
         ];
     }
 
     public function update()
     {
         return [
-            'nama_opd' => ['min:5'],
-            'singkatan' => ['min:3']
+            'nama_opd' => 'max:128|required',
+            'singkatan' => 'max:32|required'
         ];
     }
 
@@ -51,7 +51,13 @@ class OpdRequest extends FormRequest
     {
         return [
             'nama_opd.unique' => 'Nama OPD sudah terdaftar',
-            'singkatan.unique' => 'Singkatan sudah terdaftar'
+            'nama_opd.max' => 'Batas maksimal adalah 128 karakter',
+            'singkatan.max' => 'Batas maksimal adalah 32 karakter',
+            'singkatan.unique' => 'Singkatan sudah terdaftar',
+            'nama_opd.unique' => 'Nama OPD sudah terdaftar',
+            'singkatan.unique' => 'Singkatan OPD sudah terdaftar',
+            'nama_opd.required' => 'Field Nama OPD wajib diisi',
+            'singkatan.required' => 'Field Singkatan wajib diisi'
         ];
     }
 }

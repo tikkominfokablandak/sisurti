@@ -62,26 +62,15 @@
                             <div class="form-group">
                                 <label for="opd">{{ __('OPD') }}</label>
 
-                                <select id="opd" name="opd" data-placeholder="Pilih OPD" class="form-control @error('opd') is-invalid @enderror" style="width: 100%;" oninvalid="this.setCustomValidity('Mohon pilih OPD dahulu!')" oninput="setCustomValidity('')">
-                                    @foreach ($opd as $op)
-                                        <option value="{{ $op->id }}" >{{ $op->nama_opd }}</option>
-                                    @endforeach
+                                <select id="select_opd" name="opd" data-placeholder="Pilih OPD" class="form-control @error('select_opd') is-invalid @enderror" style="width: 100%;" oninvalid="this.setCustomValidity('Mohon pilih OPD dahulu!')" oninput="setCustomValidity('')">
                                 </select>
-                                
-                                @error('opd')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+
                             </div>
 
                             <div class="form-group">
                                 <label for="id_unitkerja">{{ __('Unit Kerja') }}</label>
 
-                                <select id="id_unitkerja" name="id_unitkerja" data-placeholder="Pilih id_unitkerja" class="form-control @error('id_unitkerja') is-invalid @enderror" style="width: 100%;" oninvalid="this.setCustomValidity('Mohon pilih id_unitkerja dahulu!')" oninput="setCustomValidity('')">
-                                    @foreach ($unitkerja as $op)
-                                        <option value="{{ $op->id }}" >{{ $op->nama_unitkerja }}</option>
-                                    @endforeach
+                                <select id="select_unitkerja" name="id_unitkerja" data-placeholder="Pilih Unit Kerja" class="form-control @error('id_unitkerja') is-invalid @enderror" style="width: 100%;" oninvalid="this.setCustomValidity('Mohon pilih id_unitkerja dahulu!')" oninput="setCustomValidity('')">
                                 </select>
 
                                 @error('id_unitkerja')
@@ -127,3 +116,74 @@
     </div><!--/. container-fluid -->
   </section>
 @endsection
+
+@push('javascript-internal')
+<script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+
+<script>
+  $(document).ready(function() {
+    //START select_opd
+    $('#select_opd').select2({
+      theme: 'bootstrap4',
+        allowClear: true,
+        ajax: {
+            url: "{{ route('get-opd.select') }}",
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(item) {
+                    return {
+                        text: item.nama_opd,
+                        id: item.id
+                    }
+                    })
+                };
+            }
+        }
+    });
+    //END select_opd
+
+    //Event on change select opd:start
+    $('#select_opd').change(function() {
+        //clear select
+        $('#select_unitkerja').empty();
+        //set id
+        let opdID = $(this).val();
+        if (opdID) {
+            $('#select_unitkerja').select2({
+                theme: 'bootstrap4',
+                allowClear: true,
+                ajax: {
+                    url: "{{ route('get-unitkerja.select') }}?opdID=" + opdID,
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function(data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.nama_unitkerja,
+                                id: item.id
+                            }
+                        })
+                    };
+                    }
+                }
+            });
+        } else {
+            $('#select_unitkerja').empty();
+        }
+    });
+    //END Event on change select_opd
+
+    $('#select_opd').on('select2:clear', function(e) {
+    $("#select_unitkerja").select2(
+            {theme: 'bootstrap4',}
+        );
+    });
+
+
+  });
+</script>
+
+@endpush

@@ -146,7 +146,7 @@
                                 <select id="hak_akses" class="form-control @error('hak_akses') is-invalid @enderror" style="width: 100%;" name="id_role" required oninvalid="this.setCustomValidity('Mohon pilih Hak Akses dahulu!')" oninput="setCustomValidity('')">
                                     <option value=""></option>
                                     @foreach ($role as $item)
-                                    <option value="{{ $item->id }}">{{$item->nama_role}}</option>
+                                        <option value="{{ $item->id }}">{{$item->nama_role}}</option>
                                     @endforeach
                                 </select>
                             </div>

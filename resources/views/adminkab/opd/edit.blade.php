@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    | Tambah OPD |
+    | Tambah Edit
 @endsection
 
 @section('css')
@@ -61,7 +61,7 @@
                             <div class="form-group">
                                 <label for="nama_opd">{{ __('Nama OPD') }}</label>
 
-                                <input id="nama_opd" type="text" class="form-control @error('nama_opd') is-invalid @enderror" name="nama_opd" value="{{ $opd->nama_opd }}" placeholder="Masukan nama OPD ..." required autocomplete="nama_opd" autofocus oninvalid="this.setCustomValidity('Mohon isi nama OPD terlebih dahulu!')" oninput="setCustomValidity('')">
+                                <input id="nama_opd" type="text" class="form-control @error('nama_opd') is-invalid @enderror" name="nama_opd" value="{{ old('nama_opd', $opd->nama_opd) }}" placeholder="Masukan nama OPD ..." required autocomplete="nama_opd" autofocus oninvalid="this.setCustomValidity('Mohon isi nama OPD terlebih dahulu!')" oninput="setCustomValidity('')">
 
                                 @error('nama_opd')
                                     <span class="invalid-feedback" role="alert">
@@ -73,7 +73,7 @@
                             <div class="form-group">
                                 <label for="singkatan">{{ __('Singkatan') }}</label>
 
-                                <input id="singkatan" type="text" class="form-control @error('singkatan') is-invalid @enderror" placeholder="Masukan singkatan OPD ..." name="singkatan" value="{{ $opd->singkatan }}" required autocomplete="singkatan" autofocus oninvalid="this.setCustomValidity('Mohon isi Singkatan terlebih dahulu!')" oninput="setCustomValidity('')">
+                                <input id="singkatan" type="text" class="form-control @error('singkatan') is-invalid @enderror" placeholder="Masukan singkatan OPD ..." name="singkatan" value="{{ old('singkatan' ,$opd->singkatan) }}" required autocomplete="singkatan" autofocus oninvalid="this.setCustomValidity('Mohon isi Singkatan terlebih dahulu!')" oninput="setCustomValidity('')">
 
                                 @error('singkatan')
                                     <span class="invalid-feedback" role="alert">
@@ -84,9 +84,9 @@
 
                             <div class="form-group">
                                 <label for="alamat">{{ __('Alamat') }}</label>
-
-                                <input id="alamat" type="text" class="form-control @error('alamat') is-invalid @enderror" placeholder="Masukan Alamat Lengkap ..." name="alamat" value="{{ $opd->alamat }}" autocomplete="alamat" autofocus oninvalid="this.setCustomValidity('Mohon isi alamat lengkap terlebih dahulu!')" oninput="setCustomValidity('')">
-
+                                
+                                <input id="alamat" type="text" class="form-control @error('alamat') is-invalid @enderror" placeholder="Masukan Alamat Lengkap..." name="alamat" value="{{ old('alamat', $opd->alamat) }}" autocomplete="alamat" autofocus oninvalid="this.setCustomValidity('Mohon isi alamat lengkap terlebih dahulu!')" oninput="setCustomValidity('')">
+                               
                                 @error('alamat')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

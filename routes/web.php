@@ -44,6 +44,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles']],function(){
     Route::group(['roles' => 'Admin Kab Landak'], function(){
         Route::resource('users', \App\Http\Controllers\UserController::class);
         Route::resource('opd', \App\Http\Controllers\OPDController::class);
+        // Route::get('/opd/delete/{id}');
         Route::resource('unitkerja', \App\Http\Controllers\UnitKerjaController::class);
         Route::resource('jabatan', \App\Http\Controllers\JabatanController::class);
     });
@@ -56,7 +57,6 @@ Route::group(['middleware' => ['web', 'auth', 'roles']],function(){
         Route::resource('log-disposisi', \App\Http\Controllers\AdminSurat\LogDisposisiController::class);
         
         Route::group(['roles' => 'Admin Surat'], function(){
-            
             
             Route::resource('surat-masuk', \App\Http\Controllers\AdminSurat\SuratMasukController::class);
             Route::get('surat-masuk/{id}/file', [\App\Http\Controllers\AdminSurat\SuratMasukController::class, 'file'])->name('sm.file');

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    | Unit Kerja
+@endsection
+
 @section('css')
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -59,7 +63,7 @@
                 <tbody>
                 @foreach ($jabatan as $item)
                 <tr>
-                  <td>No</td>
+                  <td>{{ $loop->iteration }}</td>
                   <td>{{ $item->nama_jabatan }}</td>
                   <td>{{ $item->nama_opd }}</td>
                   <td>{{ $item->nama_unitkerja }}</td>

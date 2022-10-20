@@ -85,7 +85,8 @@
 
                             <div class="form-group">
                                 <label>OPD</label>
-                                <select id="id_opd" name="id_opd" data-placeholder="Pilih OPD" class="form-control @error('select_opd') is-invalid @enderror" style="width: 100%;" oninvalid="this.setCustomValidity('Mohon pilih OPD dahulu!')" oninput="setCustomValidity('')">
+                                <select id="opd" name="id_opd" class="form-control @error('opd') is-invalid @enderror" style="width: 100%;" required oninvalid = "this.setCustomValidity('Mohon pilih OPD dahulu!')" oninput="setCustomValidity('')">
+                                    <option value=""></option>
                                     @foreach ($opd as $op)
                                         <option value="{{ $op->id }}">{{ $op->nama_opd }}</option>
                                     @endforeach
@@ -116,3 +117,19 @@
     </div><!--/. container-fluid -->
   </section>
 @endsection
+
+@push('javascript-internal')
+<script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#opd').select2({
+      theme: 'bootstrap4',
+      allowClear: true,
+      placeholder: "Pilih OPD",
+      theme: 'bootstrap4'
+    });
+  });
+</script>
+
+@endpush
