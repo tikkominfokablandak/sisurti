@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    | Tambah Pengguna
+    | Tambah OPD
 @endsection
 
 @section('css')

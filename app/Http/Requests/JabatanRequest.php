@@ -31,14 +31,14 @@ class JabatanRequest extends FormRequest
     public function store()
     {
         return [
-            'nama_jabatan' => 'unique:jabatans'
+            'nama_jabatan' => 'unique:jabatans|max:128|required'
         ];
     }
 
     public function update()
     {
         return [
-            'nama_jabatan' => 'min:3'
+            'nama_jabatan' => 'max:128|required'
         ];
     }
 
@@ -46,7 +46,7 @@ class JabatanRequest extends FormRequest
     {
         return[
             'nama_jabatan.unique' => 'Nama Jabatan sudah terdaftar',
-            'nama_jabatan.min' => 'Nama Jabatan harus terdiri lebih dari 3 huruf'
+            'nama_jabatan.max' => 'Batas maksimal adalah 128 karakter'
         ];
     }
 }

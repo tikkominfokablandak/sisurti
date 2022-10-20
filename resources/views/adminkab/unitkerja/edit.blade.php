@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    | Edit Unit Kerja |
+    | Edit Unit Kerja 
 @endsection
 
 @section('css')
@@ -97,10 +97,8 @@
                             <div class="form-group">
                                 <label for="id_opd">{{ __('Nama OPD') }}</label>
 
-                                <select id="id_opd" name="id_opd" data-placeholder="Pilih OPD" class="form-control @error('select_opd') is-invalid @enderror" style="width: 100%;" oninvalid="this.setCustomValidity('Mohon pilih OPD dahulu!')" oninput="setCustomValidity('')">
-                                    @foreach ($opd as $op)
-                                        <option value="{{ $op->id }}" {{ $op->id == $unitkerja->id_opd ? 'selected' : '' }}>{{ $op->nama_opd }}</option>
-                                    @endforeach
+                                <select id="select_opd" name="id_opd" data-placeholder="Pilih OPD" class="form-control @error('select_opd') is-invalid @enderror" style="width: 100%;" oninvalid="this.setCustomValidity('Mohon pilih OPD dahulu!')" oninput="setCustomValidity('')">
+                                   <option>{{ $unitkerja->nama_opd }}</option>
                                 </select>
 
                                 @error('alamat')
@@ -133,3 +131,33 @@
     </div><!--/. container-fluid -->
   </section>
 @endsection
+
+@push('javascript-internal')
+<script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+
+<script>
+  $(document).ready(function() {
+    //  select opd:start
+    $('#select_opd').select2({
+        theme: 'bootstrap4',
+        allowClear: true,
+        ajax: {
+            url: "{{ route('get-opd.select') }}",
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(item) {
+                    return {
+                        text: item.nama_opd,
+                        id: item.id
+                    }
+                    })
+                };
+            }
+        }
+    });
+    //  select opd:end
+  });
+</script>
+@endpush

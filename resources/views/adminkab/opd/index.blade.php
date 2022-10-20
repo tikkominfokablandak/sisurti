@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    | OPD
+@endsection
+
 @section('css')
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -48,7 +52,7 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>No</th>
+                  <th width="5">No</th>
                   <th>Nama OPD</th>
                   <th>Singkatan</th>
                   <th>Alamat</th>
@@ -57,9 +61,11 @@
                 </thead>
                 <tbody>
                 
+                
+
                 @foreach ($opd as $item)
                 <tr>
-                  <td>No</td>
+                  <td>{{ $loop->iteration }}</td>
                   <td>{{ $item->nama_opd }}</td>
                   <td>{{ $item->singkatan }}</td>
                   <td>{{ $item->alamat }}</td>
@@ -70,9 +76,17 @@
                       </button>
                       <div class="dropdown-menu dropdown-menu-right">
                           
-                          <a class="dropdown-item" href="{{ url('opd/'.$item->id.'/edit') }}" style="color:#ffc107" hover>
+                          <a class="dropdown-item" href="{{ url('opd/'.$item->id.'/edit') }}" style="color:#ffc107">
                             <i class="fa fa-edit"></i>
                               Edit
+                          </a>
+                          <a class="dropdown-item" href="" style="color:#ff0707">
+                            <form action="{{ route('opd.destroy', $item->id) }}" method="POST">
+                                @csrf 
+                                @method('delete')
+                              <i class="fa fa-times"></i>
+                              Hapus
+                            </form>
                           </a>
                       </div>
                     </div>

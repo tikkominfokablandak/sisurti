@@ -106,16 +106,10 @@ class JabatanController extends Controller
                     ->leftJoin('unitkerjas', 'jabatans.id_unitkerja', '=', 'unitkerjas.id')
                     ->where('jabatans.id',$id)
                     ->first();
- 
-        $opd = Opd::OrderBy('nama_opd', 'asc')->get();
-
-        $unitkerja = Unitkerja::OrderBy('nama_unitkerja', 'asc')->get();
 
         return view('adminkab.jabatan.edit', 
             [
-                'jabatan' => $jabatan,
-                'opd' => $opd,
-                'unitkerja' => $unitkerja
+                'jabatan' => $jabatan
             ]
         );
     }

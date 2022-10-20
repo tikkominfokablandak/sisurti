@@ -130,6 +130,8 @@ class OPDController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Opd::find($id)->delete();
+
+        return redirect()->route('opd.index')->with('Success', 'Data Berhasil di hapus');
     }
 }

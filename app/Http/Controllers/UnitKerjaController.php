@@ -105,11 +105,8 @@ class UnitKerjaController extends Controller
         ->where('unitkerjas.id',$id)
         ->first();
 
-        $opd = Opd::OrderBy('nama_opd', 'asc')->get();
-
         return view('adminkab.unitkerja.edit', [
-            'unitkerja' => $unitKerja,
-            'opd' => $opd
+            'unitkerja' => $unitKerja
         ]);
     }
 
@@ -123,11 +120,8 @@ class UnitKerjaController extends Controller
     public function update(UnitkerjaRequest $request, $id)
     {
         $validated = $request->validated();
-
         $unitkerjas = Unitkerja::findOrfail($id);
-
         $unitkerja = $request->all();
-
         $unitkerjas->update($unitkerja);
 
         return redirect()->route('unitkerja.index')

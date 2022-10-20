@@ -32,21 +32,22 @@ class UnitkerjaRequest extends FormRequest
     public function store()
     {
         return [
-            'nama_unitkerja' => 'max:32|unique:unitkerjas'
+            'nama_unitkerja' => 'max:128|required|unique:unitkerjas'
         ];
     }
 
     public function update()
     {
         return [
-            'nama_unitkerja' => 'min:3'
+            'nama_unitkerja' => 'max:128|required'
         ];
     }
 
     public function messages()
     {
         return[
-            'nama_unitkerja.unique' => 'Nama Unit Kerja sudah terdaftar'
+            'nama_unitkerja.unique' => 'Nama Unit Kerja sudah terdaftar',
+            'nama_unitkerja.max' => 'Batas maksimal adalah 128 karakter'
         ];
     }
 }
