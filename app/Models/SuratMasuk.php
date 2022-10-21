@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class SuratMasuk extends Model
 {
@@ -36,4 +37,9 @@ class SuratMasuk extends Model
         'id_status',
         'id_create'
     ];
+
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['tgl_surat'])->translateFormat('l, d F Y');
+    }
 }

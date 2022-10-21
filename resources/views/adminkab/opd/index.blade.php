@@ -42,7 +42,7 @@
               <div class="card-tools">
                 <a href="{{ route('opd.create') }}">
                   <button type="button" class="btn btn-block btn-success btn-sm">
-                    <i class="fas fa-user-plus"></i> Tambah Pengguna
+                    <i class="fas fa-user-plus"></i> Tambah OPD
                   </button>
                 </a>
               </div>

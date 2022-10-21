@@ -279,7 +279,6 @@
 @push('javascript-internal')
 <script>
 $(document).ready(function() {
-
     //  select opd:start
     $('#select_opd').select2({
         theme: 'bootstrap4',

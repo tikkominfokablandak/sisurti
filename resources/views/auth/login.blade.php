@@ -6,14 +6,14 @@
     <div class="card card-outline card-primary">
       <div class="text-center">
         <a href="{{ url('/') }}" class="h1">
-            <img src="assets/img/login/sipaskal-logo-login.png" alt="SIPASKAL" style="width:200px">
+            <img src="assets/img/login/sipaskal-logo-login.png" alt="SISURTI" style="width:200px">
         </a>
       </div>
       <div class="card-body">
-        <p class="login-box-msg">Masuk ke akun anda</p>
+        <p class="login-box-msg" id="coba">Masuk ke akun anda</p>
   
         <form action="{{ route('login') }}" method="post">
-            @csrf
+          @csrf
           <div class="input-group mb-3">
             <input id="login" name="login" type="text" class="form-control {{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('username') ?: old('email') }}" placeholder="Email atau Username" required autofocus oninvalid="this.setCustomValidity('Mohon isi Username dan Email terlebih dahulu!')" oninput="setCustomValidity('')">
 
@@ -23,17 +23,17 @@
               </div>
             </div>
             @if ($errors->has('username') || $errors->has('email'))
-            <span class="invalid-feedback">
-              <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
-            </span>
+              <span class="invalid-feedback">
+                <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
+              </span>
             @endif
           </div>
           <div class="input-group mb-3">
-            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" oninvalid="this.setCustomValidity('Mohon isi Password terlebih dahulu')" oninput="setCustomValidity('')">
+            <input type="password" id="password-field" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="false" oninvalid="this.setCustomValidity('Mohon isi Password terlebih dahulu')" oninput="setCustomValidity('')" >
 
             <div class="input-group-append">
               <div class="input-group-text">
-                <span class="fas fa-lock"></span>
+                <span id="toggle-password" toggle="#password-field" class="fa fa-fw fa-eye-slash"></span>
               </div>
             </div>
             @error('password')
