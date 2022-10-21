@@ -41,6 +41,14 @@
                     </button>
                 </a>
             </div>
+            <div class="col-2">
+                {{-- <a href="{{ URL::to('/suratmasuk/'.$suratmasuk->id.'/disposisi') }}"> --}}
+                <a href="{{ route('disposisi', [$suratmasuk->id]) }}">
+                    <button type="button" class="btn btn-block btn-warning">
+                        Disposisi &nbsp; <i class="fas fa-share"></i>
+                    </button>
+                </a>
+            </div>
         </div>
 
         <br>

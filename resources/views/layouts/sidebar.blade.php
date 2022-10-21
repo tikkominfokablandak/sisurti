@@ -206,30 +206,29 @@
               </p>
             </a>
           </li> --}}
-
           <li class="nav-item">
-            <a href="/tindak-lanjut" class="nav-link {{ ( (request()->is('tindak-lanjut')) ) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-file-signature"></i>
-              <p>
-                Tindak Lanjut
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="/suratmasuk" class="nav-link {{ ( (request()->is('suratmasuk')) ) ? 'active' : '' }}">
+            <a href="/suratmasuk" class="nav-link {{ ( (request()->is('suratmasuk*')) ) ? 'active' : '' }}">
               <i class="nav-icon fas fa-envelope"></i>
               <p>
                 Daftar Surat Masuk
               </p>
             </a>
           </li>
-
+          
           <li class="nav-item">
-            <a href="/disposisi" class="nav-link {{ ( (request()->is('disposisi')) ) ? 'active' : '' }}">
+            <a href="/disposisi" class="nav-link {{ ( (request()->is('disposisi*')) ) ? 'active' : '' }}">
               <i class="nav-icon fas icon-file-check-2"></i>
               <p>
                 Daftar Disposisi
+              </p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="/tindak-lanjut" class="nav-link {{ ( (request()->is('tindak-lanjut*')) ) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-file-signature"></i>
+              <p>
+                Tindak Lanjut
               </p>
             </a>
           </li>
