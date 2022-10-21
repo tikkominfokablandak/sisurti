@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\SuratMasuk;
 use App\Models\User;
 use Auth;
+use App\Models\Disposisi;
+use LogSurat;
+use App\Models\Log_surat;
 
 class DisposisiController extends Controller
 {
@@ -18,13 +21,50 @@ class DisposisiController extends Controller
         ->find($id);
 
         $tujuandisposisi = User::join('jabatans', 'users.id_jabatan', 'jabatans.id')
+        ->join('opds', 'jabatans.id_opd', 'opds.id')
+        ->select('users.*', 'jabatans.nama_jabatan', 'opds.nama_opd')
         ->where('users.id_opd', Auth::user()->id_opd)
         ->get();
 
-        return view('user.suratmasuk.disposisi', [
+        return view('user.disposisi.disposisi', [
             'suratmasuk' => $suratmasuk,
             'tujuandisposisi' => $tujuandisposisi
         ]);
+    }
+
+    public function kirimdisposisi(Request $request, $id)
+    {
+        $smread = SuratMasuk::where('id', $id)->first();
+        $smread->read = "UNREAD";
+        $smread->id_status = 5;
+        $smread->update();
+
+        $disposisi = new Disposisi;
+        $disposisi->id_disp_ke = $request->id_disp_ke;
+        $disposisi->disp_ket = $request->disp_ket;
+        $disposisi->disp_pesan = $request->disp_pesan;
+        $disposisi->id_status = 5;
+        $disposisi->id_create = Auth::user()->id;
+        $disposisi->save();
+
+        $id_sm = $smread->id;
+        $id_sk = NULL;
+        $id_tujuan = $disposisi->id_disp_ke;
+        $id_pengirim = NULL;
+        $id_tembusan = NULL;
+        $id_verifikator = NULL;
+        $id_ttd = NULL;
+        $id_disposisi = $disposisi->id;
+        $disp_ket = $disposisi->disp_ket;
+        $disp_pesan = $disposisi->disp_pesan;
+        $id_status = 5;
+        $id_create = $disposisi->id_create;
+
+        LogSurat::createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $disp_ket, $disp_pesan, $id_status, $id_create);
+
+        alert()->success('Sukses','Surat berhasil disposisi.');
+
+        return redirect('/suratmasuk');
     }
 
     /**
@@ -34,7 +74,20 @@ class DisposisiController extends Controller
      */
     public function index()
     {
-        return view('user.disposisi.index');
+        $disposisi = Disposisi::join('logsurats', 'disposisis.id', 'logsurats.id_disposisi')
+        ->join('suratmasuks', 'logsurats.id_sm', 'suratmasuks.id')
+        ->join('users', 'logsurats.id_create', 'users.id')
+        ->join('jabatans','users.id_jabatan','jabatans.id')
+        ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
+        ->join('opds','unitkerjas.id_opd','opds.id')
+        // ->where('logsurats.id_tujuan', Auth::user()->id)
+        ->where('disposisis.id_disp_ke', Auth::user()->id)
+        ->where('suratmasuks.id_status', 5)
+        ->get();
+
+        return view('user.disposisi.index', [
+            'disposisi' => $disposisi
+        ])->with('no',1);
     }
 
     /**
@@ -66,7 +119,38 @@ class DisposisiController extends Controller
      */
     public function show($id)
     {
-        //
+        $suratmasuk = SuratMasuk::join('jenissurats', 'suratmasuks.id_jenissurat', 'jenissurats.id')
+        ->join('users', 'suratmasuks.id_create', 'users.id')
+        ->select('suratmasuks.*', 'users.nama', 'jenissurats.jenis_surat')
+        ->find($id);
+
+        $log_surat = Log_surat::join('users', 'logsurats.id_tujuan', 'users.id')
+        // ->join('disposisis', 'logsurats.id_disposisi', 'disposisis.id')
+        ->join('suratmasuks', 'logsurats.id_sm', 'suratmasuks.id')
+        ->join('jenissurats', 'suratmasuks.id_jenissurat', 'jenissurats.id')
+        ->join('jabatans','users.id_jabatan','jabatans.id')
+        ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
+        ->join('opds','unitkerjas.id_opd','opds.id')
+        ->select('logsurats.*', 'suratmasuks.read', 'users.nama', 'suratmasuks.nama_pengirim', 'suratmasuks.jabatan_pengirim', 'suratmasuks.instansi_pengirim', 'suratmasuks.file_surat', 'suratmasuks.perihal', 'jenissurats.jenis_surat', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
+        ->where('logsurats.id_sm', $id)
+        ->orderBy('logsurats.id', 'desc')
+        ->get();
+
+        $disposisi = Disposisi::join('logsurats', 'disposisis.id', 'logsurats.id_disposisi')
+        ->join('suratmasuks', 'logsurats.id_sm', 'suratmasuks.id')
+        ->join('users', 'disposisis.id_disp_ke', 'users.id')
+        ->join('jabatans','users.id_jabatan','jabatans.id')
+        ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
+        ->join('opds','unitkerjas.id_opd','opds.id')
+        ->select('disposisis.*', 'users.*', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
+        ->where('logsurats.id_sm', $id)
+        ->get();
+
+        return view('user.disposisi.detail', [
+            'suratmasuk' => $suratmasuk,
+            'log_surat' => $log_surat,
+            'disposisi' => $disposisi
+        ]);
     }
 
     /**

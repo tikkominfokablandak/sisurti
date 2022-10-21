@@ -22,9 +22,19 @@ class SuratMasukController extends Controller
      */
     public function index()
     {
-        $suratmasuk = SuratMasuk::where('suratmasuks.id_tujuan', Auth::user()->id)
-        ->where('id_status', '<>', '1')
-        ->get();
+        if (Auth::user()->pangkat == "Eselon II") {
+            $suratmasuk = SuratMasuk::where('suratmasuks.id_tujuan', Auth::user()->id)
+            ->where('suratmasuks.id_status', '<>', '1')
+            ->get();
+        } else {
+            $suratmasuk = SuratMasuk::join('logsurats', 'suratmasuks.id', 'logsurats.id_sm')
+            ->join('disposisis', 'logsurats.id_disposisi', 'disposisis.id')
+            ->select('suratmasuks.*')
+            ->where('suratmasuks.id_tujuan', Auth::user()->id)
+            ->orWhere('disposisis.id_disp_ke', Auth::user()->id)
+            ->where('suratmasuks.id_status', '<>', '1')
+            ->get();
+        }
 
         return view('user.suratmasuk.index', [
             'suratmasuk' => $suratmasuk
@@ -71,6 +81,7 @@ class SuratMasukController extends Controller
         ->find($id);
 
         $log_surat = Log_surat::join('users', 'logsurats.id_tujuan', 'users.id')
+        // ->join('disposisis', 'logsurats.id_disposisi', 'disposisis.id')
         ->join('suratmasuks', 'logsurats.id_sm', 'suratmasuks.id')
         ->join('jenissurats', 'suratmasuks.id_jenissurat', 'jenissurats.id')
         ->join('jabatans','users.id_jabatan','jabatans.id')
@@ -83,14 +94,13 @@ class SuratMasukController extends Controller
 
         $disposisi = Disposisi::join('logsurats', 'disposisis.id', 'logsurats.id_disposisi')
         ->join('suratmasuks', 'logsurats.id_sm', 'suratmasuks.id')
-        ->join('tujuans', 'logsurats.id_tujuan', 'tujuans.id')
-        ->join('users', 'disposisis.id_create', 'users.id')
+        ->join('users', 'disposisis.id_disp_ke', 'users.id')
         ->join('jabatans','users.id_jabatan','jabatans.id')
         ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
         ->join('opds','unitkerjas.id_opd','opds.id')
-        ->select('disposisis.*', 'users.*', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
+        ->select('disposisis.*', 'users.nama', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
         ->where('logsurats.id_sm', $id)
-        ->whereNotNull('logsurats.id_disposisi')
+        ->orderBy('disposisis.id', 'asc')
         ->get();
 
         return view('user.suratmasuk.detail', [

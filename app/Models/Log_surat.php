@@ -20,8 +20,9 @@ class Log_surat extends Model
         'id_verifikator',
         'id_ttd',
         'id_disposisi',
+        'disp_ket',
+        'disp_pesan',
         'id_status',
-        'read',
         'id_create'
     ];
 }

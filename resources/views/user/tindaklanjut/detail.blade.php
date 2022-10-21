@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    | Surat Masuk #{{ $suratmasuk->id }}
+    | Tindak Lanjut Surat Masuk #{{ $suratmasuk->id }}
 @endsection
 
 @section('css')
@@ -16,13 +16,13 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Surat Masuk #{{ $suratmasuk->id }}</h1>
+          <h1 class="m-0">Tindak Lanjut Surat Masuk #{{ $suratmasuk->id }}</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{ url('/suratmasuk') }}">Surat Masuk</a></li>
-            <li class="breadcrumb-item active">Surat Masuk #{{ $suratmasuk->id }}</li>
+            <li class="breadcrumb-item"><a href="{{ url('/tindak-lanjut') }}">Tindak Lanjut</a></li>
+            <li class="breadcrumb-item active">Tindak Lanjut Surat Masuk #{{ $suratmasuk->id }}</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -35,11 +35,27 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-2">
-                <a href="{{ URL::to('/suratmasuk') }}">
+                <a href="{{ URL::to('/tindak-lanjut') }}">
                     <button type="button" class="btn btn-block btn-default">
                         <i class="fas fa-chevron-circle-left"></i> &nbsp; Kembali
                     </button>
                 </a>
+            </div>
+            <div class="col-2">
+                {{-- <a href="{{ URL::to('/suratmasuk/'.$suratmasuk->id.'/disposisi') }}"> --}}
+                <a href="{{ route('tl', [$suratmasuk->id]) }}">
+                    <button type="button" class="btn btn-block btn-warning">
+                        Disposisi &nbsp; <i class="fas fa-share"></i>
+                    </button>
+                </a>
+            </div>
+            <div class="col-2">
+              {{-- <a href="{{ URL::to('/suratmasuk/'.$suratmasuk->id.'/disposisi') }}"> --}}
+              {{-- <a href="{{ route('tl.selesai', [$suratmasuk->id]) }}"> --}}
+                  <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-selesai">
+                      Selesai &nbsp; <i class="fas fa-check-circle"></i> <br>
+                  </button>
+              {{-- </a> --}}
             </div>
         </div>
 
@@ -146,7 +162,7 @@
                             <tbody>
                             @foreach ($disposisi as $item)
                                 <tr>
-                                    <td>{{ $item->nama  }} - {{ $item->nama_jabatan }}</td>
+                                    <td>{{ $item->nama }} - {{ $item->nama_jabatan }}</td>
                                     <td>{{ $item->disp_ket }}</td>
                                     <td>{{ $item->disp_pesan }}</td>
                                     <td>{{ date('l d M Y H:i:s', strtotime($item->created_at)) }}</td>
@@ -277,6 +293,38 @@
       </div>
       <!-- /.row -->
     </div><!--/. container-fluid -->
+
+    <div class="modal fade" id="modal-selesai">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><i class="fas fa-plus" style="color:rgb(0, 86, 167)"></i> Form Tindak Lanjut Selesai</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form method="POST" action="{{ route('tl.selesai', [$suratmasuk->id]) }}" enctype="multipart/form-data">
+            @csrf
+          <div class="modal-body">
+            <div class="form-group">
+                <label>
+                    Pesan Balasan :
+                    <small style="color:red"><b>*</b></small>
+                </label>
+
+                <textarea name="disp_pesan" rows="3" class="form-control" id="pesan" required></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-success"> Kirim <i class="fa fa-share"></i></button>
+          </div>
+          </form>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
   </section>
 @endsection
 

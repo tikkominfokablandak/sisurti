@@ -34,11 +34,12 @@
                     <!-- /.card-header -->
       
                     <!-- form start -->
-                    <form method="POST" action="{{ route('disposisi.kirim', [$suratmasuk->id]) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('tl.kirim', [$suratmasuk->id]) }}" enctype="multipart/form-data">
                       @csrf
+                      {{-- @method('put') --}}
                       <div class="card-body">
                           <div class="row">
-                              <div class="col-sm-6">
+                              <div class="col-sm-12">
 
                                 <div class="form-group">
                                     <label>Tujuan Disposisi
@@ -48,7 +49,7 @@
                                     <select id="tujuan_disposisi" class="form-control" style="width: 100%;" name="id_disp_ke" required oninvalid="this.setCustomValidity('Mohon pilih Tujuan Disposisi dahulu!')" oninput="setCustomValidity('')">
                                       <option value=""></option>
                                       @foreach ($tujuandisposisi as $item)
-                                      <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                      <option value="{{ $item->id }}">{{ $item->nama }} - {{ $item->nama_jabatan }} - {{ $item->nama_opd }}</option>
                                       @endforeach
                                     </select>
                                 </div>
@@ -58,8 +59,14 @@
                                         <small style="color:red"><b>*</b></small>
                                     </label>
     
-                                    <select id="tujuan_disposisi" class="form-control" style="width: 100%;" name="pangkat" required oninvalid="this.setCustomValidity('Mohon pilih Grup Jabatan dahulu!')" oninput="setCustomValidity('')">
+                                    <select id="pesan_disposisi" class="form-control" style="width: 100%;" name="disp_ket" required oninvalid="this.setCustomValidity('Mohon pilih Pesan Disposisi dahulu!')" oninput="setCustomValidity('')">
                                         <option value=""></option>
+                                        <option value="HADIRI">HADIRI</option>
+                                        <option value="TINDAK LANJUTI">TINDAK LANJUTI</option>
+                                        <option value="MENGIKUTI">MENGIKUTI</option>
+                                        <option value="IKUTI">IKUTI</option>
+                                        <option value="WAKILKAN">WAKILKAN</option>
+                                        <option value="MENUGASKAN">MENUGASKAN</option>
                                     </select>
                                 </div>
 
@@ -69,9 +76,8 @@
                                         <small style="color:red"><b>*</b></small>
                                     </label>
     
-                                    <textarea name="perihal" rows="3" class="form-control" id="perihal" placeholder="Masukkan hal..."></textarea>
+                                    <textarea name="disp_pesan" rows="3" class="form-control" id="pesan" required></textarea>
                                 </div>
-
 
                               </div>
                           </div>
@@ -134,6 +140,11 @@
 $(function () {
     $('#tujuan_disposisi').select2({
         placeholder: "Pilih Tujuan Disposisi",
+        theme: 'bootstrap4'
+    });
+
+    $('#pesan_disposisi').select2({
+        placeholder: "Pilih Pesan Disposisi",
         theme: 'bootstrap4'
     });
 })

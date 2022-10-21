@@ -6,7 +6,7 @@ use App\Models\Log_surat;
 
 class LogSurat
 {
-    public static function createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $id_status, $read, $id_create)
+    public static function createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $disp_ket, $disp_pesan, $id_status, $id_create)
     {
         // if($id_status!=7) {
         //     Logsurat::create([
@@ -47,8 +47,9 @@ class LogSurat
             'id_verifikator' => $id_verifikator,
             'id_ttd' => $id_ttd,
             'id_disposisi' => $id_disposisi,
+            'disp_ket' => $disp_ket,
+            'disp_pesan' => $disp_pesan,
             'id_status' => $id_status,
-            'read' => $read,
             'id_create' => $id_create
         ]);
     }
