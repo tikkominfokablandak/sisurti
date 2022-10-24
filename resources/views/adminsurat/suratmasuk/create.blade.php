@@ -237,10 +237,10 @@
                                     <small style="color:red"><b>*</b></small>
                                 </label>
 
-                                <select id="tujuan" class="form-control form-control-sm @error('tujuan') is-invalid @enderror" style="width: 100%;" name="id_tujuan" required oninvalid="this.setCustomValidity('Mohon pilih tujuan dahulu!')" oninput="setCustomValidity('')">
+                                <select id="tujuans" class="form-control form-control-sm @error('tujuan') is-invalid @enderror" style="width: 100%;" name="id_tujuan" required oninvalid="this.setCustomValidity('Mohon pilih tujuan dahulu!')" oninput="setCustomValidity('')">
                                     <option value=""></option>
                                     @foreach ($tujuan as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama }} - {{ $item->nama_jabatan }} - {{ $item->nama_unitkerja }} - {{ $item->nama_opd }}}</option>
+                                        <option value="{{ $item->id }}">{{ $item->nama }} - {{ $item->nama_jabatan }} - {{ $item->nama_unitkerja }} - {{ $item->nama_opd }}</option>
                                     @endforeach
                                 </select>
                             </div>

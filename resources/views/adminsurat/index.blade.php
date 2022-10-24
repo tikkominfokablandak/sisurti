@@ -49,14 +49,14 @@
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>150</h3>
+                <h3>65</h3>
 
                 <p>Surat Masuk</p>
               </div>
               <div class="icon">
                 <i class="fas fa-envelope"></i>
               </div>
-              <a href="#" class="small-box-footer">
+              <a href="{{ route('surat-masuk.index') }}" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
@@ -107,7 +107,7 @@
               <div class="icon">
                 <i class="fas icon-file-check-2"></i>
               </div>
-              <a href="#" class="small-box-footer">
+              <a href="{{ route('surat-disposisi.index') }}" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
@@ -153,12 +153,12 @@
               <div class="inner">
                 <h3>150</h3>
 
-                <p>Surat Masuk</p>
+                <p>Log Surat Masuk</p>
               </div>
               <div class="icon">
                 <i class="fas fa-envelope"></i>
               </div>
-              <a href="#" class="small-box-footer">
+              <a href="{{ route('log-surat-masuk.index') }}" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
@@ -203,6 +203,91 @@
               <!-- /.card-body -->
               <div class="card-footer" style="display: block;">
                 Total status Surat keluar dan Surat masuk pada menu "LOG Surat"
+              </div>
+              <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <!-- Default box -->
+            <div class="card">
+              <div class="card-header"> <!-- style="text-align:center" -->
+                <h3 class="card-title">Pengaturan</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <!-- <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                  </button> -->
+                </div>
+              </div>
+              <div class="card-body" style="display: block;">
+                <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-light color-palette">
+              <div class="inner">
+                <h3>150</h3>
+
+                <p>Template Surat</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-file-upload"></i>
+              </div>
+              <a href="{{ route('template-surat.index') }}" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-light color-palette">
+              <div class="inner">
+                <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                <p>Daftar Tujuan</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-paper-plane"></i>
+              </div>
+              <a href="#" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-light color-palette">
+              <div class="inner">
+                <h3>65</h3>
+
+                <p>Daftar Tembusan</p>
+              </div>
+              <div class="icon">
+                <i class="fas icon-file-check-2"></i>
+              </div>
+              <a href="#" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer" style="display: block;">
+                Pengaturan
               </div>
               <!-- /.card-footer-->
             </div>

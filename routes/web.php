@@ -37,8 +37,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles']],function(){
     Route::get('get-unitkerja', [\App\Http\Controllers\UnitKerjaController::class, 'select'])->name('get-unitkerja.select');
     Route::get('get-jabatan', [\App\Http\Controllers\JabatanController::class, 'select'])->name('get-jabatan.select');
     Route::get('get-user', [\App\Http\Controllers\UserController::class, 'select'])->name('get-user.select');
-
-
+   
     Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
 
     Route::group(['roles' => 'Admin Kab Landak'], function(){
@@ -89,12 +88,28 @@ Route::group(['middleware' => ['web', 'auth', 'roles']],function(){
             // Route::group(['prefix' => 'surat'], function(){
                 // Route::resource('tandatangan', TandatanganController::class);
                 // Route::resource('verifikasi', VerifikatorController::class);
-                Route::resource('tindak-lanjut', \App\Http\Controllers\User\TindakLanjutController::class);
-                Route::resource('surat-masuk', \App\Http\Controllers\User\SuratMasukController::class);
+                Route::group(['prefix' => 'disposisi'], function(){
+                    Route::resource('/', \App\Http\Controllers\User\DisposisiController::class);
+                    Route::get('/{id}', [\App\Http\Controllers\User\DisposisiController::class, 'show'])->name('disposisi.detail');
+                    Route::get('/{id}/disposisi', [\App\Http\Controllers\User\DisposisiController::class, 'disposisi'])->name('disposisi');
+                    Route::post('/{id}/disposisi', [\App\Http\Controllers\User\DisposisiController::class, 'kirimdisposisi'])->name('disposisi.kirim');
+
+                });
+
+                Route::group(['prefix' => 'tindak-lanjut'], function(){
+                    Route::resource('/', \App\Http\Controllers\User\TindakLanjutController::class);
+                    Route::get('/{id}', [\App\Http\Controllers\User\TindakLanjutController::class, 'show']);
+                    Route::get('/{id}/tl', [\App\Http\Controllers\User\TindakLanjutController::class, 'tl'])->name('tl');
+                    Route::post('/{id}/tl', [\App\Http\Controllers\User\TindakLanjutController::class, 'kirimtl'])->name('tl.kirim');
+                    Route::post('/{id}/selesai', [\App\Http\Controllers\User\TindakLanjutController::class, 'selesaitl'])->name('tl.selesai');
+                });
+
+                Route::group(['prefix' => 'suratmasuk'], function(){
+                    Route::resource('/', \App\Http\Controllers\User\SuratMasukController::class);
+                    Route::post('/{id}', [\App\Http\Controllers\User\SuratMasukController::class, 'detail'])->name('sm.detail');
+                });
                 // Route::resource('keluar', SuratKeluarController::class);
                 // Route::resource('tembusan', TembusanController::class);
-                Route::resource('disposisi', \App\Http\Controllers\User\DisposisiController::class);
-            // });
         });
     });
 

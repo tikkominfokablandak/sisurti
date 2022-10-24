@@ -16,6 +16,7 @@ class Disposisi extends Model
         'disp_ket',
         'disp_note_sekretaris',
         'disp_note_kadis',
+        'disp_pesan',
         'tgl_disp',
         'disp_jawaban',
         'id_status',

@@ -46,7 +46,7 @@ class SuratMasukController extends Controller
                     ->join('jabatans','users.id_jabatan','jabatans.id')
                     ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
                     ->join('opds','unitkerjas.id_opd','opds.id')
-                    ->select('users.nama', 'roles.nama_role', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
+                    ->select('users.nama', 'roles.nama_role', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja', 'users.id')
                     ->orderBy('users.nama', 'asc')
                     ->where('tujuans.jenis_tujuan', 'INTERNAL')
                     ->where('tujuans.id_create', Auth::user()->id)
@@ -116,7 +116,7 @@ class SuratMasukController extends Controller
         $id_ttd = NULL;
         $id_disposisi = NULL;
         $id_status = 1;
-        $read = "READ";
+        $read = "UNREAD";
         $id_create = $suratmasuk->id_create;
 
         LogSurat::createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $id_status, $read, $id_create);
@@ -208,7 +208,6 @@ class SuratMasukController extends Controller
     {
         $file = SuratMasuk::findOrFail($id);
 
-        // return response()->file('storage/sm/'.$file->file);
         return response()->download(storage_path('storage/'. Auth::user()->id . '/suratmasuk/' . $file));
     }
 
@@ -232,7 +231,7 @@ class SuratMasukController extends Controller
         $read = "UNREAD";
         $id_create = Auth::user()->id;
 
-        LogSurat::createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $id_status, $read, $id_create);
+        // LogSurat::createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $id_status, $read, $id_create);
 
         alert()->success('Sukses','Surat masuk berhasil dikirim ke Kepala OPD.');
 

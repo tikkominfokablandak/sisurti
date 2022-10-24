@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
-      <img src="{{ asset('assets/img/sipaskal/sipaskal-logo.png') }}" alt="SIPASKAL Logo" class="brand-image elevation-3" style="opacity: .8">
+      <img src="{{ asset('assets/img/sipaskal/sisurti-logo.png') }}" alt="SISURTI Logo" class="brand-image elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">S I S U R T I</span>
     </a>
 
@@ -40,25 +40,25 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('opd.index') }}" class="nav-link {{ (request()->is('opd*')) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-landmark"></i>
                   <p>OPD</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('unitkerja.index') }}" class="nav-link {{ (request()->is('unitkerja*')) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-users-cog"></i>
                   <p>Unit Kerja</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('jabatan.index') }}" class="nav-link {{ (request()->is('jabatan*')) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-user-tie"></i>
                   <p>Jabatan</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('users.index') }}" class="nav-link {{ (request()->is('users*')) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-user"></i>
                   <p>Pengguna</p>
                 </a>
               </li>
@@ -150,37 +150,37 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('template-surat.index') }}" class="nav-link {{ ( (request()->is('template-surat')) ) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-file-upload"></i>
                   <p>Template Surat</p>
                 </a>
               </li>
               {{-- <li class="nav-item">
                 <a href="{{ route('daftar-penandatangan.index') }}" class="nav-link {{ ( (request()->is('daftar-penandatangan*')) ) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-user-friends"></i>
                   <p>Daftar Penandatangan</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('daftar-verifikator.index') }}" class="nav-link {{ ( (request()->is('daftar-verifikator*')) ) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-user-tie"></i>
                   <p>Daftar Verifikator</p>
                 </a>
               </li> --}}
               <li class="nav-item">
                 <a href="{{ route('tujuan.index') }}" class="nav-link {{ ( (request()->is('daftar-tujuan*')) ) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-users"></i>
                   <p>Daftar Tujuan</p>
                 </a>
               </li>
               {{-- <li class="nav-item">
                 <a href="{{ route('daftar-grup-tujuan.index') }}" class="nav-link {{ ( (request()->is('daftar-grup-tujuan*')) ) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-people-arrows"></i>
                   <p>Daftar Grup Tujuan</p>
                 </a>
               </li> --}}
               <li class="nav-item">
                 <a href="{{ route('daftar-tembusan.index') }}" class="nav-link {{ ( (request()->is('daftar-tembusan*')) ) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-user-tag"></i>
                   <p>Daftar Tembusan</p>
                 </a>
               </li>
@@ -206,30 +206,29 @@
               </p>
             </a>
           </li> --}}
-
           <li class="nav-item">
-            <a href="/tindak-lanjut" class="nav-link {{ ( (request()->is('tindak-lanjut')) ) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-file-signature"></i>
-              <p>
-                Tindak Lanjut
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="/surat-masuk" class="nav-link {{ ( (request()->is('surat-masuk')) ) ? 'active' : '' }}">
+            <a href="/suratmasuk" class="nav-link {{ ( (request()->is('suratmasuk*')) ) ? 'active' : '' }}">
               <i class="nav-icon fas fa-envelope"></i>
               <p>
                 Daftar Surat Masuk
               </p>
             </a>
           </li>
-
+          
           <li class="nav-item">
-            <a href="/disposisi" class="nav-link {{ ( (request()->is('disposisi')) ) ? 'active' : '' }}">
+            <a href="/disposisi" class="nav-link {{ ( (request()->is('disposisi*')) ) ? 'active' : '' }}">
               <i class="nav-icon fas icon-file-check-2"></i>
               <p>
                 Daftar Disposisi
+              </p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="/tindak-lanjut" class="nav-link {{ ( (request()->is('tindak-lanjut*')) ) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-file-signature"></i>
+              <p>
+                Tindak Lanjut
               </p>
             </a>
           </li>
