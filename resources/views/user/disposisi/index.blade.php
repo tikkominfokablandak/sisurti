@@ -98,7 +98,8 @@
                         @endif
                     </td> --}}
                     <td align="center">
-                      <a href="{{ url('disposisi/'.$item->id_sm) }}" style="color:blue">
+                      {{-- <a href="{{ url('disposisi/'.$item->id_sm) }}" style="color:blue"> --}}
+                      <a href="{{ url('tindak-lanjut/'.$item->id_sm) }}" style="color:blue">
                         <button type="button" class="btn btn-xs btn-outline-primary btn-block">
                           <i class="fa fa-info-circle"></i>
                         </button>

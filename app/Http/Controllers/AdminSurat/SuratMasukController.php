@@ -25,6 +25,7 @@ class SuratMasukController extends Controller
     public function index()
     {
         $suratmasuk = SuratMasuk::where('suratmasuks.id_create', Auth::user()->id)
+        ->orderBy('suratmasuks.id', 'desc')
         ->get();
 
         return view('adminsurat.suratmasuk.index', [
@@ -115,11 +116,12 @@ class SuratMasukController extends Controller
         $id_verifikator = NULL;
         $id_ttd = NULL;
         $id_disposisi = NULL;
+        $disp_ket = NULL;
+        $disp_pesan = NULL;
         $id_status = 1;
-        $read = "UNREAD";
         $id_create = $suratmasuk->id_create;
 
-        LogSurat::createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $id_status, $read, $id_create);
+        LogSurat::createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $disp_ket, $disp_pesan, $id_status, $id_create);
 
         alert()->success('Sukses','Surat masuk baru berhasil disimpan.');
 
@@ -139,28 +141,27 @@ class SuratMasukController extends Controller
         ->select('suratmasuks.*', 'users.nama', 'jenissurats.jenis_surat')
         ->find($id);
 
-        $log_surat = Log_surat::join('tujuans', 'logsurats.id_tujuan', 'tujuans.id')
-        ->join('users', 'tujuans.id_internal', 'users.id')
+        $log_surat = Log_surat::join('users', 'logsurats.id_tujuan', 'users.id')
+        // ->join('disposisis', 'logsurats.id_disposisi', 'disposisis.id')
         ->join('suratmasuks', 'logsurats.id_sm', 'suratmasuks.id')
         ->join('jenissurats', 'suratmasuks.id_jenissurat', 'jenissurats.id')
         ->join('jabatans','users.id_jabatan','jabatans.id')
         ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
         ->join('opds','unitkerjas.id_opd','opds.id')
-        ->select('logsurats.*', 'users.nama', 'suratmasuks.nama_pengirim', 'suratmasuks.jabatan_pengirim', 'suratmasuks.instansi_pengirim', 'suratmasuks.file_surat', 'suratmasuks.perihal', 'jenissurats.jenis_surat', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
+        ->select('logsurats.*', 'suratmasuks.read', 'users.nama', 'suratmasuks.nama_pengirim', 'suratmasuks.jabatan_pengirim', 'suratmasuks.instansi_pengirim', 'suratmasuks.file_surat', 'suratmasuks.perihal', 'jenissurats.jenis_surat', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
         ->where('logsurats.id_sm', $id)
         ->orderBy('logsurats.id', 'desc')
         ->get();
 
         $disposisi = Disposisi::join('logsurats', 'disposisis.id', 'logsurats.id_disposisi')
         ->join('suratmasuks', 'logsurats.id_sm', 'suratmasuks.id')
-        ->join('tujuans', 'logsurats.id_tujuan', 'tujuans.id')
-        ->join('users', 'disposisis.id_create', 'users.id')
+        ->join('users', 'disposisis.id_disp_ke', 'users.id')
         ->join('jabatans','users.id_jabatan','jabatans.id')
         ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
         ->join('opds','unitkerjas.id_opd','opds.id')
-        ->select('disposisis.*', 'users.*', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
+        ->select('disposisis.*', 'users.nama', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
         ->where('logsurats.id_sm', $id)
-        ->whereNotNull('logsurats.id_disposisi')
+        ->orderBy('disposisis.id', 'asc')
         ->get();
 
         return view('adminsurat.suratmasuk.detail', [
@@ -228,11 +229,12 @@ class SuratMasukController extends Controller
         $id_verifikator = NULL;
         $id_ttd = NULL;
         $id_disposisi = NULL;
+        $disp_ket = NULL;
+        $disp_pesan = NULL;
         $id_status = 2;
-        $read = "UNREAD";
         $id_create = Auth::user()->id;
 
-        LogSurat::createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $id_status, $read, $id_create);
+        LogSurat::createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $disp_ket, $disp_pesan, $id_status, $id_create);
 
         alert()->success('Sukses','Surat masuk berhasil dikirim ke Kepala OPD.');
 

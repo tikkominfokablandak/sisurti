@@ -12,6 +12,7 @@ use LogSurat;
 use App\Models\Log_surat;
 use Illuminate\Support\Str;
 use App\Models\Disposisi;
+use App\Models\User;
 
 class SuratMasukController extends Controller
 {
@@ -25,6 +26,7 @@ class SuratMasukController extends Controller
         if (Auth::user()->pangkat == "Eselon II") {
             $suratmasuk = SuratMasuk::where('suratmasuks.id_tujuan', Auth::user()->id)
             ->where('suratmasuks.id_status', '<>', '1')
+            ->orderby('suratmasuks.id', 'desc')
             ->get();
         } else {
             $suratmasuk = SuratMasuk::join('logsurats', 'suratmasuks.id', 'logsurats.id_sm')
@@ -33,6 +35,7 @@ class SuratMasukController extends Controller
             ->where('suratmasuks.id_tujuan', Auth::user()->id)
             ->orWhere('disposisis.id_disp_ke', Auth::user()->id)
             ->where('suratmasuks.id_status', '<>', '1')
+            ->orderby('suratmasuks.id', 'desc')
             ->get();
         }
 
@@ -147,5 +150,59 @@ class SuratMasukController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function disposisi($id)
+    {
+        $suratmasuk = SuratMasuk::join('jenissurats', 'suratmasuks.id_jenissurat', 'jenissurats.id')
+        ->join('users', 'suratmasuks.id_create', 'users.id')
+        ->select('suratmasuks.*', 'users.nama', 'jenissurats.jenis_surat')
+        ->find($id);
+
+        $tujuandisposisi = User::join('jabatans', 'users.id_jabatan', 'jabatans.id')
+        ->join('opds', 'jabatans.id_opd', 'opds.id')
+        ->select('users.*', 'jabatans.nama_jabatan', 'opds.nama_opd')
+        ->where('users.id_opd', Auth::user()->id_opd)
+        ->get();
+
+        return view('user.suratmasuk.disposisi', [
+            'suratmasuk' => $suratmasuk,
+            'tujuandisposisi' => $tujuandisposisi
+        ]);
+    }
+
+    public function kirimdisposisi(Request $request, $id)
+    {
+        $smread = SuratMasuk::where('id', $id)->first();
+        $smread->read = "UNREAD";
+        $smread->id_status = 5;
+        $smread->update();
+
+        $disposisi = new Disposisi;
+        $disposisi->id_disp_ke = $request->id_disp_ke;
+        $disposisi->disp_ket = $request->disp_ket;
+        $disposisi->disp_pesan = $request->disp_pesan;
+        $disposisi->id_status = 5;
+        $disposisi->id_create = Auth::user()->id;
+        $disposisi->save();
+
+        $id_sm = $smread->id;
+        $id_sk = NULL;
+        $id_tujuan = $disposisi->id_disp_ke;
+        $id_pengirim = NULL;
+        $id_tembusan = NULL;
+        $id_verifikator = NULL;
+        $id_ttd = NULL;
+        $id_disposisi = $disposisi->id;
+        $disp_ket = $disposisi->disp_ket;
+        $disp_pesan = $disposisi->disp_pesan;
+        $id_status = 5;
+        $id_create = $disposisi->id_create;
+
+        LogSurat::createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $disp_ket, $disp_pesan, $id_status, $id_create);
+
+        alert()->success('Sukses','Surat berhasil disposisi.');
+
+        return redirect('/suratmasuk');
     }
 }

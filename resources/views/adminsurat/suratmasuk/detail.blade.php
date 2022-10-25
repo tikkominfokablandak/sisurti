@@ -71,7 +71,7 @@
                         </button>
                     </form>
                 </div>
-            @elseif( $suratmasuk->id_status == 2 )
+            @else
                 <div class="col-2">
                     <button type="button" class="btn btn-block btn-warning" disabled>
                         Edit &nbsp; <i class="fa fa-edit"></i> 
@@ -178,7 +178,6 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Dilakukan oleh</th>
                                     <th>Kepada</th>
                                     <th>Pesan Disposisi / Koordinasi</th>
                                     <th>Instruksi / Pesan Tambahan</th>
@@ -189,11 +188,10 @@
                             <tbody>
                             @foreach ($disposisi as $item)
                                 <tr>
-                                    <td>{{ $item->nama }} - {{ $item->nama_jabatan }}</td>
-                                    <td>{{ $item->id_disp_ke }}</td>
+                                    <td>{{ $item->nama  }} - {{ $item->nama_jabatan }}</td>
                                     <td>{{ $item->disp_ket }}</td>
-                                    <td>{{ $item->disp_note_kadis }}</td>
-                                    <td>{{ $item->tgl_disp }}</td>
+                                    <td>{{ $item->disp_pesan }}</td>
+                                    <td>{{ date('l d M Y H:i:s', strtotime($item->created_at)) }}</td>
                                     <td align="center">
                                         @if( $item->id_status == 1 )
                                           <span class="badge bg-success">Konsep</span>
@@ -208,7 +206,7 @@
                                         @elseif( $item->id_status == 6 )
                                           <span class="badge bg-warning">Tindak Lanjut</span>
                                         @elseif( $item->id_status == 7 )
-                                          <span class="badge bg-success">Selesai</span>
+                                          <span class="badge bg-success">Disposisi Selesai</span>
                                         @elseif( $item->id_status == 8 )
                                           <span class="badge bg-warning">Belum Verifikasi</span>
                                         @elseif( $item->id_status == 9 )
@@ -261,14 +259,49 @@
                             <td>{{ $item->jabatan_pengirim }} - {{ $item->instansi_pengirim }}</td>
                             <td>
                                 <b>{{ $item->nama }}</b> - {{ $item->nama_jabatan }} - {{ $item->nama_opd }}
-                                @if( $item->read == "READ" )
+                                {{-- @if( $item->read == "READ" )
                                     <span class="badge bg-success">SUDAH DIBACA</span>
                                 @elseif( $item->read == "UNREAD" )
                                     <span class="badge bg-warning">BELUM DIBACA</span>
+                                @endif --}}
+                                @if( $item->id_status == 1 )
+                                <span class="badge bg-success">Konsep</span>
+                                @elseif( $item->id_status == 2 )
+                                <span class="badge bg-green">Terkirim</span>
+                                @elseif( $item->id_status == 3 )
+                                <span class="badge bg-warning">Belum Dibaca</span>
+                                @elseif( $item->id_status == 4 )
+                                <span class="badge bg-success">Sudah Dibaca</span>
+                                @elseif( $item->id_status == 5 )
+                                <span class="badge bg-warning">Disposisi</span>
+                                @elseif( $item->id_status == 6 )
+                                <span class="badge bg-warning">Tindak Lanjut</span>
+                                @elseif( $item->id_status == 7 )
+                                <span class="badge bg-success">Disposisi Selesai</span>
+                                @elseif( $item->id_status == 8 )
+                                <span class="badge bg-warning">Belum Verifikasi</span>
+                                @elseif( $item->id_status == 9 )
+                                <span class="badge bg-success">Sudah Verifikasi</span>
+                                @elseif( $item->id_status == 10 )
+                                <span class="badge bg-warning">Belum Tandatangan</span>
+                                @elseif( $item->id_status == 11 )
+                                <span class="badge bg-success">Sudah Tandatangan</span>
+                                @endif
+                                <br> <br>
+                                @if( $item->disp_ket == NULL)
+
+                                @elseif( $item->disp_ket != NULL)
+                                Pesan / Koordinasi / Saran : <br>
+                                <i class="fas fa-check-circle" style="color: green"></i> <br>
+                                {{ $item->disp_ket }} <br>
+                                Instruksi / Saran / Pesan Tambahan : <br>
+                                {{ $item->disp_pesan }}
                                 @endif
                             </td>
                             <td>{{ $item->jenis_surat }}</td>
-                            <td>{{ $item->perihal }}</td>
+                            <td>
+                              {{ $item->perihal }}
+                            </td>
                             <td align="center">
                                 <a href="{{ route('sm.file', $item->file_surat) }}">
                                     <i class="far fa-file-pdf"></i>

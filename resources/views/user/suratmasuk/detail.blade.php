@@ -41,6 +41,17 @@
                     </button>
                 </a>
             </div>
+            <div class="col-2">
+              @if ( Auth::user()->pangkat == "Eselon II" )
+                <a href="{{ route('sm.disposisi', [$suratmasuk->id]) }}">
+                    <button type="button" class="btn btn-block btn-warning">
+                        Disposisi &nbsp; <i class="fas fa-share"></i>
+                    </button>
+                </a>
+              @else
+                
+              @endif
+            </div>
         </div>
 
         <br>

@@ -88,6 +88,13 @@ Route::group(['middleware' => ['web', 'auth', 'roles']],function(){
             // Route::group(['prefix' => 'surat'], function(){
                 // Route::resource('tandatangan', TandatanganController::class);
                 // Route::resource('verifikasi', VerifikatorController::class);
+                Route::group(['prefix' => 'suratmasuk'], function(){
+                    Route::resource('/', \App\Http\Controllers\User\SuratMasukController::class);
+                    Route::post('/{id}', [\App\Http\Controllers\User\SuratMasukController::class, 'detail'])->name('sm.detail');
+                    Route::get('/{id}/disposisi', [\App\Http\Controllers\User\SuratMasukController::class, 'disposisi'])->name('sm.disposisi');
+                    Route::post('/{id}/disposisi', [\App\Http\Controllers\User\SuratMasukController::class, 'kirimdisposisi'])->name('sm.disposisi.kirim');
+                });
+                
                 Route::group(['prefix' => 'disposisi'], function(){
                     Route::resource('/', \App\Http\Controllers\User\DisposisiController::class);
                     Route::get('/{id}', [\App\Http\Controllers\User\DisposisiController::class, 'show'])->name('disposisi.detail');
@@ -104,10 +111,6 @@ Route::group(['middleware' => ['web', 'auth', 'roles']],function(){
                     Route::post('/{id}/selesai', [\App\Http\Controllers\User\TindakLanjutController::class, 'selesaitl'])->name('tl.selesai');
                 });
 
-                Route::group(['prefix' => 'suratmasuk'], function(){
-                    Route::resource('/', \App\Http\Controllers\User\SuratMasukController::class);
-                    Route::post('/{id}', [\App\Http\Controllers\User\SuratMasukController::class, 'detail'])->name('sm.detail');
-                });
                 // Route::resource('keluar', SuratKeluarController::class);
                 // Route::resource('tembusan', TembusanController::class);
         });

@@ -46,7 +46,7 @@
                   <th>Uraian Informasi</th>
                   <th width="10">Tingkat Urgensi</th>
                   <th width="15">Status Tindak Lanjut</th>
-                  <th width="15">Status Baca</th>
+                  {{-- <th width="15">Status Baca</th> --}}
                   <th width="10">Aksi</th>
                 </tr>
                 </thead>
@@ -90,13 +90,13 @@
                         <span class="badge bg-success">Sudah Tandatangan</span>
                         @endif
                     </td>
-                    <td align="center">
+                    {{-- <td align="center">
                         @if( $item->read == "READ" )
                             <span class="badge bg-success">Sudah Dibaca</span>
                         @elseif( $item->read == "UNREAD" )
                             <span class="badge bg-warning">Belum Dibaca</span>
                         @endif
-                    </td>
+                    </td> --}}
                     <td align="center">
                         <form method="POST" action="{{ route('sm.detail', [$item->id]) }}">
                             @csrf

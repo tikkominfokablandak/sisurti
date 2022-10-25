@@ -45,7 +45,7 @@
                 {{-- <a href="{{ URL::to('/suratmasuk/'.$suratmasuk->id.'/disposisi') }}"> --}}
                 <a href="{{ route('tl', [$suratmasuk->id]) }}">
                     <button type="button" class="btn btn-block btn-warning">
-                        Disposisi &nbsp; <i class="fas fa-share"></i>
+                        Tidak Lanjut &nbsp; <i class="fas fa-share"></i>
                     </button>
                 </a>
             </div>
