@@ -26,5 +26,19 @@
 <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="assets/dist/js/adminlte.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#toggle-password').click(function() {
+      $(this).toggleClass("fa-eye fa-eye-slash");
+      var input = $($(this).attr("toggle"));
+      if(input.attr("type") == "password"){
+        input.attr("type", "text");
+      }else{
+        input.attr("type", "password");
+      }
+    });
+  });
+</script>
 </body>
 </html>

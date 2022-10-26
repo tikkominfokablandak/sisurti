@@ -29,11 +29,11 @@
             @endif
           </div>
           <div class="input-group mb-3">
-            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" oninvalid="this.setCustomValidity('Mohon isi Password terlebih dahulu')" oninput="setCustomValidity('')">
+            <input type="password" id="password-field" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="false" oninvalid="this.setCustomValidity('Mohon isi Password terlebih dahulu')" oninput="setCustomValidity('')" >
 
             <div class="input-group-append">
               <div class="input-group-text">
-                <span class="fas fa-lock"></span>
+                <span id="toggle-password" class="fas fa-eye-slash" toggle="#password-field"></span>
               </div>
             </div>
             @error('password')
