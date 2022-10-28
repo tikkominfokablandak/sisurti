@@ -125,11 +125,11 @@
 
                                 <select id="sifat_surat" class="form-control form-control-sm @error('sifat_surat') is-invalid @enderror" style="width: 100%;" name="sifat_surat" required oninvalid="this.setCustomValidity('Mohon pilih sifat surat dahulu!')" oninput="setCustomValidity('')">
                                     <option value=""></option>
+                                    <option value="BIASA">BIASA</option>
+                                    <option value="KONFIDENSIAL">KONFIDENSIAL</option>
+                                    <option value="PENTING">PENTING</option>
                                     <option value="RAHASIA">RAHASIA</option>
                                     <option value="SANGAT RAHASIA">SANGAT RAHASIA</option>
-                                    <option value="TERBATAS">TERBATAS</option>
-                                    <option value="BIASA">BIASA</option>
-                                    <option value="TERBUKA">TERBUKA</option>
                                 </select>
                             </div>
 
@@ -141,8 +141,9 @@
                                 <select id="tingkat_urgen" class="form-control form-control-sm @error('tingkat_urgen') is-invalid @enderror" style="width: 100%;" name="tingkat_urgen" required oninvalid="this.setCustomValidity('Mohon pilih tingkat urgensi dahulu!')" oninput="setCustomValidity('')">
                                     <option value=""></option>
                                     <option value="BIASA">BIASA</option>
+                                    <option value="PENTING">PENTING</option>
                                     <option value="SEGERA">SEGERA</option>
-                                    <option value="SANGAT SEGERA">SANGAT SEGERA</option>
+                                    <option value="AMAT SEGERA">AMAT SEGERA</option>
                                 </select>
                             </div>
 

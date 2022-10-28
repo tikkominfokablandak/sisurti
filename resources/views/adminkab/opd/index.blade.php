@@ -38,11 +38,11 @@
 
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Daftar Data Pengguna</h3>
+              <h3 class="card-title">Daftar Data OPD</h3>
               <div class="card-tools">
                 <a href="{{ route('opd.create') }}">
                   <button type="button" class="btn btn-block btn-success btn-sm">
-                    <i class="fas fa-user-plus"></i> Tambah Pengguna
+                    <i class="fas fa-user-plus"></i> Tambah OPD
                   </button>
                 </a>
               </div>

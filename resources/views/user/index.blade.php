@@ -49,9 +49,9 @@
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>150</h3>
+                <h3>{{ number_format($suratmasuk); }}</h3>
 
-                <p>Surat Masuk</p>
+                <p>Daftar Surat Masuk</p>
               </div>
               <div class="icon">
                 <i class="fas fa-envelope"></i>
@@ -66,7 +66,7 @@
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>-</h3>
 
                 <p>Surat Keluar</p>
               </div>
@@ -83,29 +83,30 @@
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>44</h3>
+                <h3>-</h3>
 
-                <p>Registrasi Surat</p>
+                <p>Daftar Disposisi</p>
               </div>
               <div class="icon">
-                <i class="fas fa-file-signature"></i>
+                <i class="fas icon-file-check-2"></i>
               </div>
               <a href="{{ route('surat-masuk.create') }}" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
           </div>
+          
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>65</h3>
+                <h3>-</h3>
 
-                <p>Disposisi Surat</p>
+                <p>Tindak Lanjut</p>
               </div>
               <div class="icon">
-                <i class="fas icon-file-check-2"></i>
+                <i class="fas fa-file-signature"></i>
               </div>
               <a href="#" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
@@ -118,91 +119,6 @@
               <!-- /.card-body -->
               <div class="card-footer" style="display: block;">
                 Total status Surat keluar dan Surat masuk pada menu "Surat DINAS"
-              </div>
-              <!-- /.card-footer-->
-            </div>
-            <!-- /.card -->
-          </div>
-        </div>
-      </div>
-    </section>
-
-<section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <!-- Default box -->
-            <div class="card">
-              <div class="card-header"> <!-- style="text-align:center" -->
-                <h3 class="card-title">Log Surat</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <!-- <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                    <i class="fas fa-times"></i>
-                  </button> -->
-                </div>
-              </div>
-              <div class="card-body" style="display: block;">
-                <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-light color-palette">
-              <div class="inner">
-                <h3>150</h3>
-
-                <p>Surat Masuk</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-envelope"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-light color-palette">
-              <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                <p>Surat Keluar</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-paper-plane"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-light color-palette">
-              <div class="inner">
-                <h3>65</h3>
-
-                <p>Disposisi Surat</p>
-              </div>
-              <div class="icon">
-                <i class="fas icon-file-check-2"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-        </div>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer" style="display: block;">
-                Total status Surat keluar dan Surat masuk pada menu "LOG Surat"
               </div>
               <!-- /.card-footer-->
             </div>

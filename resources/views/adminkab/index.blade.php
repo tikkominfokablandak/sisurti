@@ -49,7 +49,7 @@
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>65</h3>
+                <h3>{{ number_format($opd); }}</h3>
                 {{-- {{ $opd }} --}}
                 {{-- {{ $opd->count() }} --}}
 
@@ -68,7 +68,7 @@
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>{{ number_format($unitkerja); }}</h3>
 
                 <p>Unit Kerja</p>
               </div>
@@ -85,7 +85,7 @@
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>44</h3>
+                <h3>{{ number_format($jabatan); }}</h3>
 
                 <p>jabatan</p>
               </div>
@@ -102,7 +102,7 @@
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>65</h3>
+                <h3>{{ number_format($pengguna); }}</h3>
 
                 <p>Pengguna</p>
               </div>

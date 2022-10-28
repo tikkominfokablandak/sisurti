@@ -49,41 +49,7 @@
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>150</h3>
-
-                <p>Surat Masuk</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-envelope"></i>
-              </div>
-              <a href="{{ route('surat-masuk.index') }}" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-light color-palette">
-              <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                <p>Surat Keluar</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-paper-plane"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-light color-palette">
-              <div class="inner">
-                <h3>44</h3>
+                <h3>+</h3>
 
                 <p>Registrasi Surat</p>
               </div>
@@ -100,7 +66,41 @@
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>65</h3>
+                <h3>{{ number_format($suratmasuk); }}</h3>
+
+                <p>Surat Masuk</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <a href="{{ route('surat-masuk.index') }}" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-light color-palette">
+              <div class="inner">
+                <h3>{{ number_format($suratkeluar); }}</h3>
+
+                <p>Surat Keluar</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-paper-plane"></i>
+              </div>
+              <a href="" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-light color-palette">
+              <div class="inner">
+                <h3>{{ number_format($disposisi); }}</h3>
 
                 <p>Disposisi Surat</p>
               </div>
@@ -151,7 +151,7 @@
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>150</h3>
+                <h3>{{ number_format($logsuratmasuk); }}</h3>
 
                 <p>Log Surat Masuk</p>
               </div>
@@ -168,9 +168,9 @@
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>-</h3>
 
-                <p>Surat Keluar</p>
+                <p>Log Surat Keluar</p>
               </div>
               <div class="icon">
                 <i class="fas fa-paper-plane"></i>
@@ -185,9 +185,9 @@
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>65</h3>
+                <h3>-</h3>
 
-                <p>Disposisi Surat</p>
+                <p>Log Disposisi</p>
               </div>
               <div class="icon">
                 <i class="fas icon-file-check-2"></i>
@@ -236,14 +236,15 @@
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>150</h3>
+                <h3>{{ number_format($templatesurat); }}</h3>
 
                 <p>Template Surat</p>
               </div>
               <div class="icon">
                 <i class="fas fa-file-upload"></i>
               </div>
-              <a href="{{ route('template-surat.index') }}" class="small-box-footer">
+              <a href="" class="small-box-footer">
+                {{-- {{ route('template-surat.index') }} --}}
                 More info <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
@@ -253,14 +254,15 @@
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>{{ number_format($tujuan); }}</h3>
 
                 <p>Daftar Tujuan</p>
               </div>
               <div class="icon">
                 <i class="fas fa-paper-plane"></i>
               </div>
-              <a href="#" class="small-box-footer">
+              <a href="" class="small-box-footer">
+                {{-- {{ route('daftar-tujuan.index') }} --}}
                 More info <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
@@ -270,14 +272,14 @@
             <!-- small card -->
             <div class="small-box bg-light color-palette">
               <div class="inner">
-                <h3>65</h3>
+                <h3>{{ number_format($tembusan); }}</h3>
 
                 <p>Daftar Tembusan</p>
               </div>
               <div class="icon">
                 <i class="fas icon-file-check-2"></i>
               </div>
-              <a href="#" class="small-box-footer">
+              <a href="{{ route('daftar-tembusan.index') }}" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
