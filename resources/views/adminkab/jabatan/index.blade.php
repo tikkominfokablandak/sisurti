@@ -74,11 +74,17 @@
                       <button type="button" class="btn btn-outline-primary btn-block dropdown-toggle dropdown-icon" data-toggle="dropdown">
                       </button>
                       <div class="dropdown-menu dropdown-menu-right">
-                          
                           <a class="dropdown-item" href="{{ url('jabatan/'.$item->id.'/edit') }}" style="color:#ffc107" hover>
                             <i class="fa fa-edit"></i>
                               Edit
                           </a>
+
+                          <form action="{{ route('jabatan.destroy', $item->id) }}" method="POST">
+                            @method('delete')
+                            @csrf
+                            <button type="submit" class="dropdown-item" onclick="return confirm('Apakah kamu yakin untuk menghapus data?')"><i class="fa fa-times"></i> Hapus</button>
+                            
+                          </form>
                       </div>
                     </div>
                   </td>

@@ -35,8 +35,10 @@ class OPDController extends Controller
     {
         $opd = Opd::select('opds.*')->orderBy('id', 'desc')->get();
 
-        return view('adminkab.opd.index', [
-            'opd' => $opd
+        return view(
+            'adminkab.opd.index',
+            [
+                'opd' => $opd
             ]
         );
     }
@@ -95,7 +97,8 @@ class OPDController extends Controller
     {
         $opd = Opd::select('opds.*')->where('id', $id)->first();
 
-        return view('adminkab.opd.edit', 
+        return view(
+            'adminkab.opd.edit',
             [
                 'opd' => $opd
             ]
@@ -132,6 +135,6 @@ class OPDController extends Controller
     {
         Opd::find($id)->delete();
 
-        return redirect()->route('opd.index')->with('Success', 'Data Berhasil di hapus');
+        return redirect()->route('opd.index')->with('success', 'Data Berhasil di hapus.');
     }
 }

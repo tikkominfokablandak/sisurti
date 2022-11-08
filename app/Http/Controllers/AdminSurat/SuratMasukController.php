@@ -14,6 +14,7 @@ use LogSurat;
 use App\Models\Log_surat;
 use Illuminate\Support\Str;
 use App\Models\Disposisi;
+use Illuminate\Support\Facades\Storage;
 
 class SuratMasukController extends Controller
 {
@@ -25,8 +26,8 @@ class SuratMasukController extends Controller
     public function index()
     {
         $suratmasuk = SuratMasuk::where('suratmasuks.id_create', Auth::user()->id)
-        ->orderBy('suratmasuks.id', 'desc')
-        ->get();
+            ->orderBy('suratmasuks.id', 'desc')
+            ->get();
 
         return view('adminsurat.suratmasuk.index', [
             'suratmasuk' => $suratmasuk
@@ -43,27 +44,27 @@ class SuratMasukController extends Controller
         $jenissurat = Jenissurat::get();
 
         $tujuan = Tujuan::join('users', 'tujuans.id_internal', 'users.id')
-                    ->join('roles','users.id_role','roles.id')
-                    ->join('jabatans','users.id_jabatan','jabatans.id')
-                    ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
-                    ->join('opds','unitkerjas.id_opd','opds.id')
-                    ->select('users.nama', 'roles.nama_role', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja', 'users.id')
-                    ->orderBy('users.nama', 'asc')
-                    ->where('tujuans.jenis_tujuan', 'INTERNAL')
-                    ->where('tujuans.id_create', Auth::user()->id)
-                    ->get();
+            ->join('roles', 'users.id_role', 'roles.id')
+            ->join('jabatans', 'users.id_jabatan', 'jabatans.id')
+            ->join('unitkerjas', 'jabatans.id_unitkerja', 'unitkerjas.id')
+            ->join('opds', 'unitkerjas.id_opd', 'opds.id')
+            ->select('users.nama', 'roles.nama_role', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja', 'users.id')
+            ->orderBy('users.nama', 'asc')
+            ->where('tujuans.jenis_tujuan', 'INTERNAL')
+            ->where('tujuans.id_create', Auth::user()->id)
+            ->get();
 
         $tembusan = Tembusan::join('users', 'tembusans.id_user', 'users.id')
-                    ->join('roles','users.id_role','roles.id')
-                    ->join('jabatans','users.id_jabatan','jabatans.id')
-                    ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
-                    ->join('opds','unitkerjas.id_opd','opds.id')
-                    ->select('users.nama', 'roles.nama_role', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
-                    ->orderBy('users.nama', 'asc')
-                    ->where('tembusans.id_create', Auth::user()->id)
-                    ->get();
+            ->join('roles', 'users.id_role', 'roles.id')
+            ->join('jabatans', 'users.id_jabatan', 'jabatans.id')
+            ->join('unitkerjas', 'jabatans.id_unitkerja', 'unitkerjas.id')
+            ->join('opds', 'unitkerjas.id_opd', 'opds.id')
+            ->select('users.nama', 'roles.nama_role', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
+            ->orderBy('users.nama', 'asc')
+            ->where('tembusans.id_create', Auth::user()->id)
+            ->get();
 
-        return view('adminsurat.suratmasuk.create',[
+        return view('adminsurat.suratmasuk.create', [
             'jenissurat' => $jenissurat,
             'tujuan' => $tujuan,
             'tembusan' => $tembusan
@@ -94,13 +95,13 @@ class SuratMasukController extends Controller
         $suratmasuk->perihal = $request->perihal;
         $suratmasuk->isi = $request->isi;
 
-            $file = $request->file('file_surat');
-            $destinationPath = 'storage/' . Auth::user()->id . '/suratmasuk/';
-            $nama = 'sm-' . str_random(10). '.pdf';
-            $file->move($destinationPath, $nama);
-            // Storage::disk('local')->put($destinationPath . '/' . $nama , $request->file);
+        $file = $request->file('file_surat');
+        $destinationPath = 'storage/' . Auth::user()->id . '/suratmasuk/';
+        $nama = 'sm-' . str_random(10) . '.pdf';
+        $file->move($destinationPath, $nama);
+        // Storage::disk('local')->put($destinationPath . '/' . $nama , $request->file);
 
-            $suratmasuk->file_surat = $nama;
+        $suratmasuk->file_surat = $nama;
 
         $suratmasuk->id_tujuan = $request->id_tujuan;
         $suratmasuk->id_status = 1;
@@ -123,7 +124,7 @@ class SuratMasukController extends Controller
 
         LogSurat::createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $disp_ket, $disp_pesan, $id_status, $id_create);
 
-        alert()->success('Sukses','Surat masuk baru berhasil disimpan.');
+        alert()->success('Sukses', 'Surat masuk baru berhasil disimpan.');
 
         return redirect()->route('surat-masuk.index');
     }
@@ -137,32 +138,32 @@ class SuratMasukController extends Controller
     public function show($id)
     {
         $suratmasuk = SuratMasuk::join('jenissurats', 'suratmasuks.id_jenissurat', 'jenissurats.id')
-        ->join('users', 'suratmasuks.id_create', 'users.id')
-        ->select('suratmasuks.*', 'users.nama', 'jenissurats.jenis_surat')
-        ->find($id);
+            ->join('users', 'suratmasuks.id_create', 'users.id')
+            ->select('suratmasuks.*', 'users.nama', 'jenissurats.jenis_surat')
+            ->find($id);
 
         $log_surat = Log_surat::join('users', 'logsurats.id_tujuan', 'users.id')
-        // ->join('disposisis', 'logsurats.id_disposisi', 'disposisis.id')
-        ->join('suratmasuks', 'logsurats.id_sm', 'suratmasuks.id')
-        ->join('jenissurats', 'suratmasuks.id_jenissurat', 'jenissurats.id')
-        ->join('jabatans','users.id_jabatan','jabatans.id')
-        ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
-        ->join('opds','unitkerjas.id_opd','opds.id')
-        ->select('logsurats.*', 'suratmasuks.read', 'users.nama', 'suratmasuks.nama_pengirim', 'suratmasuks.jabatan_pengirim', 'suratmasuks.instansi_pengirim', 'suratmasuks.file_surat', 'suratmasuks.perihal', 'jenissurats.jenis_surat', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
-        ->where('logsurats.id_sm', $id)
-        ->orderBy('logsurats.id', 'desc')
-        ->get();
+            // ->join('disposisis', 'logsurats.id_disposisi', 'disposisis.id')
+            ->join('suratmasuks', 'logsurats.id_sm', 'suratmasuks.id')
+            ->join('jenissurats', 'suratmasuks.id_jenissurat', 'jenissurats.id')
+            ->join('jabatans', 'users.id_jabatan', 'jabatans.id')
+            ->join('unitkerjas', 'jabatans.id_unitkerja', 'unitkerjas.id')
+            ->join('opds', 'unitkerjas.id_opd', 'opds.id')
+            ->select('logsurats.*', 'suratmasuks.read', 'users.nama', 'suratmasuks.nama_pengirim', 'suratmasuks.jabatan_pengirim', 'suratmasuks.instansi_pengirim', 'suratmasuks.file_surat', 'suratmasuks.perihal', 'jenissurats.jenis_surat', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
+            ->where('logsurats.id_sm', $id)
+            ->orderBy('logsurats.id', 'desc')
+            ->get();
 
         $disposisi = Disposisi::join('logsurats', 'disposisis.id', 'logsurats.id_disposisi')
-        ->join('suratmasuks', 'logsurats.id_sm', 'suratmasuks.id')
-        ->join('users', 'disposisis.id_disp_ke', 'users.id')
-        ->join('jabatans','users.id_jabatan','jabatans.id')
-        ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
-        ->join('opds','unitkerjas.id_opd','opds.id')
-        ->select('disposisis.*', 'users.nama', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
-        ->where('logsurats.id_sm', $id)
-        ->orderBy('disposisis.id', 'asc')
-        ->get();
+            ->join('suratmasuks', 'logsurats.id_sm', 'suratmasuks.id')
+            ->join('users', 'disposisis.id_disp_ke', 'users.id')
+            ->join('jabatans', 'users.id_jabatan', 'jabatans.id')
+            ->join('unitkerjas', 'jabatans.id_unitkerja', 'unitkerjas.id')
+            ->join('opds', 'unitkerjas.id_opd', 'opds.id')
+            ->select('disposisis.*', 'users.nama', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
+            ->where('logsurats.id_sm', $id)
+            ->orderBy('disposisis.id', 'asc')
+            ->get();
 
         return view('adminsurat.suratmasuk.detail', [
             'suratmasuk' => $suratmasuk,
@@ -210,7 +211,7 @@ class SuratMasukController extends Controller
         $file = SuratMasuk::findOrFail($id);
 
         // return response()->file('storage/sm/'.$file->file);
-        return response()->download(storage_path('storage/'. Auth::user()->id . '/suratmasuk/' . $file));
+        return response()->download(storage_path('storage/' . Auth::user()->id . '/suratmasuk/' . $file));
     }
 
     public function kirim($id)
@@ -236,7 +237,7 @@ class SuratMasukController extends Controller
 
         LogSurat::createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $disp_ket, $disp_pesan, $id_status, $id_create);
 
-        alert()->success('Sukses','Surat masuk berhasil dikirim ke Kepala OPD.');
+        alert()->success('Sukses', 'Surat masuk berhasil dikirim ke Kepala OPD.');
 
         return redirect()->back();
     }

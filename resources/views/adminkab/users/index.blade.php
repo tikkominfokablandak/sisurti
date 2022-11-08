@@ -91,6 +91,12 @@
                             <i class="fa fa-edit"></i>
                               Edit
                           </a>
+                          <form action="{{ route('users.destroy', $item->id) }}" method="POST">
+                            @method('delete')
+                            @csrf
+                            <button type="submit" class="dropdown-item" onclick="return confirm('Apakah kamu yakin untuk menghapus data?')"><i class="fa fa-times"></i> Hapus</button>
+                            
+                          </form>
                       </div>
                     </div>
                   </td>

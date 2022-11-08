@@ -31,22 +31,26 @@ class JabatanRequest extends FormRequest
     public function store()
     {
         return [
-            'nama_jabatan' => 'unique:jabatans|max:128|required'
+            'nama_jabatan' => 'unique:jabatans|max:128|required',
+            'id_opd' => 'required'
         ];
     }
 
     public function update()
     {
         return [
-            'nama_jabatan' => 'max:128|required'
+            'nama_jabatan' => 'max:128|required',
+            'id_opd' => 'required'
         ];
     }
 
     public function messages()
     {
-        return[
+        return [
             'nama_jabatan.unique' => 'Nama Jabatan sudah terdaftar',
-            'nama_jabatan.max' => 'Batas maksimal adalah 128 karakter'
+            'nama_jabatan.required' => 'Nama Jabatan harus diisi',
+            'nama_jabatan.max' => 'Batas maksimal adalah 128 karakter',
+            'id_opd' => 'Pilih OPD terlebih dahulu'
         ];
     }
 }

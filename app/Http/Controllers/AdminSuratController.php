@@ -17,8 +17,8 @@ class AdminSuratController extends Controller
         //$users = User::count();
         //$count = DB::table('opds')->get()->count();
         $count = User::count();
-        
+
         //return view ("adminsurat.index ", compact('users'));
-        return view ('adminsurat.index', ['count' => $count]);
+        return view('adminsurat.index', ['count' => $count]);
     }
 }

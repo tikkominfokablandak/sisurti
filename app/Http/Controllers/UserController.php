@@ -13,6 +13,7 @@ use Validator;
 use Alert;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
@@ -23,16 +24,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::join('roles','users.id_role','roles.id')
-                ->join('jabatans','users.id_jabatan','jabatans.id')
-                ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
-                ->join('opds','unitkerjas.id_opd','opds.id')
-                ->select('users.*', 'roles.nama_role', 'jabatans.nama_jabatan', 'opds.nama_opd')
-                ->orderBy('id_role', 'desc')->get();
-        
-        return view('adminkab.users.index',
+        $user = User::join('roles', 'users.id_role', 'roles.id')
+            ->join('jabatans', 'users.id_jabatan', 'jabatans.id')
+            ->join('unitkerjas', 'jabatans.id_unitkerja', 'unitkerjas.id')
+            ->join('opds', 'unitkerjas.id_opd', 'opds.id')
+            ->select('users.*', 'roles.nama_role', 'jabatans.nama_jabatan', 'opds.nama_opd')
+            ->orderBy('id_role', 'desc')->get();
+
+        return view(
+            'adminkab.users.index',
             [
-            'user' => $user
+                'user' => $user
             ]
         );
     }
@@ -46,8 +48,10 @@ class UserController extends Controller
     {
         $role = Role::orderBy('id', 'asc')->get();
 
-        return view('adminkab.users.create', [
-            'role' => $role
+        return view(
+            'adminkab.users.create',
+            [
+                'role' => $role
             ]
         );
     }
@@ -64,7 +68,7 @@ class UserController extends Controller
 
         $user = $request->all();
 
-        if($request->file('foto') == NULL) {
+        if ($request->file('foto') == NULL) {
             $user['foto'] = 'user.jpg';
         } else {
             $file = $request->file('foto');
@@ -73,7 +77,7 @@ class UserController extends Controller
             $extension = $file->getClientOriginalExtension();
             $namabaru = $nama . '.' . $extension;
             $file->move($path, $namabaru);
-            
+
             $user['foto'] = $namabaru;
         }
 
@@ -83,7 +87,7 @@ class UserController extends Controller
 
         User::create($user);
 
-        alert()->success('Sukses','Data pengguna baru berhasil ditambahkan.');
+        alert()->success('Sukses', 'Data pengguna baru berhasil ditambahkan.');
 
         return redirect('users');
     }
@@ -96,15 +100,16 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::join('roles','users.id_role','roles.id')
-                ->join('jabatans','users.id_jabatan','jabatans.id')
-                ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
-                ->join('opds','unitkerjas.id_opd','opds.id')
-                ->select('users.*', 'roles.nama_role', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
-                ->where('users.id',$id)
-                ->first();
-        
-        return view('adminkab.users.detail',
+        $user = User::join('roles', 'users.id_role', 'roles.id')
+            ->join('jabatans', 'users.id_jabatan', 'jabatans.id')
+            ->join('unitkerjas', 'jabatans.id_unitkerja', 'unitkerjas.id')
+            ->join('opds', 'unitkerjas.id_opd', 'opds.id')
+            ->select('users.*', 'roles.nama_role', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
+            ->where('users.id', $id)
+            ->first();
+
+        return view(
+            'adminkab.users.detail',
             [
                 'user' => $user
             ]
@@ -121,23 +126,24 @@ class UserController extends Controller
     {
         $role = Role::orderBy('id', 'asc')->get();
 
-        $user = User::join('roles','users.id_role','roles.id')
-                ->join('jabatans','users.id_jabatan','jabatans.id')
-                ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
-                ->join('opds','unitkerjas.id_opd','opds.id')
-                ->select('users.*', 'roles.nama_role', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
-                ->where('users.id',$id)
-                ->first();
-        
-        return view('adminkab.users.edit',
+        $user = User::join('roles', 'users.id_role', 'roles.id')
+            ->join('jabatans', 'users.id_jabatan', 'jabatans.id')
+            ->join('unitkerjas', 'jabatans.id_unitkerja', 'unitkerjas.id')
+            ->join('opds', 'unitkerjas.id_opd', 'opds.id')
+            ->select('users.*', 'roles.nama_role', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
+            ->where('users.id', $id)
+            ->first();
+
+        return view(
+            'adminkab.users.edit',
             [
                 'role' => $role,
                 'user' => $user,
-                ]
-            );
-        }
-        
-        /**
+            ]
+        );
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -152,13 +158,13 @@ class UserController extends Controller
 
         $user = $request->all();
 
-        if($request->password == NULL) {
+        if ($request->password == NULL) {
             $user['password'] = $users->password;
         } else {
             $user['password'] = Hash::make($request->password);
         }
 
-        if($request->file('foto') == NULL) {
+        if ($request->file('foto') == NULL) {
             $user['foto'] = $users->foto;
         } else {
             $file = $request->file('foto');
@@ -167,7 +173,7 @@ class UserController extends Controller
             $extension = $file->getClientOriginalExtension();
             $namabaru = $nama . '.' . $extension;
             $file->move($path, $namabaru);
-            
+
             $user['foto'] = $namabaru;
         }
 
@@ -177,7 +183,7 @@ class UserController extends Controller
         $users->update($user);
 
         return redirect()->route('users.index')
-                        ->with('success', 'Perubahan data berhasil di simpan.');
+            ->with('success', 'Perubahan data berhasil di simpan.');
     }
 
     /**
@@ -186,9 +192,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $tujuan = base_path() . '/public/assets/img/profil/' . $user->foto;
+        if (File::exists($tujuan)) {
+            File::delete($tujuan);
+        }
+        $user->delete();
+
+        return redirect()->route('users.index')->with('success', 'Data berhasil di hapus.');
     }
 
     public function select(Request $request)
@@ -197,7 +211,7 @@ class UserController extends Controller
         $unitkerjaID = $request->unitkerjaID;
         if ($request->has('q')) {
             $search = $request->q;
-            $user = User::join('jabatans','users.id_jabatan','jabatans.id')
+            $user = User::join('jabatans', 'users.id_jabatan', 'jabatans.id')
                 ->select("id", "nama", "nama_jabatan")
                 ->where('id_unitkerja', $unitkerjaID)
                 ->Where('nama', 'LIKE', "%$search%")

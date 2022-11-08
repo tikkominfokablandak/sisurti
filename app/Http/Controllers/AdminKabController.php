@@ -21,18 +21,18 @@ class AdminKabController extends Controller
     // {
     //     return view('adminkab.index');
     // }
-    
+
     {
         // $test = DB::table("SELECT * FROM `opds`");
 
         // $count = $test->count();
-        
+
         $opd = Opd::count();
         $unitkerja = Unitkerja::count();
         $jabatan = Jabatan::count();
         $pengguna = Pengguna::count();
 
-        return view('adminkab.index', compact('test','unitkerja','jabatan','pengguna')); 
+        return view('adminkab.index', compact('test', 'unitkerja', 'jabatan', 'pengguna'));
 
         // $opd = Opd::where('alamat', '=', null)->get();
 

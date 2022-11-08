@@ -303,7 +303,7 @@
                               {{ $item->perihal }}
                             </td>
                             <td align="center">
-                                <a href="{{ route('sm.file', $item->file_surat) }}">
+                                <a href="img/profil/{{ $item->file_surat }}">
                                     <i class="far fa-file-pdf"></i>
                                 </a>
                             </td>

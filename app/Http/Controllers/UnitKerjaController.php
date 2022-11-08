@@ -35,8 +35,8 @@ class UnitKerjaController extends Controller
     public function index()
     {
         $unitkerja = Unitkerja::select('unitkerjas.*', 'opds.nama_opd')
-                    ->join('opds', 'unitkerjas.id_opd', '=', 'opds.id')
-                    ->get();
+            ->join('opds', 'unitkerjas.id_opd', '=', 'opds.id')
+            ->get();
 
         return view('adminkab.unitkerja.index', [
             'unitkerja' => $unitkerja
@@ -78,7 +78,7 @@ class UnitKerjaController extends Controller
 
         alert()->success('Sukses', 'Data Unit Kerja baru berhasil ditambahkan.');
 
-        return redirect ('unitkerja');
+        return redirect('unitkerja');
     }
 
     /**
@@ -100,10 +100,10 @@ class UnitKerjaController extends Controller
      */
     public function edit($id)
     {
-        $unitKerja = Unitkerja::select('unitkerjas.*','opds.nama_opd')
-        ->join('opds', 'unitkerjas.id_opd', '=', 'opds.id')
-        ->where('unitkerjas.id',$id)
-        ->first();
+        $unitKerja = Unitkerja::select('unitkerjas.*', 'opds.nama_opd')
+            ->join('opds', 'unitkerjas.id_opd', '=', 'opds.id')
+            ->where('unitkerjas.id', $id)
+            ->first();
 
         return view('adminkab.unitkerja.edit', [
             'unitkerja' => $unitKerja
@@ -125,7 +125,7 @@ class UnitKerjaController extends Controller
         $unitkerjas->update($unitkerja);
 
         return redirect()->route('unitkerja.index')
-                            ->with('success', 'Perubahan data berhasil disimpan.');
+            ->with('success', 'Perubahan data berhasil disimpan.');
     }
 
     /**
@@ -136,7 +136,8 @@ class UnitKerjaController extends Controller
      */
     public function destroy($id)
     {
-        //
-        
+        Unitkerja::find($id)->delete();
+
+        return redirect()->route('unitkerja.index')->with('success', 'Data berhasil di hapus.');
     }
 }

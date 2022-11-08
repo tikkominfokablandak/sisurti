@@ -50,7 +50,7 @@
                             <div class="form-group">
                                 <label for="nama_unitkerja">{{ __('Nama Unit Kerja') }}</label>
 
-                                <input id="nama_unitkerja" type="text" class="form-control @error('nama_unitkerja') is-invalid @enderror" name="nama_unitkerja" value="{{ old('nama_unitkerja') }}" placeholder="Masukan nama OPD ..." required autocomplete="nama_unitkerja" autofocus oninvalid="this.setCustomValidity('Mohon isi nama Unit Kerja terlebih dahulu!')" oninput="setCustomValidity('')">
+                                <input id="nama_unitkerja" type="text" class="form-control @error('nama_unitkerja') is-invalid @enderror" name="nama_unitkerja" value="{{ old('nama_unitkerja') }}" placeholder="Masukan nama unit kerja ..." required autocomplete="nama_unitkerja" autofocus oninvalid="this.setCustomValidity('Mohon isi nama Unit Kerja terlebih dahulu!')" oninput="setCustomValidity('')">
 
                                 @error('nama_unitkerja')
                                     <span class="invalid-feedback" role="alert">

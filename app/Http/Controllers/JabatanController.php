@@ -34,9 +34,9 @@ class JabatanController extends Controller
     public function index()
     {
         $jabatan = Jabatan::select('jabatans.*', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
-                    ->leftJoin('opds', 'jabatans.id_opd', '=', 'opds.id')
-                    ->leftJoin('unitkerjas', 'jabatans.id_unitkerja', '=', 'unitkerjas.id')
-                    ->get();
+            ->leftJoin('opds', 'jabatans.id_opd', '=', 'opds.id')
+            ->leftJoin('unitkerjas', 'jabatans.id_unitkerja', '=', 'unitkerjas.id')
+            ->get();
 
         return view('adminkab.jabatan.index', [
             'jabatan' => $jabatan
@@ -69,11 +69,8 @@ class JabatanController extends Controller
     public function store(JabatanRequest $request)
     {
         $validated = $request->validated();
-
         $jabatan = $request->all();
-
         $jabatan['id_opd'] = $request->opd;
-
         Jabatan::create($jabatan);
 
         alert()->success('Sukses', 'Data Jabatan baru berhasil ditambahkan.');
@@ -102,12 +99,13 @@ class JabatanController extends Controller
     {
         //
         $jabatan = Jabatan::select('jabatans.*', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
-                    ->leftJoin('opds', 'jabatans.id_opd', '=', 'opds.id')
-                    ->leftJoin('unitkerjas', 'jabatans.id_unitkerja', '=', 'unitkerjas.id')
-                    ->where('jabatans.id',$id)
-                    ->first();
+            ->leftJoin('opds', 'jabatans.id_opd', '=', 'opds.id')
+            ->leftJoin('unitkerjas', 'jabatans.id_unitkerja', '=', 'unitkerjas.id')
+            ->where('jabatans.id', $id)
+            ->first();
 
-        return view('adminkab.jabatan.edit', 
+        return view(
+            'adminkab.jabatan.edit',
             [
                 'jabatan' => $jabatan
             ]
@@ -124,15 +122,12 @@ class JabatanController extends Controller
     public function update(JabatanRequest $request, $id)
     {
         $validated = $request->validated();
-
         $jabatans = Jabatan::findOrfail($id);
-
         $jabatan = $request->all();
-
         $jabatans->update($jabatan);
 
         return redirect()->route('jabatan.index')
-                                ->with('success', 'Perubahan data berhasil disimpan.');
+            ->with('success', 'Perubahan data berhasil disimpan.');
     }
 
     /**
@@ -144,5 +139,8 @@ class JabatanController extends Controller
     public function destroy($id)
     {
         //
+        Jabatan::find($id)->delete();
+
+        return redirect()->route('jabatan.index')->with('success', 'Data Berhasil di hapus.');
     }
 }

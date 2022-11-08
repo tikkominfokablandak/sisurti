@@ -45,8 +45,9 @@ class UnitkerjaRequest extends FormRequest
 
     public function messages()
     {
-        return[
-            'nama_unitkerja.unique' => 'Nama Unit Kerja sudah terdaftar',
+        return [
+            'nama_unitkerja.unique' => 'Nama unit kerja sudah terdaftar',
+            'nama_unitkerja.required' => 'Nama unit harus diisi',
             'nama_unitkerja.max' => 'Batas maksimal adalah 128 karakter'
         ];
     }

@@ -73,7 +73,7 @@
                             <div class="form-group">
                                 <label for="opd">{{ __('OPD') }}</label>
 
-                                <select id="select_opd" name="opd" data-placeholder="Pilih OPD" class="form-control @error('select_opd') is-invalid @enderror" style="width: 100%;" oninvalid="this.setCustomValidity('Mohon pilih OPD dahulu!')" oninput="setCustomValidity('')">
+                                <select id="select_opd" name="id_opd" data-placeholder="Pilih OPD" class="form-control @error('select_opd') is-invalid @enderror" style="width: 100%;" oninvalid="this.setCustomValidity('Mohon pilih OPD dahulu!')" oninput="setCustomValidity('')">
                                     <option>{{ $jabatan->nama_opd }}</option>
                                 </select>
 
@@ -82,7 +82,7 @@
                             <div class="form-group">
                                 <label for="unitkerja">{{ __('Unit Kerja') }}</label>
                                 
-                                <select id="select_unitkerja" name="unitkerja" data-placeholder="Pilih Unit Kerja" class="form-control @error('unitkerja') is-invalid @enderror" style="width: 100%;" oninvalid="this.setCustomValidity('Mohon pilih unit kerja dahulu!')" oninput="setCustomValidity('')">
+                                <select id="select_unitkerja" name="id_unitkerja" data-placeholder="Pilih Unit Kerja" class="form-control @error('unitkerja') is-invalid @enderror" style="width: 100%;" oninvalid="this.setCustomValidity('Mohon pilih unit kerja dahulu!')" oninput="setCustomValidity('')">
                                     <option>{{ $jabatan->nama_unitkerja }}</option>
                                 </select>
 

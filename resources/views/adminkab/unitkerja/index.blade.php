@@ -42,7 +42,7 @@
               <div class="card-tools">
                 <a href="{{ route('unitkerja.create') }}">
                   <button type="button" class="btn btn-block btn-success btn-sm">
-                    <i class="fas fa-user-plus"></i> Tambah Data Unit Kerja
+                    <i class="fas fa-user-plus"></i> Tambah Unit Kerja
                   </button>
                 </a>
               </div>
@@ -79,6 +79,12 @@
                             <i class="fa fa-edit"></i>
                               Edit
                           </a>
+                          <form action="{{ route('unitkerja.destroy', $item->id) }}" method="POST">
+                            @method('delete')
+                            @csrf
+                            <button type="submit" class="dropdown-item" onclick="return confirm('Apakah kamu yakin untuk menghapus data?')"><i class="fa fa-times"></i> Hapus</button>
+                            
+                          </form>
                       </div>
                     </div>
                   </td>

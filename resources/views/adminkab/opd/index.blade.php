@@ -60,8 +60,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                
-                
 
                 @foreach ($opd as $item)
                 <tr>
@@ -75,19 +73,18 @@
                       <button type="button" class="btn btn-outline-primary btn-block dropdown-toggle dropdown-icon" data-toggle="dropdown">
                       </button>
                       <div class="dropdown-menu dropdown-menu-right">
-                          
                           <a class="dropdown-item" href="{{ url('opd/'.$item->id.'/edit') }}" style="color:#ffc107">
                             <i class="fa fa-edit"></i>
                               Edit
                           </a>
-                          <a class="dropdown-item" href="" style="color:#ff0707">
+                          
                             <form action="{{ route('opd.destroy', $item->id) }}" method="POST">
-                                @csrf 
-                                @method('delete')
-                              <i class="fa fa-times"></i>
-                              Hapus
+                              @method('delete')
+                              @csrf
+                              <button type="submit" class="dropdown-item" onclick="return confirm('Apakah kamu yakin untuk menghapus data?')"><i class="fa fa-times"></i> Hapus</button>
+                              
                             </form>
-                          </a>
+                          {{-- </a> --}}
                       </div>
                     </div>
                   </td>
