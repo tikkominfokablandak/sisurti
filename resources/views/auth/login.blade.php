@@ -84,7 +84,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Hubungi&hellip;</p>
+        <p>Silahkan Hubungi System Admin di diskominfo@landakab.go.id</p>
       </div>
       {{-- <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

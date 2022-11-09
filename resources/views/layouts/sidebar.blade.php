@@ -82,24 +82,24 @@
                   <p>Registrasi Surat Masuk</p>
                 </a>
               </li>
-              {{-- <li class="nav-item">
+              <li class="nav-item">
                 <a href="{{ route('surat-keluar.create') }}" class="nav-link {{ ( (request()->is('surat-keluar/create')) ) ? 'active' : '' }}">
                   <i class="fas fa-file-signature"></i>
                   <p>Registrasi Surat Keluar</p>
                 </a>
-              </li> --}}
+              </li>
               <li class="nav-item">
                 <a href="{{ route('surat-masuk.index') }}" class="nav-link {{ ( (request()->is('surat-masuk')) ) ? 'active' : '' }}">
                   <i class="fas fa-envelope"></i>
                   <p>Daftar Surat Masuk</p>
                 </a>
               </li>
-              {{-- <li class="nav-item">
+              <li class="nav-item">
                 <a href="{{ route('surat-keluar.index') }}" class="nav-link {{ ( (request()->is('surat-keluar')) ) ? 'active' : '' }}">
                   <i class="fas fa-paper-plane"></i>
                   <p>Daftar Surat Keluar</p>
                 </a>
-              </li> --}}
+              </li>
               <li class="nav-item">
                 <a href="{{ route('surat-disposisi.index') }}" class="nav-link {{ ( (request()->is('surat-disposisi*')) ) ? 'active' : '' }}">
                   <i class="fas icon-file-check-2"></i>
@@ -121,7 +121,7 @@
               <li class="nav-item">
                 <a href="{{ route('log-surat-masuk.index') }}" class="nav-link {{ ( (request()->is('log-surat-masuk*')) ) ? 'active' : '' }}">
                   <i class="fas fa-envelope-open-text"></i>
-                  <p>Surat Masuk</p>
+                  <p>Log Surat Masuk</p>
                 </a>
               </li>
               {{-- <li class="nav-item">
@@ -133,7 +133,7 @@
               <li class="nav-item">
                 <a href="{{ route('log-disposisi.index') }}" class="nav-link {{ ( (request()->is('log-disposisi*')) ) ? 'active' : '' }}">
                   <i class="fas icon-file-check-2"></i>
-                  <p>Disposisi</p>
+                  <p>Log Disposisi</p>
                 </a>
               </li>
             </ul>

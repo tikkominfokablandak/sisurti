@@ -25,108 +25,98 @@
     </div>
 </div>
 
+{{-- Button Surat Dinas --}}
 <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <!-- Default box -->
-            <div class="card">
-              <div class="card-header"> <!-- style="text-align:center" -->
-                <h3 class="card-title">Administrasi</h3>
+  <div class="container-fluid">
+    <div class="row">
+      {{-- <div class="col-12"> --}}
+        <div class="col-md-3">
 
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <!-- <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                    <i class="fas fa-times"></i>
-                  </button> -->
-                </div>
-              </div>
-              <div class="card-body" style="display: block;">
-                <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-light color-palette">
-              <div class="inner">
-                <h3>{{ number_format($opd); }}</h3>
-                {{-- {{ $opd }} --}}
-                {{-- {{ $opd->count() }} --}}
+<div class="card align-items-center">
+  <div class="card-header">
+    <h3 class="card-title">OPD</h3>
+  </div>
+  <div class="card-body">
+    {{-- <p>Add the classes <code>.btn.btn-app</code> to an <code>&lt;a&gt;</code> tag to achieve the following:</p> --}}
+    <a href="{{ route('opd.index') }}" class="btn btn-app">
+      <span class="badge bg-success">{{ number_format($opd); }}</span>
+      <i class="fas fa-landmark"></i> P&nbsp;e&nbsp;n&nbsp;g&nbsp;a&nbsp;t&nbsp;u&nbsp;r&nbsp;a&nbsp;n &nbsp;&nbsp;OPD
+    </a> 
+  </div> 
+  <!-- /.card-body -->
+  <div class="card-footer" style="display: block;">
+    {{-- Total status Surat keluar dan Surat masuk pada menu "Surat DINAS" --}}
+  </div>
+</div>
+</div>
+{{-- batas bawah container --}}
 
-                <p>O P D</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-landmark"></i>
-              </div>
-              <a href="{{ route('opd.index') }}" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-light color-palette">
-              <div class="inner">
-                <h3>{{ number_format($unitkerja); }}</h3>
+<div class="col-md-3">
 
-                <p>Unit Kerja</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-users"></i>
-              </div>
-              <a href="{{ route('unitkerja.index') }}" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-light color-palette">
-              <div class="inner">
-                <h3>{{ number_format($jabatan); }}</h3>
+  <div class="card align-items-center">
+    <div class="card-header">
+      <h3 class="card-title">Unit Kerja</h3>
+    </div>
+    <div class="card-body">
+      {{-- <p>Add the classes <code>.btn.btn-app</code> to an <code>&lt;a&gt;</code> tag to achieve the following:</p> --}}
+      
+      <a href="{{ route('unitkerja.index') }}" class="btn btn-app">
+        <span class="badge bg-success">{{ number_format($unitkerja); }}</span>
+        <i class="fas fa-users"></i> Pengaturan Unit Kerja
+      </a>
+    </div> 
+    <!-- /.card-body -->
+    <div class="card-footer" style="display: block;">
+      {{-- Total status Surat keluar dan Surat masuk pada menu "Surat DINAS" --}}
+    </div>
+  </div>
+  </div>
+  {{-- batas bawah container --}}
 
-                <p>jabatan</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-user-tie"></i>
-              </div>
-              <a href="{{ route('jabatan.index') }}" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-light color-palette">
-              <div class="inner">
-                <h3>{{ number_format($pengguna); }}</h3>
+  <div class="col-md-3">
 
-                <p>Pengguna</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-user"></i>
-              </div>
-              <a href="{{ route('users.index') }}" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
+    <div class="card align-items-center">
+      <div class="card-header">
+        <h3 class="card-title">Jabatan</h3>
+      </div>
+      <div class="card-body">
+        {{-- <p>Add the classes <code>.btn.btn-app</code> to an <code>&lt;a&gt;</code> tag to achieve the following:</p> --}}
+        <a href="{{ route('jabatan.index') }}" class="btn btn-app">
+          <span class="badge bg-success">{{ number_format($jabatan); }}</span>
+          <i class="fas fa-user-tie"></i> Pengaturan Jabatan
+        </a>
+      </div> 
+      <!-- /.card-body -->
+      <div class="card-footer" style="display: block;">
+        {{-- Total status Surat keluar dan Surat masuk pada menu "Surat DINAS" --}}
+      </div>
+    </div>
+    </div>
+    {{-- batas bawah container --}}
+
+    <div class="col-md-3">
+
+      <div class="card align-items-center">
+        <div class="card-header">
+          <h3 class="card-title">Pengguna</h3>
         </div>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer" style="display: block;">
-                Total isian pada menu "Administrasi"
-              </div>
-              <!-- /.card-footer-->
-            </div>
-            <!-- /.card -->
-          </div>
+        <div class="card-body">
+          {{-- <p>Add the classes <code>.btn.btn-app</code> to an <code>&lt;a&gt;</code> tag to achieve the following:</p> --}}
+          <a href="{{ route('users.index') }}" class="btn btn-app">
+            <span class="badge bg-success">{{ number_format($pengguna); }}</span>
+            <i class="fas fa-user"></i> Pengaturan Pengguna
+          </a>
+        </div> 
+        <!-- /.card-body -->
+        <div class="card-footer" style="display: block;">
+          {{-- Total status Surat keluar dan Surat masuk pada menu "Surat DINAS" --}}
         </div>
       </div>
-    </section>
+      </div>
+      {{-- batas bawah container --}}
+</div></div>
+</section>
+
+
 
 @endsection
