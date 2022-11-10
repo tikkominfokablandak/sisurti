@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Log_surat extends Model
 {
@@ -25,4 +26,10 @@ class Log_surat extends Model
         'id_status',
         'id_create'
     ];
+
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['created_at'])
+            ->translatedFormat('l, d F Y H:i:s');
+    }
 }

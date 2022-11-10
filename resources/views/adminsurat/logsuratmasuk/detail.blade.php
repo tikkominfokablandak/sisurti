@@ -49,13 +49,13 @@
             <div class="callout callout-warning">
                 <h5><b>Surat belum dikirim ke Kepala OPD</b></h5>
 
-                <p>{{ date('j M Y H:i:s', strtotime($suratmasuk->created_at)) }}</p>
+                <p>{{ $suratmasuk->created_at }}</p>
             </div>
         @elseif( $suratmasuk->id_status == 2 )
             <div class="callout callout-success">
                 <h5><b>Surat sudah dikirim ke Kepala OPD</b></h5>
 
-                <p>{{ date('j M Y H:i:s', strtotime($suratmasuk->created_at)) }}</p>
+                <p>{{ $suratmasuk->created_at }}</p>
             </div>
         @endif
 
@@ -77,7 +77,7 @@
                                     <dt>Nomor Surat</dt>
                                     <dd>{{ $suratmasuk->no_surat }}</dd>
                                     <dt>Tanggal Surat</dt>
-                                    <dd>{{ date('j M Y', strtotime($suratmasuk->tgl_surat)) }}</dd>
+                                    <dd>{{ $suratmasuk->tgl_surat }}</dd>
                                 </dl>
                             </div>
                             
@@ -120,9 +120,9 @@
                                             <div class="col-md-7">
                                                 <dl class="row">
                                                     <dt class="col-sm-3">Diterima pada</dt>
-                                                    <dd class="col-sm-9">{{ date('j M Y', strtotime($suratmasuk->tgl_diterima)) }}</dd>
+                                                    <dd class="col-sm-9">{{ $suratmasuk->tgl_diterima }}</dd>
                                                     <dt class="col-sm-3">Diregistrasikan pada</dt>
-                                                    <dd class="col-sm-9">{{ date('j M Y H:i:s', strtotime($suratmasuk->created_at)) }}</dd>
+                                                    <dd class="col-sm-9">{{ $suratmasuk->created_at }}</dd>
                                                     <dt class="col-sm-3">Diregistrasikan oleh</dt>
                                                     <dd class="col-sm-9">{{ $suratmasuk->nama }}</dd>
                                                 </dl>
@@ -228,7 +228,7 @@
                     <tbody>
                     @foreach ($log_surat as $item)
                         <tr>
-                            <td>{{ date('l d M Y H:i:s', strtotime($item->created_at)) }}</td>
+                            <td>{{ $item->created_at }}</td>
                             <td><b>{{ $item->nama_pengirim }}</b></td>
                             <td>{{ $item->jabatan_pengirim }} - {{ $item->instansi_pengirim }}</td>
                             <td>

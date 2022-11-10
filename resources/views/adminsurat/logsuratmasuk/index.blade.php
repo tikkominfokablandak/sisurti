@@ -55,7 +55,7 @@
                 @foreach ($suratmasuk as $item)
                 <tr>
                   <td>{{ $logsuratmasuk++ }}</td>
-                  <td>{{ date('j M Y', strtotime($item->tgl_surat)) }}</td>
+                  <td>{{ $item->tgl_surat }}</td>
                   <td>{{ $item->no_surat }}</td>
                   <td>{{ $item->perihal }}</td>
                   <td>{{ $item->nama_instansi }}</td>
