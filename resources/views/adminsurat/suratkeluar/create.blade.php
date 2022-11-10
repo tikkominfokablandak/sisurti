@@ -50,11 +50,11 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="username">{{ __('Jenis Surat') }}
+                                <label>{{ __('Jenis Surat') }}
                                     <small style="color:red"><b>*</b></small>
                                 </label>
 
-                                <select id="jenis_surat" class="form-control" style="width: 100%;" name="id_jenissurat" required oninvalid="this.setCustomValidity('Mohon pilih pengirim dahulu!')" oninput="setCustomValidity('')">
+                                <select id="jenis_surat" class="form-control" style="width: 100%;" name="id_jenissurat" required oninvalid="this.setCustomValidity('Mohon pilih jenis surat dahulu!')" oninput="setCustomValidity('')">
                                     <option value=""></option>
                                     @foreach ($jenissurat as $item)
                                         <option value="{{ $item->id }}">{{ $item->jenis_surat }}</option>
@@ -190,7 +190,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>Tujuan Eksternal
 
                                 </label>
@@ -201,7 +201,7 @@
                                     <option value="{{ $item->id }}">{{ $item->nama_tujuan }} - {{ $item->jabatan_tujuan }} - {{ $item->instansi_tujuan }} - {{ $item->kotakab }}</option>
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> --}}
 
                             {{-- <div class="form-group">
                                 <input id="nama_tujuan" type="text" class="form-control form-control-sm" placeholder="Nama Tujuan" name="nama_tujuan" disabled>

@@ -43,7 +43,7 @@ class SuratKeluarController extends Controller
                         ->join('jabatans','users.id_jabatan','jabatans.id')
                         ->join('unitkerjas','jabatans.id_unitkerja','unitkerjas.id')
                         ->join('opds','unitkerjas.id_opd','opds.id')
-                        ->select('users.*', 'tujuans.*', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
+                        ->select('users.*', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
                         ->where('tujuans.id_create', Auth::user()->id)
                         ->where('jenis_tujuan', '=', 'INTERNAL')
                         ->orderBy('users.nama', 'asc')
@@ -102,7 +102,6 @@ class SuratKeluarController extends Controller
         $validated = $request->validated();
 
         $suratkeluar = new SuratKeluar;
-        // $suratkeluar = $request->all();
 
             $file = $request->file('file_surat');
             $nama = 'sk-' . str_random(10);
@@ -110,12 +109,16 @@ class SuratKeluarController extends Controller
             $namabaru = $nama . '.' . $extension;
             Storage::putFileAs('public/sk', $request->file('file_surat'), $namabaru);
 
-        // $suratkeluar['file_surat'] = $namabaru;
-
-        // $suratkeluar['tgl_surat'] = Carbon::now();
-        // $suratkeluar['id_status'] = 1;
-        // $suratkeluar['id_create'] = Auth::user()->id;
-        // $suratkeluar['id_pengirim'] = Auth::user()->id;
+        $suratkeluar->id_jenissurat = $request->id_jenissurat;
+        $suratkeluar->sifat_surat = $request->sifat_surat;
+        $suratkeluar->tingkat_urgen = $request->tingkat_urgen;
+        $suratkeluar->no_surat = $request->no_surat;
+        $suratkeluar->perihal = $request->perihal;
+        $suratkeluar->isi = $request->isi;
+        $suratkeluar->id_tujuan = $request->id_tujuan;
+        $suratkeluar->id_tembusan = $request->id_tembusan;
+        $suratkeluar->id_verifikator = $request->id_verifikator;
+        $suratkeluar->id_ttd = $request->id_ttd;
 
         $suratkeluar->file_surat = $namabaru;
 
@@ -126,8 +129,6 @@ class SuratKeluarController extends Controller
 
         $suratkeluar->save();
 
-        // SuratKeluar::create($suratkeluar);
-
         $id_sm = NULL;
         $id_sk = $suratkeluar->id;
         $id_tujuan = $suratkeluar->id_tujuan;
@@ -136,11 +137,12 @@ class SuratKeluarController extends Controller
         $id_verifikator = $suratkeluar->id_verifikator;
         $id_ttd = $suratkeluar->id_ttd;
         $id_disposisi = NULL;
+        $disp_ket = NULL;
+        $disp_pesan = NULL;
         $id_status = 1;
-        $read = "READ";
         $id_create = $suratkeluar->id_create;
 
-        LogSurat::createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $id_status, $read, $id_create);
+        LogSurat::createLog($id_sm, $id_sk, $id_tujuan, $id_pengirim, $id_tembusan, $id_verifikator, $id_ttd, $id_disposisi, $disp_ket, $disp_pesan, $id_status, $id_create);
 
         alert()->success('Sukses','Data surat keluar baru berhasil disimpan.');
 

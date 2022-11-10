@@ -226,7 +226,7 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label>Utama
                                     <small style="color:red"><b>*</b></small>
@@ -298,7 +298,7 @@ $(function () {
         theme: 'bootstrap4'
     });
 
-    $('#tujuan').select2({
+    $('#tujuans').select2({
             placeholder: "Pilih Tujuan",
             theme: 'bootstrap4'
         });
