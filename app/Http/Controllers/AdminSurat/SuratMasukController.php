@@ -89,8 +89,8 @@ class SuratMasukController extends Controller
         $suratmasuk->tingkat_urgen = $request->tingkat_urgen;
         $suratmasuk->no_surat = $request->no_surat;
 
-        $suratmasuk->tgl_surat = "2022-10-01";
-        $suratmasuk->tgl_diterima = "2022-10-01";
+        $suratmasuk->tgl_surat = $request->tgl_surat;
+        $suratmasuk->tgl_diterima = $request->tgl_diterima;
 
         $suratmasuk->perihal = $request->perihal;
         $suratmasuk->isi = $request->isi;

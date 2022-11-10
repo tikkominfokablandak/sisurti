@@ -156,37 +156,30 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="username">{{ __('Tanggal Surat') }}
+                                <label>{{ __('Tanggal Surat') }}
                                     <small style="color:red"><b>*</b></small>
                                 </label>
 
                                 <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                    <input type="text" class="form-control form-control-sm datetimepicker-input" required oninvalid="this.setCustomValidity('Mohon isi tanggal surat masuk terlebih dahulu!')" oninput="setCustomValidity('')" data-target="#reservationdate"/>
+                                    <input type="text" class="form-control datetimepicker-input" name="tgl_surat" required oninvalid="this.setCustomValidity('Mohon isi tanggal surat masuk terlebih dahulu!')" oninput="setCustomValidity('')" data-target="#reservationdate"/>
                                     <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
                                 </div>
-
-                                @error('nama_pengirim')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
 
-                            {{-- <div class="form-group">
-                                <label for="username">{{ __('Tanggal Diterima') }}
+                            <div class="form-group">
+                                <label>{{ __('Tanggal Diterima') }}
                                     <small style="color:red"><b>*</b></small>
                                 </label>
 
-                                <input id="nama_pengirim" type="text" class="form-control form-control-sm @error('nama_pengirim') is-invalid @enderror" placeholder="Masukan Nama Pengirim ..." name="nama_pengirim" value="{{ old('nama_pengirim') }}" required autocomplete="username" autofocus oninvalid="this.setCustomValidity('Mohon isi Nama Pengirim terlebih dahulu!')" oninput="setCustomValidity('')">
-
-                                @error('nama_pengirim')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div> --}}
+                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                    <input type="text" class="form-control datetimepicker-input" name="tgl_diterima" required oninvalid="this.setCustomValidity('Mohon isi tanggal surat diterima terlebih dahulu!')" oninput="setCustomValidity('')" data-target="#reservationdate"/>
+                                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-sm-7">
@@ -352,75 +345,5 @@ if ( has_errors ){
     reader.readAsDataURL(this.files[0]); 
   
    });
-</script>
-
-<script>
-$(function () {
-    //Datemask dd/mm/yyyy
-    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-    //Datemask2 mm/dd/yyyy
-    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-    //Money Euro
-    $('[data-mask]').inputmask()
-
-    //Date picker
-    $('#reservationdate').datetimepicker({
-        format: 'L'
-    });
-
-    //Date and time picker
-    $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
-
-    //Date range picker
-    $('#reservation').daterangepicker()
-    //Date range picker with time picker
-    $('#reservationtime').daterangepicker({
-      timePicker: true,
-      timePickerIncrement: 30,
-      locale: {
-        format: 'MM/DD/YYYY hh:mm A'
-      }
-    })
-    //Date range as a button
-    $('#daterange-btn').daterangepicker(
-      {
-        ranges   : {
-          'Today'       : [moment(), moment()],
-          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        },
-        startDate: moment().subtract(29, 'days'),
-        endDate  : moment()
-      },
-      function (start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-      }
-    )
-
-    //Timepicker
-    $('#timepicker').datetimepicker({
-      format: 'LT'
-    })
-
-    //Bootstrap Duallistbox
-    $('.duallistbox').bootstrapDualListbox()
-
-    //Colorpicker
-    $('.my-colorpicker1').colorpicker()
-    //color picker with addon
-    $('.my-colorpicker2').colorpicker()
-
-    $('.my-colorpicker2').on('colorpickerChange', function(event) {
-      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-    })
-
-    $("input[data-bootstrap-switch]").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-
-  })
 </script>
 @endsection
