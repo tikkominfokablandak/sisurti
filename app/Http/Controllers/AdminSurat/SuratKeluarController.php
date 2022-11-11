@@ -169,7 +169,13 @@ class SuratKeluarController extends Controller
      */
     public function show($id)
     {
-        //
+        $suratkeluar = SuratKeluar::where('suratkeluars.id_create', Auth::user()->id)
+            ->where('id', $id)
+            ->first();
+
+        return view('adminsurat.suratkeluar.detail', [
+            'suratkeluar' => $suratkeluar
+        ])->with('no', 1);
     }
 
     /**
@@ -210,10 +216,10 @@ class SuratKeluarController extends Controller
     {
         $file = SuratKeluar::findOrFail($id);
 
-        // return response()->download(storage_path('app/public/' . Auth::user()->id . '/suratkeluar/' . $unduh));
-        // return response()->file('storage/' . Auth::user()->id . '/suratkeluar/' . $unduh);
-        // return Storage::download('public/' . Auth::user()->id . '/suratkeluar/' . $unduh);
+        // return response()->download(storage_path('app/public/' . Auth::user()->id . '/suratkeluar/' . $file->file_surat));
+        // return response()->download('storage/' . Auth::user()->id . '/suratkeluar/' . $file->file_surat);
+        return Storage::download('public/' . Auth::user()->id . '/suratkeluar/' . $file->file_surat);
         // return response()->download(public_path('storage/'. Auth::user()->id .'/suratkeluar/'. $unduh));
-        return Storage::disk('public')->download('storage/' . Auth::user()->id . '/suratkeluar/'. $file);
+        // return Storage::disk('public')->download('storage/' . Auth::user()->id . '/suratkeluar/'. $file);
     }
 }

@@ -61,8 +61,12 @@
                   <td>{{ $item->no_surat }}</td>
                   <td>{{ $item->perihal }}</td>
                   <td align="center">
-                    {{-- <a href="{{ route('sk.unduh', $item->file_surat) }}"> --}}
-                    <a href="{{ url('surat-keluar/unduh/'. $item->file_surat) }}">
+                    {{-- <a href="{{ route('surat-keluar.show', $item->id) }}">
+                      <i class="fas fa-eye"></i>
+                      Detail
+                    </a> --}}
+                    <a href="{{ route('sk.unduh', ['id' => $item->id]) }}">
+                    {{-- <a href="{{ url('surat-keluar/unduh/'. $item->file_surat) }}"> --}}
                       <i class="fas fa-file-word"></i>
                       Unduh
                     </a>
