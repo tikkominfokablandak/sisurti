@@ -41,4 +41,10 @@ class SuratKeluar extends Model
         return Carbon::parse($this->attributes['created_at'])
             ->translatedFormat('l, d F Y H:i:s');
     }
+
+    public function getTglSuratAttribute()
+    {
+        return Carbon::parse($this->attributes['tgl_surat'])
+            ->translatedFormat('l, d F Y');
+    }
 }

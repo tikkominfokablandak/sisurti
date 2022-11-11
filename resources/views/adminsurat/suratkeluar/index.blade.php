@@ -41,52 +41,41 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>No</th>
+                  <th width="10">No</th>
                   <th>Tanggal Surat</th>
                   <th>Nomor Surat</th>
                   <th>Hal</th>
-                  <th>Asal Surat</th>
-                  <th>Tingkat Urgensi</th>
-                  <th>Status Verifikator</th>
+                  {{-- <th>Asal Surat</th> --}}
+                  {{-- <th>Tingkat Urgensi</th> --}}
+                  {{-- <th>Status Verifikator</th>
                   <th>Status Penandatangan</th>
-                  <th>Status Kirim</th>
-                  <th width="10">Aksi</th>
+                  <th>Status Kirim</th> --}}
+                  <th width="10"></th>
                 </tr>
                 </thead>
                 <tbody>
-                {{-- @foreach ($user as $item)
+                @foreach ($suratkeluar as $item)
                 <tr>
-                  <td>{{ $item->nama_role }}</td>
-                  <td>{{ $item->nama }}</td>
-                  <td>{{ $item->email }}</td>
-                  <td>{{ $item->username }}</td>
-                  <td>{{ $item->nama_opd }} / {{ $item->nama_unitkerja }}</td>
-                  <td>{{ $item->nama_jabatan }}</td>
+                  <td>{{ $no++ }}</td>
+                  <td>{{ $item->tgl_surat }}</td>
+                  <td>{{ $item->no_surat }}</td>
+                  <td>{{ $item->perihal }}</td>
                   <td align="center">
-                    @if( $item->active == 1 )
-                      <span class="badge bg-success">Aktif</span>
-                    @elseif( $item->active == 0 )
-                      <span class="badge bg-danger">Tidak Aktif</span>
-                    @endif
-                  </td>
-                  <td align="center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-outline-primary btn-block dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-right">
-                          <a class="dropdown-item" href="{{ url('users/'.$item->id) }}" style="color:blue">
-                            <i class="fa fa-info-circle"></i>
-                              Detail
-                          </a>
-                          <a class="dropdown-item" href="{{ url('users/'.$item->id.'/edit') }}" style="color:#ffc107" hover>
-                            <i class="fa fa-edit"></i>
-                              Edit
-                          </a>
-                      </div>
-                    </div>
+                    {{-- <a href="{{ route('sk.unduh', $item->file_surat) }}"> --}}
+                    <a href="{{ url('surat-keluar/unduh/'. $item->file_surat) }}">
+                      <i class="fas fa-file-word"></i>
+                      Unduh
+                    </a>
+                    {{-- <form action="{{ route('sk.unduh', $item->file_surat) }}" method="GET">
+                      @csrf
+                      <button type="submit" class="btn border-none btn-sm btn-primary">
+                        <i class="fas fa-file-word"></i>
+                        Unduh
+                      </button> 
+                    </form> --}}
                   </td>
                 </tr>
-                @endforeach --}}
+                @endforeach
                 </tbody>
               </table>
             </div>

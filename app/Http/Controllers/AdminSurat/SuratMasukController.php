@@ -25,8 +25,8 @@ class SuratMasukController extends Controller
      */
     public function index()
     {
-        $suratmasuk = SuratMasuk::where('suratmasuks.id_create', Auth::user()->id)
-            ->orderBy('suratmasuks.id', 'desc')
+        $suratmasuk = SuratMasuk::where('id_create', Auth::user()->id)
+            ->orderBy('created_at', 'DESC')
             ->get();
 
         return view('adminsurat.suratmasuk.index', [
@@ -95,11 +95,17 @@ class SuratMasukController extends Controller
         $suratmasuk->perihal = $request->perihal;
         $suratmasuk->isi = $request->isi;
 
-        $file = $request->file('file_surat');
-        $destinationPath = 'storage/' . Auth::user()->id . '/suratmasuk/';
-        $nama = 'sm-' . str_random(10) . '.pdf';
-        $file->move($destinationPath, $nama);
+        // $file = $request->file('file_surat');
+        // $destinationPath = public_path('storage/' . Auth::user()->id . '/suratmasuk/');
+        // $nama = 'sm-' . str_random(10) . '.pdf';
+        // $file->move($destinationPath, $nama);
+        // $file->storeAs('public/'. Auth::user()->id . '/suratmasuk/'. $nama);
         // Storage::disk('local')->put($destinationPath . '/' . $nama , $request->file);
+
+            $file = $request->file('file_surat');
+            $nama = 'sm-' . str_random(10) . '.pdf';
+            $extension = $file->getClientOriginalExtension();
+            Storage::putFileAs('public/'.Auth::user()->id.'/suratmasuk', $request->file('file_surat'), $nama);
 
         $suratmasuk->file_surat = $nama;
 
@@ -206,7 +212,7 @@ class SuratMasukController extends Controller
         //
     }
 
-    public function file($id)
+    public function unduh($id)
     {
         $file = SuratMasuk::findOrFail($id);
 

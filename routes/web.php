@@ -58,10 +58,11 @@ Route::group(['middleware' => ['web', 'auth', 'roles']], function () {
         Route::group(['roles' => 'Admin Surat'], function () {
 
             Route::resource('surat-masuk', \App\Http\Controllers\AdminSurat\SuratMasukController::class);
-            Route::get('surat-masuk/{id}/file', [\App\Http\Controllers\AdminSurat\SuratMasukController::class, 'file'])->name('sm.file');
+            Route::get('surat-masuk/unduh/{id}', [\App\Http\Controllers\AdminSurat\SuratMasukController::class, 'unduh'])->name('sm.unduh');
             Route::post('surat-masuk/{id}/kirim', [\App\Http\Controllers\AdminSurat\SuratMasukController::class, 'kirim'])->name('sm.kirim');
 
             Route::resource('surat-keluar', \App\Http\Controllers\AdminSurat\SuratKeluarController::class);
+            Route::get('surat-keluar/unduh/{id}', [\App\Http\Controllers\AdminSurat\SuratKeluarController::class, 'unduh'])->name('sk.unduh');
             Route::resource('surat-disposisi', \App\Http\Controllers\AdminSurat\DisposisiController::class);
 
             Route::resource('log-surat-masuk', \App\Http\Controllers\AdminSurat\LogSuratMasukController::class);

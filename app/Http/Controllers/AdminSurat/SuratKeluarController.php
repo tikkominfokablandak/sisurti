@@ -27,7 +27,13 @@ class SuratKeluarController extends Controller
      */
     public function index()
     {
-        return view('adminsurat.suratkeluar.index');
+        $suratkeluar = SuratKeluar::where('suratkeluars.id_create', Auth::user()->id)
+            ->orderBy('suratkeluars.id', 'desc')
+            ->get();
+
+        return view('adminsurat.suratkeluar.index', [
+            'suratkeluar' => $suratkeluar
+        ])->with('no', 1);
     }
 
     /**
@@ -107,7 +113,13 @@ class SuratKeluarController extends Controller
             $nama = 'sk-' . str_random(10);
             $extension = $file->getClientOriginalExtension();
             $namabaru = $nama . '.' . $extension;
-            Storage::putFileAs('public/sk', $request->file('file_surat'), $namabaru);
+            Storage::putFileAs('public/'.Auth::user()->id.'/suratkeluar', $request->file('file_surat'), $namabaru);
+
+        //     $file = $request->file('file_surat');
+        // $destinationPath = 'storage/' . Auth::user()->id . '/suratmasuk/';
+        // $nama = 'sm-' . str_random(10) . '.pdf';
+        // $file->move($destinationPath, $nama);
+        // Storage::disk('local')->put($destinationPath . '/' . $nama , $request->file);
 
         $suratkeluar->id_jenissurat = $request->id_jenissurat;
         $suratkeluar->sifat_surat = $request->sifat_surat;
@@ -192,5 +204,16 @@ class SuratKeluarController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function unduh($id)
+    {
+        $file = SuratKeluar::findOrFail($id);
+
+        // return response()->download(storage_path('app/public/' . Auth::user()->id . '/suratkeluar/' . $unduh));
+        // return response()->file('storage/' . Auth::user()->id . '/suratkeluar/' . $unduh);
+        // return Storage::download('public/' . Auth::user()->id . '/suratkeluar/' . $unduh);
+        // return response()->download(public_path('storage/'. Auth::user()->id .'/suratkeluar/'. $unduh));
+        return Storage::disk('public')->download('storage/' . Auth::user()->id . '/suratkeluar/'. $file);
     }
 }

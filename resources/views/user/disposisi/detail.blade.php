@@ -126,6 +126,7 @@
                                 </div>
                             </div>
                         </div>
+                        <iframe src="{{ asset('storage/'.$suratmasuk->id_create.'/suratmasuk/'.$suratmasuk->file_surat) }}" align="top" height="1000" width="100%" frameborder="0" scrolling="auto"></iframe>
                     </div>
                 </div>
             </div>
@@ -214,7 +215,7 @@
                             <th>Tujuan</th>
                             <th>Jenis Surat</th>
                             <th>Hal</th>
-                            <th width="10">File</th>
+                            {{-- <th width="10">File</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -268,11 +269,11 @@
                             <td>
                               {{ $item->perihal }}
                             </td>
-                            <td align="center">
+                            {{-- <td align="center">
                                 <a href="{{ route('sm.file', $item->file_surat) }}">
                                     <i class="far fa-file-pdf"></i>
                                 </a>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                     </tbody>
