@@ -51,7 +51,12 @@
                   <tr>
                     <td>{{ $no++ }}</td>
                     <td>{{ $item->jenis_surat }}</td>
-                    <td>{{ $item->file }}</td>
+                    <td>
+                      <a href="{{ route('template.unduh', ['id' => $item->id]) }}">
+                        <i class="fas fa-file-word"></i>
+                        Unduh
+                      </a>
+                    </td>
                   </tr>
                 @endforeach
                 </tbody>

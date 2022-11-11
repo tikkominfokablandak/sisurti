@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminSurat;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Jenissurat;
+use Storage;
 
 class JenisSuratController extends Controller
 {
@@ -15,11 +16,19 @@ class JenisSuratController extends Controller
      */
     public function index()
     {
-        $template = Jenissurat::get();
+        $template = Jenissurat::whereNotNull('file')
+        ->get();
 
         return view('adminsurat.template-surat.index', [
             'template' => $template
         ])->with('no', 1);
+    }
+
+    public function unduh($id)
+    {
+        $file = Jenissurat::findOrFail($id);
+
+        return Storage::download('public/template/' . $file->file);
     }
 
     /**

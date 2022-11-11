@@ -82,6 +82,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles']], function () {
             Route::resource('daftar-grup-tujuan', \App\Http\Controllers\AdminSurat\GrupTujuanController::class);
             Route::resource('daftar-tembusan', \App\Http\Controllers\AdminSurat\TembusanController::class);
             Route::resource('template-surat', \App\Http\Controllers\AdminSurat\JenisSuratController::class);
+            Route::get('template-surat/unduh/{id}', [\App\Http\Controllers\AdminSurat\JenisSuratController::class, 'unduh'])->name('template.unduh');
             //Route::get('/dashboard', [\App\Http\Controllers\AdminSurat\AdminSuratController::class, 'index']);
         });
 
