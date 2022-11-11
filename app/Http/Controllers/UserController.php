@@ -14,6 +14,7 @@ use Alert;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Auth;
 
 class UserController extends Controller
 {
@@ -84,6 +85,7 @@ class UserController extends Controller
         $user['username'] = Str::lower($request->username);
         $user['email'] = Str::lower($request->email);
         $user['password'] = Hash::make($request->password);
+        $user['id_create'] = Auth::user()->id;
 
         User::create($user);
 

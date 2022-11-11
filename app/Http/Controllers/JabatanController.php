@@ -7,6 +7,7 @@ use App\Models\Jabatan;
 use App\Models\Opd;
 use App\Models\Unitkerja;
 use App\Http\Requests\JabatanRequest;
+use Auth;
 
 class JabatanController extends Controller
 {
@@ -71,6 +72,7 @@ class JabatanController extends Controller
         $validated = $request->validated();
         $jabatan = $request->all();
         $jabatan['id_opd'] = $request->opd;
+        $jabatan['id_create'] = Auth::user()->id;
         Jabatan::create($jabatan);
 
         alert()->success('Sukses', 'Data Jabatan baru berhasil ditambahkan.');

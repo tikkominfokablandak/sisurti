@@ -8,6 +8,7 @@ use Validator;
 use Alert;
 use App\Http\Requests\OpdRequest;
 use Illuminate\Support\Str;
+use Auth;
 
 class OPDController extends Controller
 {
@@ -68,6 +69,7 @@ class OPDController extends Controller
         $opd['nama_opd'] = $request->nama_opd;
         $opd['singkatan'] = $request->singkatan;
         $opd['alamat'] = $request->alamat;
+        $opd['id_create'] = Auth::user()->id;
 
         Opd::create($opd);
 

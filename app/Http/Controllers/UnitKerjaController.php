@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Unitkerja;
 use App\Models\Opd;
 use App\Http\Requests\UnitkerjaRequest;
+use Auth;
 
 class UnitKerjaController extends Controller
 {
@@ -73,6 +74,7 @@ class UnitKerjaController extends Controller
         $unitKerja['induk_unitkerja'] = $request->induk_unitkerja;
         $unitKerja['alamat'] = $request->alamat;
         $unitKerja['id_opd'] = $request->id_opd;
+        $unitKerja['id_create'] = Auth::user()->id;
 
         Unitkerja::create($unitKerja);
 
