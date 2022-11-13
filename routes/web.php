@@ -53,6 +53,9 @@ Route::group(['middleware' => ['web', 'auth', 'roles']], function () {
     });
 
     Route::group(['roles' => ['Admin Surat', 'User']], function () {
+        Route::get('change-password', [\App\Http\Controllers\Auth\ChangePasswordController::class, 'index'])->name('changePassword');
+        Route::post('change-password', [\App\Http\Controllers\Auth\ChangePasswordController::class, 'changePasswordSave'])->name('postChangePassword');
+
         Route::resource('log-disposisi', \App\Http\Controllers\AdminSurat\LogDisposisiController::class);
 
         Route::group(['roles' => 'Admin Surat'], function () {
