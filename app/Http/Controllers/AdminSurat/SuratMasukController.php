@@ -15,6 +15,7 @@ use App\Models\Log_surat;
 use Illuminate\Support\Str;
 use App\Models\Disposisi;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class SuratMasukController extends Controller
 {
@@ -186,7 +187,32 @@ class SuratMasukController extends Controller
      */
     public function edit($id)
     {
-        //
+        $suratmasuk = SuratMasuk::join('jenissurats', 'suratmasuks.id_jenissurat', 'jenissurats.id')
+            ->join('users', 'suratmasuks.id_tujuan', 'users.id')
+            ->join('jabatans', 'users.id_jabatan', 'jabatans.id')
+            ->join('unitkerjas', 'jabatans.id_unitkerja', 'unitkerjas.id')
+            ->join('opds', 'unitkerjas.id_opd', 'opds.id')
+            ->select('suratmasuks.*', 'jenissurats.jenis_surat', 'users.nama', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja')
+            ->findOrFail($id);
+
+        $jenissurat = Jenissurat::get();
+
+        $tujuan = Tujuan::join('users', 'tujuans.id_internal', 'users.id')
+            ->join('roles', 'users.id_role', 'roles.id')
+            ->join('jabatans', 'users.id_jabatan', 'jabatans.id')
+            ->join('unitkerjas', 'jabatans.id_unitkerja', 'unitkerjas.id')
+            ->join('opds', 'unitkerjas.id_opd', 'opds.id')
+            ->select('users.nama', 'roles.nama_role', 'jabatans.nama_jabatan', 'opds.nama_opd', 'unitkerjas.nama_unitkerja', 'users.id')
+            ->orderBy('users.nama', 'asc')
+            ->where('tujuans.jenis_tujuan', 'INTERNAL')
+            ->where('tujuans.id_create', Auth::user()->id)
+            ->get();
+
+        return view('adminsurat.suratmasuk.edit', [
+            'suratmasuk' => $suratmasuk,
+            'jenissurat' => $jenissurat,
+            'tujuan' => $tujuan,
+        ]);
     }
 
     /**
@@ -198,7 +224,56 @@ class SuratMasukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $suratmasuk = SuratMasuk::findOrFail($id);
+
+        $suratmasuk->nama_pengirim = $request->nama_pengirim;
+        $suratmasuk->jabatan_pengirim = $request->jabatan_pengirim;
+        $suratmasuk->instansi_pengirim = $request->instansi_pengirim;
+        $suratmasuk->id_jenissurat = $request->id_jenissurat;
+        $suratmasuk->sifat_surat = $request->sifat_surat;
+        $suratmasuk->tingkat_urgen = $request->tingkat_urgen;
+        $suratmasuk->no_surat = $request->no_surat;
+
+        // Carbon::createFromFormat('l, d F Y', $request->tgl_surat)->format('Y-m-d');
+        // $tgl_surat = date('Y-m-d ', strtotime($request->tgl_surat));
+        // $suratmasuk->tgl_surat = $request->filled('tgl_surat') ? date('Y-m-d', strtotime($request->input('tgl_surat'))) : NULL;
+        // $suratmasuk->tgl_surat = $tgl_surat;
+
+        if($request->tgl_surat == NULL) {
+            
+        } else {
+            $suratmasuk->tgl_surat = $request->tgl_surat;
+        }
+
+        if($request->tgl_diterima == NULL) {
+            
+        } else {
+            $suratmasuk->tgl_diterima = $request->tgl_diterima;
+        }
+
+        $suratmasuk->perihal = $request->perihal;
+        $suratmasuk->isi = $request->isi;
+
+            if($request->file('file_surat') == NULL) {
+                $suratmasuk->file_surat = $suratmasuk->file_surat;
+            } else {
+                $file = $request->file('file_surat');
+                $nama = 'sm-' . str_random(10) . '.pdf';
+                $extension = $file->getClientOriginalExtension();
+                Storage::putFileAs('public/'.Auth::user()->id.'/suratmasuk', $request->file('file_surat'), $nama);
+
+                $suratmasuk->file_surat = $nama;
+            }
+
+        $suratmasuk->id_tujuan = $request->id_tujuan;
+        $suratmasuk->id_status = 1;
+        $suratmasuk->id_create = Auth::user()->id;
+
+        $suratmasuk->update();
+
+        alert()->success('Sukses', 'Surat masuk berhasil diperbarui.');
+
+        return redirect()->route('surat-masuk.index');
     }
 
     /**
