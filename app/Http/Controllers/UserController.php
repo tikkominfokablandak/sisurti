@@ -15,6 +15,7 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -73,11 +74,12 @@ class UserController extends Controller
             $user['foto'] = 'user.jpg';
         } else {
             $file = $request->file('foto');
-            $path = base_path() . '/public/assets/img/profil';
+            // $path = base_path() . '/public/assets/img/profil';
             $nama = $user['username'];
             $extension = $file->getClientOriginalExtension();
             $namabaru = $nama . '.' . $extension;
-            $file->move($path, $namabaru);
+            // $file->move($path, $namabaru);
+            Storage::putFileAs('public/img/profil/', $request->file('foto'), $namabaru);
 
             $user['foto'] = $namabaru;
         }
@@ -170,17 +172,17 @@ class UserController extends Controller
             $user['foto'] = $users->foto;
         } else {
             $file = $request->file('foto');
-            $path = base_path() . '/public/assets/img/profil';
             $nama = $user['username'];
             $extension = $file->getClientOriginalExtension();
             $namabaru = $nama . '.' . $extension;
-            $file->move($path, $namabaru);
+            Storage::putFileAs('public/img/profil/', $request->file('foto'), $namabaru);
 
             $user['foto'] = $namabaru;
         }
 
         $user['username'] = Str::lower($request->username);
         $user['email'] = Str::lower($request->email);
+        $user['id_create'] = Auth::user()->id;
 
         $users->update($user);
 

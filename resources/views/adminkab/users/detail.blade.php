@@ -57,7 +57,7 @@
                                 <dt>Email</dt>
                                 <dd>{{ $user->email }}</dd>
                                 <dt>Foto</dt>
-                                <dd><img src="{{ url('assets/img/profil/'.$user->foto) }}" alt="Foto {{ $user->nama }}" style="width:200px"></dd>
+                                <dd><img src="{{ asset('storage/img/profil/'.$user->foto) }}" alt="Foto {{ $user->nama }}" style="width:200px"></dd>
                             </dl>
                         </div>
                         <div class="col-sm-6">

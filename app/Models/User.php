@@ -39,7 +39,8 @@ class User extends Authenticatable
         'pangkat',
         'jenis_user',
         'foto',
-        'active'
+        'active',
+        'id_create'
     ];
 
     /**

@@ -43,13 +43,13 @@
 
       <li class="nav-item dropdown user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-          <img src="{{ url('assets/img/profil/'.Auth::user()->foto) }}" class="user-image img-circle elevation-2" alt="{{ Auth::user()->nama }}">
+          <img src="{{ asset('storage/img/profil/'.Auth::user()->foto) }}" class="user-image img-circle elevation-2" alt="{{ Auth::user()->nama }}">
           <span class="d-none d-md-inline">{{ Auth::user()->nama }}</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <!-- User image -->
           <li class="user-header bg-primary">
-            <img src="{{ url('assets/img/profil/'.Auth::user()->foto) }}" class="img-circle elevation-2" alt="{{ Auth::user()->nama }}">
+            <img src="{{ asset('storage/img/profil/'.Auth::user()->foto) }}" class="img-circle elevation-2" alt="{{ Auth::user()->nama }}">
 
             <p>
               {{ Auth::user()->nama }} - {{ Auth::user()->nama_jabatan }}
