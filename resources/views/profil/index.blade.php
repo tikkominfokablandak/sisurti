@@ -27,7 +27,7 @@
           <div class="card card-primary card-outline">
             <div class="card-body box-profil">
               <div class="text-center">
-                <img class="profile-user-img img-fluid img-circle" src="{{ url('assets/img/profil/'.Auth::user()->foto) }}" alt="{{ Auth::user()->nama }}">
+                <img class="profile-user-img img-fluid img-circle" src="{{ asset('storage/img/profil/'.Auth::user()->foto) }}" alt="{{ Auth::user()->nama }}">
               </div>
               <h3 class="profile-username text-center">{{ $user->nama }}</h3>
               <p class="text-muted text-center">{{ $user->nip }}</p>
@@ -36,13 +36,13 @@
         </div>
         <div class="col-md-9">
           <div class="card">
-            <div class="card-header p-2">
+            {{-- <div class="card-header p-2">
               <ul class="nav nav-pills">
                 <li class="nav-item">
                   <a href="#data" class="nav-link active" data-toggle="tab">Data</a>
                 </li>
               </ul>
-            </div>
+            </div> --}}
             <div class="card-body">
               <div class="tab-content">
                 <div class="active tab-pane" id="data">

@@ -40,9 +40,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles']], function () {
 
     Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
 
-    Route::get('profil', [\App\Http\Controllers\profileController::class, 'index'])->name('profil.index');
-    Route::get('profil/{id}/edit', [\App\Http\Controllers\profileController::class, 'edit'])->name('profil.edit');
-    Route::put('profil/{id}/edit', [\App\Http\Controllers\profileController::class, 'update'])->name('profil.update');
+    // Route::get('profil', [\App\Http\Controllers\profileController::class, 'index'])->name('profil.index');
+    // Route::get('profil/{id}/edit', [\App\Http\Controllers\profileController::class, 'edit'])->name('profil.edit');
+    // Route::put('profil/{id}/edit', [\App\Http\Controllers\profileController::class, 'update'])->name('profil.update');
+    Route::resource('profil', \App\Http\Controllers\ProfileController::class);
     
     Route::group(['roles' => 'Admin Kab Landak'], function () {
         Route::resource('users', \App\Http\Controllers\UserController::class);

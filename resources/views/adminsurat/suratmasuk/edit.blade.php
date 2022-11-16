@@ -209,7 +209,7 @@
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input @error('file_surat') is-invalid @enderror" id="customFile" name="file_surat" value="{{ $suratmasuk->file_surat }}">
-                                        <label class="custom-file-label" for="customFile">Pilih File</label>
+                                        <label class="custom-file-label" for="customFile">{{ $suratmasuk->file_surat }}</label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

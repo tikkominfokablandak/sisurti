@@ -127,7 +127,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="password">{{ __('Kata Sandi') }}</label>
 
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Minimal 8 karakter ..." name="password" autocomplete="new-password">
@@ -166,10 +166,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="col-sm-6">
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>Hak Akses</label>
 
                                 <select id="hak_akses" class="form-control @error('hak_akses') is-invalid @enderror" style="width: 100%;" name="id_role" required oninvalid="this.setCustomValidity('Mohon pilih Hak Akses dahulu!')" oninput="setCustomValidity('')">
@@ -179,7 +179,7 @@
                                     <option value="{{ $item->id }}">{{$item->nama_role}}</option>
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label>OPD</label>
 
@@ -248,7 +248,7 @@
                                 </div>
 
                                 <div class="col-md-12 mb-2">
-                                <img id="preview-image" src="{{ url('assets/img/profil/'.$user->foto) }}" alt="{{ $user->foto }}" style="max-height: 150px;">
+                                <img id="preview-image" src="{{ asset('storage/img/profil/'.$user->foto) }}" alt="{{ $user->foto }}" style="max-height: 150px;">
                                 </div>
                             </div>
                         </div>

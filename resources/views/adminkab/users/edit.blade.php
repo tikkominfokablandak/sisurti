@@ -248,7 +248,7 @@
                                 </div>
 
                                 <div class="col-md-12 mb-2">
-                                <img id="preview-image" src="{{ url('assets/img/profil/'.$user->foto) }}" alt="{{ $user->foto }}" style="max-height: 150px;">
+                                <img id="preview-image" src="{{ asset('storage/img/profil/'.$user->foto) }}" alt="{{ $user->foto }}" style="max-height: 150px;">
                                 </div>
                             </div>
                         </div>
