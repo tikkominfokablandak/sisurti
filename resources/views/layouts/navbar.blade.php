@@ -43,13 +43,13 @@
 
       <li class="nav-item dropdown user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-          <img src="{{ asset('storage/img/profil/'.Auth::user()->foto) }}" class="user-image img-circle elevation-2" alt="{{ Auth::user()->nama }}">
+          <img src="{{ asset('assets/img/profil/'.Auth::user()->foto) }}" class="user-image img-circle elevation-2" alt="{{ Auth::user()->nama }}">
           <span class="d-none d-md-inline">{{ Auth::user()->nama }}</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <!-- User image -->
           <li class="user-header bg-primary">
-            <img src="{{ asset('storage/img/profil/'.Auth::user()->foto) }}" class="img-circle elevation-2" alt="{{ Auth::user()->nama }}">
+            <img src="{{ asset('assets/img/profil/'.Auth::user()->foto) }}" class="img-circle elevation-2" alt="{{ Auth::user()->nama }}">
 
             <p>
               {{ Auth::user()->nama }} - {{ Auth::user()->nama_jabatan }}
@@ -59,7 +59,7 @@
 
           <!-- Menu Footer-->
           <li class="user-footer">
-            <a href="#" class="btn btn-default btn-flat">Profil</a>
+            <a href="{{ route('profil.index') }}" class="btn btn-default btn-flat">Profil</a>
             <a href="{{ route('logout') }}" class="btn btn-default btn-flat float-right"
                 onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">

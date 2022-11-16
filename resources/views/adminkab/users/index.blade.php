@@ -54,7 +54,7 @@
                 <tr>
                   <th>Hak Akses</th>
                   <th>Nama</th>
-                  <th>Email</th>
+                  <th style="width:240px">Email</th>
                   <th>Nama Pengguna</th>
                   <th>Instansi / Unit Kerja</th>
                   <th>Jabatan</th>
@@ -95,7 +95,6 @@
                             @method('delete')
                             @csrf
                             <button type="submit" class="dropdown-item" onclick="return confirm('Apakah kamu yakin untuk menghapus data?')"><i class="fa fa-times"></i> Hapus</button>
-                            
                           </form>
                       </div>
                     </div>
