@@ -25,104 +25,78 @@
     </div>
 </div>
 
+{{-- Button Dashboard User --}}
 <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <!-- Default box -->
-            <div class="card">
-              <div class="card-header"> <!-- style="text-align:center" -->
-                <h3 class="card-title">Surat Dinas</h3>
+  <div class="container-fluid">
+    <div class="row">
+      {{-- <div class="col-12"> --}}
+        <div class="col-md-4">
 
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body" style="display: block;">
-                <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-light color-palette">
-              <div class="inner">
-                <h3>{{ number_format($suratmasuk); }}</h3>
+<div class="card align-items-center">
+  <div class="card-header">
+    <h3 class="card-title">Surat Masuk</h3>
+  </div>
+  <div class="card-body">
+    {{-- <p>Add the classes <code>.btn.btn-app</code> to an <code>&lt;a&gt;</code> tag to achieve the following:</p> --}}
+    <a href="/suratmasuk" class="btn btn-app">
+      <span class="badge bg-success"></span>
+      {{-- {{ number_format($opd); }} --}}
+      <i class="fas fa-envelope"></i> Daftar Surat Masuk
+    </a> 
+  </div> 
+  <!-- /.card-body -->
+  <div class="card-footer" style="display: block;">
+    {{-- Total status Surat keluar dan Surat masuk pada menu "Surat DINAS" --}}
+  </div>
+</div>
+</div>
+{{-- batas bawah container --}}
 
-                <p>Daftar Surat Masuk</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-envelope"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-light color-palette">
-              <div class="inner">
-                <h3>-</h3>
+<div class="col-md-4">
 
-                <p>Surat Keluar</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-paper-plane"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-light color-palette">
-              <div class="inner">
-                <h3>-</h3>
+  <div class="card align-items-center">
+    <div class="card-header">
+      <h3 class="card-title">Disposisi</h3>
+    </div>
+    <div class="card-body">
+      {{-- <p>Add the classes <code>.btn.btn-app</code> to an <code>&lt;a&gt;</code> tag to achieve the following:</p> --}}
+      
+      <a href="/disposisi" class="btn btn-app">
+        <span class="badge bg-success"></span>
+        <i class="fas icon-file-check-2"></i> Daftar Disposisi
+      </a>
+    </div> 
+    <!-- /.card-body -->
+    <div class="card-footer" style="display: block;">
+      {{-- Total status Surat keluar dan Surat masuk pada menu "Surat DINAS" --}}
+    </div>
+  </div>
+  </div>
+  {{-- batas bawah container --}}
 
-                <p>Daftar Disposisi</p>
-              </div>
-              <div class="icon">
-                <i class="fas icon-file-check-2"></i>
-              </div>
-              <a href="{{ route('surat-masuk.create') }}" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-light color-palette">
-              <div class="inner">
-                <h3>-</h3>
+  <div class="col-md-4">
 
-                <p>Tindak Lanjut</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-file-signature"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-        </div>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer" style="display: block;">
-                Total status Surat keluar dan Surat masuk pada menu "Surat DINAS"
-              </div>
-              <!-- /.card-footer-->
-            </div>
-            <!-- /.card -->
-          </div>
-        </div>
+    <div class="card align-items-center">
+      <div class="card-header">
+        <h3 class="card-title">Tindak Lanjut</h3>
       </div>
-    </section>
+      <div class="card-body">
+        {{-- <p>Add the classes <code>.btn.btn-app</code> to an <code>&lt;a&gt;</code> tag to achieve the following:</p> --}}
+        <a href="/tindak-lanjut" class="btn btn-app">
+          <span class="badge bg-success"></span>
+          <i class="fas fa-file-signature"></i> Daftar Tindak Lanjut
+        </a>
+      </div> 
+      <!-- /.card-body -->
+      <div class="card-footer" style="display: block;">
+        {{-- Total status Surat keluar dan Surat masuk pada menu "Surat DINAS" --}}
+      </div>
+    </div>
+    </div>
+    {{-- batas bawah container --}}
+
+    
+</div></div>
+</section>
 
 @endsection

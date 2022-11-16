@@ -44,7 +44,7 @@ class DashboardController extends Controller
     $tembusan = Tembusan::count();
 
     //dashboard count untuk user
-
+    
 
     if( Auth::user()->id_role == '1') {
         return view('adminkab.index',
@@ -58,8 +58,12 @@ class DashboardController extends Controller
                 );
     } else if (Auth::user()->id_role == '4') {
         return view('user.index',
-                compact('suratmasuk')     
+                compact('suratmasuk','disposisi')     
                 );
+            // } else if (Auth::user()->id_role == '4') {
+            //     return view('user.index',
+            //             compact('suratmasuk','disposisi')     
+            //             );            
     } else if (Auth::user()->id_role == '5') {
         return view('TNDE.admin.dashboard');
     // } else {
